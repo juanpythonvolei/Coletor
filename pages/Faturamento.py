@@ -16,7 +16,8 @@ with coly:
 
 uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui')
 if uploaded_files:
-        resultado = confirmar(process_notes(notes_list=uploaded_files,data=str(date.today()),usuario=st.session_state.selected_option,status=False,peso_recebido=float(1)))
+        confirmar()     
+        resultado = process_notes(notes_list=uploaded_files,data=str(date.today()),usuario=st.session_state.selected_option,status=False,peso_recebido=float(1))
         if resultado:
               col1,col2,col3 = st.columns(3)
               with col1:
