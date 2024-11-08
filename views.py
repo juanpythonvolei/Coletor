@@ -6,17 +6,27 @@ import google.generativeai as genai
 import pandas as pd
 import xmltodict
 import os 
+import speech_recognition as sr
 
 session = sessionmaker(bind=engine)
 session = session()
-def treat_audio():
+
+def treat_audio(texto_final):
     audio_value = st.experimental_audio_input("Faça sua pergunta")
     if audio_value:
         rec = sr.Recognizer()
         with sr.AudioFile(audio_value) as arquivo_audio:
                     audio = rec.record(arquivo_audio)
                     texto = rec.recognize_google(audio,language ='pt-BR ')
-        return texto 
+        humano = st.chat_message('human')
+        humano.write(pergunta)
+        assistente = st.chat_message('assistant')
+        return assistente.write(analisar(
+            f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.
+            Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {texto}"""
+            ,str(texto_final)))
+         
+        
 def read_ean(ean):
     try:
         produto = session.query(EansProdutos).filter(EansProdutos.codigo_ean == ean).first().correspondente
@@ -661,6 +671,7 @@ def assistant():
             Produtos: {texto_produtos}"""
 
     pergunta = st.chat_input(placeholder='Faça sua pergunta')
+    treat_audio(texto_final)
     if pergunta:
         humano = st.chat_message('human')
         humano.write(pergunta)
