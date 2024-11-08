@@ -698,7 +698,7 @@ def download_button(df,nome):
                                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                                     )
 
-def donwload_storage()
+def donwload_storage():
     list = []
     estoque = session.query(Estoque).all()    
     for item in estoque:
@@ -706,7 +706,7 @@ def donwload_storage()
         list.append(pd.DataFrame(texto_estoque,index=[i]))
     donwload_button(pd.concat(list)) 
     
-def donwload_billing()
+def donwload_billing():
     list = []
     billing = session.query(Faturamento).all()    
     for item in billing:
@@ -714,7 +714,7 @@ def donwload_billing()
         list.append(pd.DataFrame(texto_billing,index=[i]))
     donwload_button(pd.concat(list)) 
     
-def donwload_picklist()
+def donwload_picklist():
     list = []
     picklist = session.query(Picklist).all()    
     for item in picklist:
@@ -722,14 +722,14 @@ def donwload_picklist()
         list.append(pd.DataFrame(texto_picklist,index=[i]))
     donwload_button(pd.concat(list))        
     
-def donwload_separation()
+def donwload_separation():
     list = []
     separacao = session.query(Separacao).all()    
     for item in separacao:
         texto_separaco = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
         list.append(pd.DataFrame(texto_separacao,index=[i]))
     donwload_button(pd.concat(list)) 
-def donwload_ralation()
+def donwload_ralation():
     list = []
     romaneios = session.query(Romaneios).all()    
     for item in romaneios:
@@ -737,7 +737,7 @@ def donwload_ralation()
         list.append(pd.DataFrame(texto_romaneios,index=[i]))
     donwload_button(pd.concat(list)) 
     
-def donwload_history()
+def donwload_history():
     list = []
     historico = session.query(Historico).all()    
     for item in historico:
@@ -745,7 +745,7 @@ def donwload_history()
         list.append(pd.DataFrame(texto_historico,index=[i]))
     donwload_button(pd.concat(list)) 
     
-def donwload_users()
+def donwload_users():
     list = []
     usuarios = session.query(Usuarios).all()    
     for item in usuarios:
@@ -753,7 +753,7 @@ def donwload_users()
         list.append(pd.DataFrame(texto_usuarios,index=[i]))
     donwload_button(pd.concat(list)) 
     
-def donwload_receiving()
+def donwload_receiving():
     list = []
     recebimento = session.query(Recebimento).all()    
     for item in  recebimento:
@@ -761,7 +761,7 @@ def donwload_receiving()
         list.append(pd.DataFrame(texto_recebimento,index=[i]))
     donwload_button(pd.concat(list)) 
     
-def donwload_product()
+def donwload_product():
     list = []
     produtos = session.query(Produtos).all()    
     for item in produtos:
