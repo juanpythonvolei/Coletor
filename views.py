@@ -592,9 +592,9 @@ def create_itens_relations_for_item(data,lista,user):
 def query_and_register_ean(code,ean):
     try:
         produto = session.query(Produtos).filter(Produtos.codigo == code).first()
-        if session.query(EansProdutos).filter(EansProdutos.correspondente == code).first():
+        if session.query(EansProdutos).filter(EansProdutos.produto == code).first():
             return st.error(f"O item {code} já está com as informações preenchidas")
-        session.add(EansProdutos(codigo_ean=ean,correspondente=produto.codigo))
+        session.add(EansProdutos(codigo_ean=ean,produto=produto.codigo))
         session.commit()
         return st.success(f"O item {code} teve seu código ean cadastrado com sucesso")
     except:
@@ -604,7 +604,7 @@ def query_and_update_ean(code,ean):
     try:
         elemento = session.query(Produtos).filter(Produtos.codigo == code).first()
         if elemento:
-            produto = session.query(EansProdutos).filter(EansProdutos.correspondente == code).first()
+            produto = session.query(EansProdutos).filter(EansProdutos.produto == code).first()
             produto.codigo_ean = ean
             session.commit()
     except:
