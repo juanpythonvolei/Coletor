@@ -743,7 +743,7 @@ def donwload_history():
     for i,item in enumerate(historico):
         texto_historico = {'Evento':item.evento, 'quantidade':item.quantidade,'data':item.data,'usuário':item.usuario,'item':item.item}
         list.append(pd.DataFrame(texto_historico,index=[i]))
-    donwload_button(pd.concat(list),f'Histórico {date.today()}') 
+    download_button(pd.concat(list),f'Histórico {date.today()}') 
     
 def donwload_users():
     list = []
