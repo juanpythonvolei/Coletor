@@ -12,7 +12,7 @@ session = sessionmaker(bind=engine)
 session = session()
 
 def treat_audio(texto_final):
-    audio_value = st.experimental_audio_input("Faça sua pergunta")
+    audio_value = st.experimental_audio_input(label="Faça sua pergunta",key='assistant')
     if audio_value:
         rec = sr.Recognizer()
         with sr.AudioFile(audio_value) as arquivo_audio:
