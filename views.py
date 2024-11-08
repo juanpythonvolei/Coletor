@@ -726,7 +726,7 @@ def donwload_separation()
     list = []
     separacao = session.query(Separacao).all()    
     for item in separacao:
-        texto_separaco = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}'}
+        texto_separaco = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
         list.append(pd.DataFrame(texto_separacao,index=[i]))
     donwload_button(pd.concat(list)) 
 def donwload_ralation()
