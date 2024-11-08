@@ -11,6 +11,12 @@ session = sessionmaker(bind=engine)
 session = session()
 def treat_audio():
     audio_value = st.experimental_audio_input("Faça sua pergunta")
+    if audio_value:
+        rec = sr.Recognizer()
+        with sr.AudioFile(audio_value) as arquivo_audio:
+                    audio = rec.record(arquivo_audio)
+                    texto = rec.recognize_google(audio,language ='pt-BR ')
+        return texto 
 def read_ean(ean):
     try:
         produto = session.query(EansProdutos).filter(EansProdutos.codigo_ean == ean).first().correspondente
