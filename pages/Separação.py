@@ -4,7 +4,7 @@ import random
 
 
 
-colx,coly = st.columns(2)
+colx,coly,colz = st.columns(3)
 
 with colx:
       if 'selected_option' in st.session_state:
@@ -12,6 +12,9 @@ with colx:
 with coly:
       with st.popover('🤖'):
             assistant()
+with colz:
+      with st.popover('📂'):
+            donwload_separation()
 
 notas = session.query(Picklist.nota).filter(Picklist.status==True,Picklist.data == str(date.today())).all()
 nota_a_remover = session.query(Separacao.nota).filter(Separacao.status == True,Separacao.data == str(date.today())).all()
