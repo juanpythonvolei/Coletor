@@ -1,7 +1,7 @@
 import streamlit as st 
 from views import *
 
-colx,coly = st.columns(2)
+colx,coly,colz = st.columns(3)
 
 with colx:
       if 'selected_option' in st.session_state:
@@ -9,6 +9,9 @@ with colx:
 with coly:
       with st.popover('🤖'):
             assistant()
+with colz:
+      with st.popover('📂'):
+            donwload_receiving()
 
 tab1,tab2 = st.tabs(['Adicionar itens',"Consultar itens"])
 
