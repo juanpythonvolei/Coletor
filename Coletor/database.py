@@ -177,5 +177,5 @@ class EansProdutos(Base):
         self.codigo_ean = codigo_ean
         self.produto = produto
 
-engine = create_engine(st.secrets['database'])
+engine = create_engine('sqlite:///database/estoque.db')
 base =Base.metadata.create_all(engine)
