@@ -73,29 +73,29 @@ Estoque\n
             st.info(f"""Estoque: \n
             {texto}""")
 with st.popover("Assistência"):
-        #audio_value = st.experimental_audio_input("Faça sua pergunta")
-        #if audio_value:
-                #texto_decri = ''
-                #infos_rec = session.query(Recebimento).all()
-                #descri_rec = [f'Item Recebimento: {item.produto} Quantidade Recebimento: {item.quantidade}'for item in infos_rec]
-                #for elemento in descri_rec:
-                    #if elemento in texto:
-                        #pass
-                    #else:
-                        #texto += elemento
-                #infos_est = [f'Item: {item.item} Endereço: {item.endereco} Quantidade: {item.quantidade}\n' for item in session.query(Estoque).all()]
-                #for descri in infos_est:
-                    #if descri in texto:
-                        #pass
-                    #else: 
-                        #texto += f'{descri}\n'
-                #assistant = st.chat_message('assistant')
-                #rec = sr.Recognizer()
-                #with sr.AudioFile(audio_value) as arquivo_audio:
-                    #audio = rec.record(arquivo_audio)
-                    #texto = rec.recognize_google(audio,language ='pt-BR ')
-                #resposta = analisar(texto,texto_decri)
-                #assistant.write(resposta)   
+        audio_value = st.experimental_audio_input("Faça sua pergunta")
+        if audio_value:
+                texto_decri = ''
+                infos_rec = session.query(Recebimento).all()
+                descri_rec = [f'Item Recebimento: {item.produto} Quantidade Recebimento: {item.quantidade}'for item in infos_rec]
+                for elemento in descri_rec:
+                    if elemento in texto:
+                        pass
+                    else:
+                        texto += elemento
+                infos_est = [f'Item: {item.item} Endereço: {item.endereco} Quantidade: {item.quantidade}\n' for item in session.query(Estoque).all()]
+                for descri in infos_est:
+                    if descri in texto:
+                        pass
+                    else: 
+                        texto += f'{descri}\n'
+                assistant = st.chat_message('assistant')
+                rec = sr.Recognizer()
+                with sr.AudioFile(audio_value) as arquivo_audio:
+                    audio = rec.record(arquivo_audio)
+                    texto = rec.recognize_google(audio,language ='pt-BR ')
+                resposta = analisar(texto,texto_decri)
+                assistant.write(resposta)   
         message = st.chat_input(placeholder="Insira sua pegunta")
         if message:
             texto = ''
