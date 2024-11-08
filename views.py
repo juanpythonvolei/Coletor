@@ -9,7 +9,8 @@ import os
 
 session = sessionmaker(bind=engine)
 session = session()
-
+def treat_audio():
+    audio_value = st.experimental_audio_input("Faça sua pergunta")
 def read_ean(ean):
     try:
         produto = session.query(EansProdutos).filter(EansProdutos.codigo_ean == ean).first().correspondente
