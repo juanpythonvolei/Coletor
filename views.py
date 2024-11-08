@@ -103,7 +103,7 @@ def carregar_arquivo(pergunta,conteudo):
 def confirmar():
     confirmar = st.button('Confirmar')
     if confirmar:
-       pass
+       return True
 
 def save_table_int_text(table,user,data):
     tabela = table.to_string()
