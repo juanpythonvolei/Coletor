@@ -7,6 +7,7 @@ import pandas as pd
 import xmltodict
 import os 
 import speech_recognition as sr
+from io import BytesIO
 
 session = sessionmaker(bind=engine)
 session = session()
@@ -680,3 +681,90 @@ def assistant():
             f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.
             Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {pergunta}"""
             ,str(texto_final)))
+
+@st.cache_data
+def convert_df_to_excel(df):
+            output = BytesIO()
+            with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                df.to_excel(writer, index=False, sheet_name='Sheet1')
+            processed_data = output.getvalue()
+            return processed_data
+
+def download_button(df,nome):
+    download = st.download_button(
+                                    label=f"Faça o download do {nome} no formato Excel",
+                                    data=convert_df_to_excel(df),
+                                    file_name=f"Pesquisa do produto {nome}.xlsx",
+                                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                    )
+
+def donwload_storage()
+    list = []
+    estoque = session.query(Estoque).all()    
+    for item in estoque:
+        texto_estoque = {'produto':{item.item}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade}}
+        list.append(pd.DataFrame(texto_estoque,index=[i]))
+    donwload_button(pd.concat(list)) 
+    
+def donwload_billing()
+    list = []
+    billing = session.query(Faturamento).all()    
+    for item in billing:
+        texto_billing = {f'produto':{item.produto}, 'endereço': {item.posicao} , 'quantidade':{item.quantidade},'numero da nota': {item.numero_da_nota}, 'cliente': {item.cliente}, 'transportadora':{item.transportadora}, 'data': {item.data}}
+        list.append(pd.DataFrame(texto_billing,index=[i]))
+    donwload_button(pd.concat(list)) 
+    
+def donwload_picklist()
+    list = []
+    picklist = session.query(Picklist).all()    
+    for item in picklist:
+        texto_picklist = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
+        list.append(pd.DataFrame(texto_picklist,index=[i]))
+    donwload_button(pd.concat(list))        
+    
+def donwload_separation()
+    list = []
+    separacao = session.query(Separacao).all()    
+    for item in separacao:
+        texto_separaco = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}'}
+        list.append(pd.DataFrame(texto_separacao,index=[i]))
+    donwload_button(pd.concat(list)) 
+def donwload_ralation()
+    list = []
+    romaneios = session.query(Romaneios).all()    
+    for item in romaneios:
+        texto_romaneios = {'romaneio':{item.romaneio}, 'data': {item.data} , 'usuario':{item.usuario}}
+        list.append(pd.DataFrame(texto_romaneios,index=[i]))
+    donwload_button(pd.concat(list)) 
+    
+def donwload_history()
+    list = []
+    historico = session.query(Historico).all()    
+    for item in historico:
+        texto_historico = {'Evento':{item.evento} , 'quantidade':{item.quantidade},'data':{item.data},'usuário':{item.usuario},'item':{item.item}}
+        list.append(pd.DataFrame(texto_historico,index=[i]))
+    donwload_button(pd.concat(list)) 
+    
+def donwload_users()
+    list = []
+    usuarios = session.query(Usuarios).all()    
+    for item in usuarios:
+        texto_estoque = {'Usuário':{item.usuario}}
+        list.append(pd.DataFrame(texto_usuarios,index=[i]))
+    donwload_button(pd.concat(list)) 
+    
+def donwload_receiving()
+    list = []
+    recebimento = session.query(Recebimento).all()    
+    for item in  recebimento:
+        texto_recebimento = {'produto':{item.produto} , 'quantidade':{item.quantidade},'data':{item.data}}
+        list.append(pd.DataFrame(texto_recebimento,index=[i]))
+    donwload_button(pd.concat(list)) 
+    
+def donwload_product()
+    list = []
+    produtos = session.query(Produtos).all()    
+    for item in produtos:
+        texto_produtos = {'produto':{item.codigo} , 'valor': {item.preco} ,'peso':{item.peso}  ,'descrição':{item.nome}}
+        list.append(pd.DataFrame(texto_produtos,index=[i]))
+    donwload_button(pd.concat(list)) 
