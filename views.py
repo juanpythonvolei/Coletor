@@ -19,7 +19,7 @@ def treat_audio(texto_final):
                     audio = rec.record(arquivo_audio)
                     texto = rec.recognize_google(audio,language ='pt-BR ')
         humano = st.chat_message('human')
-        humano.write(pergunta)
+        humano.write(texto)
         assistente = st.chat_message('assistant')
         return assistente.write(analisar(
             f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.
