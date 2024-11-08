@@ -3,7 +3,7 @@ from views import *
 
 
 
-colx,coly = st.columns(2)
+colx,coly,colz = st.columns(3)
 
 with colx:
       if 'selected_option' in st.session_state:
@@ -11,6 +11,9 @@ with colx:
 with coly:
       with st.popover('🤖'):
             assistant()
+with colz:
+      with st.popover('📂'):
+            pass
 
 col1,col2,col3,col4 = st.columns(4)
 
