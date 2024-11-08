@@ -55,9 +55,12 @@ if tab1:
                             st.metric(label="Total volumes",value=resposta[3])
 if tab2:
      with tab2:
-            usuario = st.selectbox(label="Seleção",options=session.query(Usuarios.usuario).all()[0],placeholder="Selecione uma transportadora",index=None,key='Consulta')
-            data  = st.date_input(label="Selecione uma data",value=None,key='dateinput')
-            if usuario and data:
-                romaneio = session.query(Romaneios.romaneio).filter(Romaneios.data,Romaneios.usuario == usuario).all()
-                for item in list(set(romaneio)):
-                    st.info(item[0])
+           try:
+                  usuario = st.selectbox(label="Seleção",options=session.query(Usuarios.usuario).all()[0],placeholder="Selecione uma transportadora",index=None,key='Consulta')
+                  data  = st.date_input(label="Selecione uma data",value=None,key='dateinput')
+                  if usuario and data:
+                      romaneio = session.query(Romaneios.romaneio).filter(Romaneios.data,Romaneios.usuario == usuario).all()
+                      for item in list(set(romaneio)):
+                          st.info(item[0])
+            except:
+                  pass
