@@ -30,7 +30,7 @@ def treat_audio(texto_final):
         
 def read_ean(ean):
     try:
-        produto = session.query(EansProdutos).filter(EansProdutos.codigo_ean == ean).first().correspondente
+        produto = session.query(EansProdutos).filter(EansProdutos.codigo_ean == ean).first().produto
         return produto,st.success(f"Item: {produto}")
     except:
         return st.error("o código ean não foi encontrado")
