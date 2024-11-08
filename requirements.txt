@@ -1,0 +1,8 @@
+pandas
+SQLAlchemy
+streamlit
+urllib3
+google-generativeai
+openpyxl
+SpeechRecognition 
+pyttsx3
