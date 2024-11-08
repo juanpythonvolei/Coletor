@@ -710,7 +710,7 @@ def donwload_billing():
     list = []
     billing = session.query(Faturamento).all()    
     for i,item in enumerate(billing):
-        texto_billing = {f'produto':{item.produto}, 'endereço': {item.posicao} , 'quantidade':{item.quantidade},'numero da nota': {item.numero_da_nota}, 'cliente': {item.cliente}, 'transportadora':{item.transportadora}, 'data': {item.data}}
+        texto_billing = {f'produto':item.produto, 'endereço': item.posicao , 'quantidade':item.quantidade,'numero da nota': item.numero_da_nota, 'cliente': item.cliente, 'transportadora':item.transportadora, 'data': item.data}
         list.append(pd.DataFrame(texto_billing,index=[i]))
     download_button(pd.concat(list),f'Faturamento {date.today()}') 
     
@@ -718,7 +718,7 @@ def donwload_picklist():
     list = []
     picklist = session.query(Picklist).all()    
     for i,item in enumerate(picklist):
-        texto_picklist = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
+        texto_picklist = {'produto':item.produto, 'endereço': item.endereco , 'quantidade':item.quantidade,'numero da nota': item.nota, 'data': item.data}
         list.append(pd.DataFrame(texto_picklist,index=[i]))
     donwload_button(pd.concat(list),f'Picklist {date.today()}')        
     
@@ -726,14 +726,14 @@ def donwload_separation():
     list = []
     separacao = session.query(Separacao).all()    
     for i,item in enumerate(separacao):
-        texto_separaco = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
+        texto_separaco = {'produto':item.produto, 'endereço': item.endereco , 'quantidade':item.quantidade,'numero da nota': item.nota, 'data': item.data}
         list.append(pd.DataFrame(texto_separacao,index=[i]))
     donwload_button(pd.concat(list),f'Separações {date.today()}') 
 def donwload_ralation():
     list = []
     romaneios = session.query(Romaneios).all()    
     for i,item in enumerate(romaneios):
-        texto_romaneios = {'romaneio':{item.romaneio}, 'data': {item.data} , 'usuario':{item.usuario}}
+        texto_romaneios = {'romaneio':item.romaneio, 'data': item.data , 'usuario':item.usuario}
         list.append(pd.DataFrame(texto_romaneios,index=[i]))
     donwload_button(pd.concat(list),f'Romaneios {date.today()}') 
     
@@ -749,7 +749,7 @@ def donwload_users():
     list = []
     usuarios = session.query(Usuarios).all()    
     for i,item in enumerate(usuarios):
-        texto_estoque = {'Usuário':{item.usuario}}
+        texto_estoque = {'Usuário':item.usuario}
         list.append(pd.DataFrame(texto_usuarios,index=[i]))
     donwload_button(pd.concat(list),f'Usuários {date.today()}') 
     
@@ -757,7 +757,7 @@ def donwload_receiving():
     list = []
     recebimento = session.query(Recebimento).all()    
     for i,item in enumerate(recebimento):
-        texto_recebimento = {'produto':{item.produto} , 'quantidade':{item.quantidade},'data':{item.data}}
+        texto_recebimento = {'produto':item.produto , 'quantidade':item.quantidade,'data':item.data}
         list.append(pd.DataFrame(texto_recebimento,index=[i]))
     donwload_button(pd.concat(list),f'Recebimento {date.today()}') 
     
@@ -765,6 +765,6 @@ def donwload_product():
     list = []
     produtos = session.query(Produtos).all()    
     for i,item in enumerate(produtos):
-        texto_produtos = {'produto':{item.codigo} , 'valor': {item.preco} ,'peso':{item.peso}  ,'descrição':{item.nome}}
+        texto_produtos = {'produto':item.codigo , 'valor': item.preco ,'peso':item.peso  ,'descrição':item.nome}
         list.append(pd.DataFrame(texto_produtos,index=[i]))
     donwload_button(pd.concat(pd.concat(list),f'Produtos {date.today()}')) 
