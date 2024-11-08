@@ -102,7 +102,6 @@ def carregar_arquivo(pergunta,conteudo):
 @st.dialog("Deseja realmente continuar ?")
 def confirmar(function):
     if st.button('Confirmar'):
-        function
         st.rerun()
 
 def save_table_int_text(table,user,data):
