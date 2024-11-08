@@ -15,7 +15,7 @@ with coly:
             assistant()
 with colz:
       with st.popover('📂'):
-            donwnload_billig()
+            donwload_billing()
 
 uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui')
 if uploaded_files:
