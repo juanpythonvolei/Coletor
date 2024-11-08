@@ -99,7 +99,7 @@ def carregar_arquivo(pergunta,conteudo):
     response = chat.send_message(pergunta)
     return response.text
 
-#@st.dialog("Deseja realmente continuar")
+@st.dialog("Deseja realmente continuar")
 def confirmar(function):
     confirmar = st.button('Confirmar')
     if confirmar:
