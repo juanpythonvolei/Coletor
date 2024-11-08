@@ -704,7 +704,7 @@ def donwload_storage():
     for item in estoque:
         texto_estoque = {'produto':{item.item}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade}}
         list.append(pd.DataFrame(texto_estoque,index=[i]))
-    donwload_button(pd.concat(list)) 
+    download_button(pd.concat(list),f'Estoque {date.today()}') 
     
 def donwload_billing():
     list = []
@@ -712,7 +712,7 @@ def donwload_billing():
     for item in billing:
         texto_billing = {f'produto':{item.produto}, 'endereço': {item.posicao} , 'quantidade':{item.quantidade},'numero da nota': {item.numero_da_nota}, 'cliente': {item.cliente}, 'transportadora':{item.transportadora}, 'data': {item.data}}
         list.append(pd.DataFrame(texto_billing,index=[i]))
-    donwload_button(pd.concat(list)) 
+    download_button(pd.concat(list),f'Faturamento {date.today()}') 
     
 def donwload_picklist():
     list = []
@@ -720,7 +720,7 @@ def donwload_picklist():
     for item in picklist:
         texto_picklist = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
         list.append(pd.DataFrame(texto_picklist,index=[i]))
-    donwload_button(pd.concat(list))        
+    donwload_button(pd.concat(list),f'Picklist {date.today()}')        
     
 def donwload_separation():
     list = []
@@ -728,14 +728,14 @@ def donwload_separation():
     for item in separacao:
         texto_separaco = {'produto':{item.produto}, 'endereço': {item.endereco} , 'quantidade':{item.quantidade},'numero da nota': {item.nota}, 'data': {item.data}}
         list.append(pd.DataFrame(texto_separacao,index=[i]))
-    donwload_button(pd.concat(list)) 
+    donwload_button(pd.concat(list),f'Separações {date.today()}') 
 def donwload_ralation():
     list = []
     romaneios = session.query(Romaneios).all()    
     for item in romaneios:
         texto_romaneios = {'romaneio':{item.romaneio}, 'data': {item.data} , 'usuario':{item.usuario}}
         list.append(pd.DataFrame(texto_romaneios,index=[i]))
-    donwload_button(pd.concat(list)) 
+    donwload_button(pd.concat(list),f'Romaneios {date.today()}') 
     
 def donwload_history():
     list = []
@@ -743,7 +743,7 @@ def donwload_history():
     for item in historico:
         texto_historico = {'Evento':{item.evento} , 'quantidade':{item.quantidade},'data':{item.data},'usuário':{item.usuario},'item':{item.item}}
         list.append(pd.DataFrame(texto_historico,index=[i]))
-    donwload_button(pd.concat(list)) 
+    donwload_button(pd.concat(list),f'Histórico {date.today()}') 
     
 def donwload_users():
     list = []
@@ -751,7 +751,7 @@ def donwload_users():
     for item in usuarios:
         texto_estoque = {'Usuário':{item.usuario}}
         list.append(pd.DataFrame(texto_usuarios,index=[i]))
-    donwload_button(pd.concat(list)) 
+    donwload_button(pd.concat(list),f'Usuários {date.today()}') 
     
 def donwload_receiving():
     list = []
@@ -759,7 +759,7 @@ def donwload_receiving():
     for item in  recebimento:
         texto_recebimento = {'produto':{item.produto} , 'quantidade':{item.quantidade},'data':{item.data}}
         list.append(pd.DataFrame(texto_recebimento,index=[i]))
-    donwload_button(pd.concat(list)) 
+    donwload_button(pd.concat(list),f'Recebimento {date.today()}') 
     
 def donwload_product():
     list = []
@@ -767,4 +767,4 @@ def donwload_product():
     for item in produtos:
         texto_produtos = {'produto':{item.codigo} , 'valor': {item.preco} ,'peso':{item.peso}  ,'descrição':{item.nome}}
         list.append(pd.DataFrame(texto_produtos,index=[i]))
-    donwload_button(pd.concat(list)) 
+    donwload_button(pd.concat(pd.concat(list),f'Produtos {date.today()}')) 
