@@ -13,7 +13,7 @@ with coly:
             assistant()
 with colz:
       with st.popover('📂'):
-            donwload_relations()
+            donwload_relation()
 
 tab1,tab2 = st.tabs(['Romaneios', 'Ver Romaneios'])    
 
