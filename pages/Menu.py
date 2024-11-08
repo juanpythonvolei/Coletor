@@ -13,7 +13,7 @@ with coly:
             assistant()
 with colz:
       with st.popover('📂'):
-            download_product()
+            donwload_product()
 
 col1,col2,col3,col4 = st.columns(4)
 
