@@ -16,8 +16,8 @@ with coly:
 
 uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui')
 if uploaded_files:
-        confirmar()    
-        resultado = process_notes(notes_list=uploaded_files,data=str(date.today()),usuario=st.session_state.selected_option,status=False,peso_recebido=float(1))
+            
+        resultado = confirmar(process_notes(notes_list=uploaded_files,data=str(date.today()),usuario=st.session_state.selected_option,status=False,peso_recebido=float(1)))
         col1,col2,col3 = st.columns(3)
         with col1:
               st.metric(label="Notas Faturadas",value=resultado[0])
