@@ -12,10 +12,11 @@ from io import BytesIO
 session = sessionmaker(bind=engine)
 session = session()
 
-def treat_table(df)
+def treat_table(df):
     table = pd.read_excel(df)
     st.write(table)
     return table.to_string()
+    
 def treat_audio(texto_final):
     audio_value = st.experimental_audio_input(label="Faça sua pergunta",key='assistant')
     if audio_value:
