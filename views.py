@@ -675,7 +675,7 @@ def assistant():
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
-            assistente.write(carregar_arquivo(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",uploaded_files[0])
+            assistente.write(carregar_arquivo(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",uploaded_files[0]))
         else:
             humano = st.chat_message('human')
             humano.write(pergunta)
