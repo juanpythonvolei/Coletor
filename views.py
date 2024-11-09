@@ -357,11 +357,11 @@ def login(usuario,senha):
 def picking(data):
     lista_ok = []
     verificar_se_ativo = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.status == False).all()
-    se_mercado_concluido = session.query(Picklist.id_faturamento).filter(Picklist.data == str(date.today()),Picklist.status == True).all()
-    lista_conferencia = [elemento[0] for elemento in se_mercado_concluido]
+    se_mercado_concluido = session.query(Picklist.nota,Picklist.produto).filter(Picklist.data == str(date.today()),Picklist.status == True).all()
+    lista_conferencia = [elemento for elemento in se_mercado_concluido]
     for item in list(set(verificar_se_ativo)):
         try:
-            if item.id in lista_conferencia:
+            if item.numero_da_nota and item.produto in lista_conferencia:
                 pass
             else:
                 lista_ok.append(item)    
