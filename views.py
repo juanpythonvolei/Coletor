@@ -358,9 +358,10 @@ def picking(data):
     lista_ok = []
     verificar_se_ativo = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.status == False).all()
     se_mercado_concluido = session.query(Picklist.nota).filter(Picklist.data == str(date.today()),Picklist.status == True).all()
+    lista_conferencia = [elemento[0] for elemento in se_mercado_concluido]
     for item in list(set(verificar_se_ativo)):
         try:
-            if item.numero_da_nota in se_mercado_concluido:
+            if item.numero_da_nota in lista_conferencia:
                 pass
             else:
                 lista_ok.append(item)    
