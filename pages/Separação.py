@@ -32,8 +32,8 @@ with col4:
 with col5:
    for item in selecoes:
       quantidae_value = session.query(Picklist.quantidade).filter(Picklist.data == str(date.today()),Picklist.nota == item,Picklist.status == True).all()
-      lista_quantidade=[item[0] for item in quantiade_value]
-      for elemento in lista_quantidae:
+      lista_quantidade = [item[0] for item in quantiade_value]
+      for elemento in lista_quantidade:
             contador += elemento
    st.metric(label="Total de volumes",value=contador)
 with col6:
