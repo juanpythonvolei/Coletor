@@ -117,7 +117,7 @@ def analisar(pergunta,conteudo):
 def carregar_arquivo(pergunta,conteudo):
     arquivos_upload = []
 
-    for item in conteudo
+    for item in conteudo:
         if 'pdf' in conteudo.name:
             mime_type = "application/pdf"
         elif 'xlsx' in conteudo.name:
