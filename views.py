@@ -118,8 +118,12 @@ def carregar_arquivo(pergunta,conteudo):
     if '.pdf' in conteudo.name:
         arquivo = genai.upload_file(conteudo,mime_type='application/pdf')
     elif '.xlsx' in conteudo.name:
-        tabela = treat_table(conteudo)
-        arquivo = {"text":str(tabela)}
+        texto = ''
+        if len(conteudo) > 1:
+        for item in conteudo:
+            tabela = treat_table(item)
+            texto += f'{tabela}\n'
+        arquivo = {"text":str(texto)}
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
@@ -684,7 +688,7 @@ def assistant():
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
-            assistente.write(carregar_arquivo(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",uploaded_files[0]))
+            assistente.write(carregar_arquivo(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",uploaded_files))
         else:
             humano = st.chat_message('human')
             humano.write(pergunta)
