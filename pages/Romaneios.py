@@ -22,7 +22,7 @@ if tab1:
         col3,col4 = st.columns(2)
             
         with col3:    
-            transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select')    
+            transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0][:5] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select')    
         with col4:
             if transp:
                 with st.popover("🗓️ Selecione uma data"):
@@ -35,7 +35,7 @@ if tab1:
             with col2:
                 botao_ver_automático = st.button(f"Vizualizar Romaneio automátio para a tranpostadora {transp}")
             with botao_novo:
-                notas = st.multiselect(label="Seleção",placeholder="Selecione as notas da transportadora",options=[item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data == str(data),Faturamento.transportadora[:5] == transp[:5]).all()],key='nenhuma')
+                notas = st.multiselect(label="Seleção",placeholder="Selecione as notas da transportadora",options=[item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data == str(data),Faturamento.transportadora == transp).all()],key='nenhuma')
             if transp and notas and data:
                     
                     if not botao_ver_automático:
