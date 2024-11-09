@@ -408,7 +408,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                     peso = float(documento['nfeProc']['NFe']['infNFe']['transp']['vol']['pesoL'])
                 except:
                     peso =float(0)
-                resultado = billing(code=codigo_produto,price=valor_produto,transp=transportadora,client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso)
+                resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso)
                 if resultado['tipo'] == 'cadastrada':
                         contador_cadastro +=1
                 contador_ok += 1
@@ -424,7 +424,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                             transportadora = documento['nfeProc']['NFe']['infNFe']['transp']['transporta']['xNome']
                             numero_da_nota = documento['nfeProc']['NFe']['infNFe']['ide']['nNF']
                             data_emit = documento['nfeProc']['NFe']['infNFe']['ide']['dhEmi'][:10]
-                            resultado = billing(code=codigo_produto,price=valor_produto,transp=transportadora,client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso_recebido)
+                            resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso_recebido)
                             if resultado['tipo'] == 'cadastrada':
                                 contador_cadastro +=1
                             contador_ok += 1 
