@@ -357,17 +357,17 @@ def login(usuario,senha):
 def picking(data):
     lista_ok = []
     verificar_se_ativo = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.status == False).all()
-    se_mercado_concluido = session.query(Picklist.nota).filter(Picklist.data == str(date.today()),Picklist.status == True).all()
+    se_mercado_concluido = session.query(Picklist.id_faturamento).filter(Picklist.data == str(date.today()),Picklist.status == True).all()
     lista_conferencia = [elemento[0] for elemento in se_mercado_concluido]
     for item in list(set(verificar_se_ativo)):
         try:
-            if item.numero_da_nota in lista_conferencia:
+            if item.id in lista_conferencia:
                 pass
             else:
                 lista_ok.append(item)    
         except:
             pass
-    return list(set(lista_ok))      
+    return lista_ok      
 
 def billing(code,price,transp,client,data,user,qtd,number,status,data_emition,peso,description):
                 verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
