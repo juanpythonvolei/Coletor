@@ -3,7 +3,7 @@ from views import *
 import xmltodict
 from datetime import date
 
-
+image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 
 colx,coly,colz = st.columns(3)
 
