@@ -497,7 +497,7 @@ def separate(product,data,note_number,user,qtd_coletada):
         if verificar_separacao.quantidade == verificar_separacao.qtd_coletada:
             verificar_separacao.status = True
             session.commit()
-            verify_if_billing_done(session.query(Separacao).filter(Separacao.status == True,Separacao.nota == note_number,Separacao.data == str(date.today(),Separacao.produto == product)).first())
+            verify_if_billing_done(session.query(Separacao).filter(Separacao.status == True,Separacao.nota == note_number,Separacao.data == str(date.today()),Separacao.produto == product).first())
             add_history(action=f"Separação e conclusão de Faturamento {session.query(Picklist).filter(Picklist.nota == verificar_separacao.nota,Picklist.data == str(date.today()),Picklist.id == verificar_separacao.id_mercado).first().id_faturamento}",qtd=session.query(Picklist).filter(Picklist.nota == verificar_separacao.nota,Picklist.data == str(date.today()),Picklist.id == verificar_separacao.id_mercado).first().quantidade,data=data,item=product,user=user)
             return st.success(f"Separação {verificar_separacao.id} concluida com sucesso")
         else: 
@@ -507,7 +507,7 @@ def separate(product,data,note_number,user,qtd_coletada):
                 verificar_separacao.status = True
                 session.commit()
                 add_history(action=f"Separação e conclusão de Faturamento {session.query(Picklist).filter(Picklist.nota == verificar_separacao.nota,Picklist.data == str(date.today()),Picklist.id == verificar_separacao.id_mercado).first().id_faturamento}",qtd=session.query(Picklist).filter(Picklist.nota == verificar_separacao.nota,Picklist.data == str(date.today()),Picklist.id == verificar_separacao.id_mercado).first().quantidade,data=data,item=product,user=user)
-                verify_if_billing_done(session.query(Separacao).filter(Separacao.status == True,Separacao.nota == note_number,Separacao.data == str(date.today(),Separacao.produto == product)).first())
+                verify_if_billing_done(session.query(Separacao).filter(Separacao.status == True,Separacao.nota == note_number,Separacao.data == str(date.today()),Separacao.produto == product).first())
                 return st.success(f"Separação {verificar_separacao.id} concluida com sucesso")
     except:
         try:
@@ -532,7 +532,7 @@ def separate(product,data,note_number,user,qtd_coletada):
             item_separado.status = True
             session.commit()
             add_history(action=f"Separação e conclusão do faturamento {session.query(Picklist).filter(Picklist.nota == note_number,Picklist.data == str(date.today())).first().id_faturamento}",qtd=session.query(Picklist).filter(Picklist.nota == note_number,Picklist.data == str(date.today())).first().quantidade,data=data,item=product,user=user)
-            verify_if_billing_done(session.query(Separacao).filter(Separacao.status == True,Separacao.nota == note_number,Separacao.data == str(date.today(),Separacao.produto == product)).first())
+            verify_if_billing_done(session.query(Separacao).filter(Separacao.status == True,Separacao.nota == note_number,Separacao.data == str(date.today()),Separacao.produto == product).first())
             return st.success(f"Separação {item_separado.id} concluida com sucesso")
 
 def create_itens_relations(data,transp,user):
