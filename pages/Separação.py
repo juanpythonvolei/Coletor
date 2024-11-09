@@ -31,8 +31,10 @@ with col4:
    selecoes = st.multiselect(label="Selecione suas notas",options=list(set(lista)),placeholder="Selecione as notas para a separação")
 with col5:
    for item in selecoes:
-      quantidae_value = session.query(Picklist).filter(Picklist.data == str(date.today()),Picklist.nota == item,Picklist.status == True).first().quantidade
-      contador += quantidae_value
+      quantidae_value = session.query(Picklist.quantidade).filter(Picklist.data == str(date.today()),Picklist.nota == item,Picklist.status == True).all()
+      lista_quantidade=[item[0] for item in quantiade_value]
+      for elemento in lista_quantidae
+            contador += elemento
    st.metric(label="Total de volumes",value=contador)
 with col6:
     st.metric(label="Notas disponíveis",value=len(lista))
