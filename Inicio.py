@@ -1,7 +1,7 @@
 import streamlit as st
 from views import *
 
-image = st.image('https://img.freepik.com/vetores-premium/empresa-de-transporte-de-logotipo-de-logistica-de-caminhao-que-esta-em-um-fundo-preto_645012-137.jpg')
+image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 st.markdown("""
     <style>
     .sidebar .sidebar-content {
