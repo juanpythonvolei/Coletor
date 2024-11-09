@@ -682,14 +682,17 @@ def assistant():
     with cola:
         pergunta = st.chat_input(placeholder='Faça sua pergunta')
     with colb:
-        if uploaded_files:
-            texto = ''
-            for item in uploaded_files:
-                tabela = treat_table(item)
-                texto += f'{tabela}\n'
-            treat_audio(None,texto)
-        else:
-             treat_audio(texto_final,None)
+        try:
+            if uploaded_files:
+                texto = ''
+                for item in uploaded_files:
+                    tabela = treat_table(item)
+                    texto += f'{tabela}\n'
+                treat_audio(None,texto)
+            else:
+                 treat_audio(texto_final,None)
+        except:
+            pass
     if pergunta:
         if uploaded_files:
             texto = ''
