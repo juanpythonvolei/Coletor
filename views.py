@@ -605,6 +605,8 @@ def query_and_update_ean(code,ean):
         return st.error(f"O item {code} não está cadastrado")
     
 def assistant():
+    with st.popover('Carregar arquivo'):
+        st.upload_files(")
     texto_estoque = '' 
     texto_usuarios = ''
     texto_historico = ''
