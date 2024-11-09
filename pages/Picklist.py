@@ -16,7 +16,7 @@ with colz:
             donwload_picklist()
 
 mercados_ativos = picking(data=str(date.today()))
-for mercado in list(set(mercados_ativos)):
+for mercado in mercados_ativos:
         col1,col2,col3 = st.columns(3)
         contador = 0
         with col1:
