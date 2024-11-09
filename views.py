@@ -124,6 +124,8 @@ def carregar_arquivo(pergunta,conteudo):
                 tabela = treat_table(item)
                 texto += f'{tabela}\n'
             arquivo = {"text":str(texto)}
+        else:
+            arquivo = {"text":str(treat_table(conteudo[0]))}
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
