@@ -42,7 +42,7 @@ st.title("Notas selecionadas")
 
 
 if selecoes:
-   for i,elemento in enumerate(list(set(separation(selecoes)))):
+   for i,elemento in enumerate(separation(selecoes)):
       nota = st.subheader(f"Nota: {elemento.nota} Quantidade: {elemento.quantidade}")
       col1,col2,col3 = st.columns(3)
       with col1:
