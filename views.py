@@ -121,18 +121,17 @@ def carregar_arquivo(pergunta,conteudo):
         if 'pdf' in item.name:
             mime_type = "application/pdf"
         elif 'xlsx' in item.name:
-            mime_type = "text/plain"
+            texto = ''
+            tabela = treat_table(item)
+            texto += f'{tabela}\n'
+            arquivo = {"text":texto}
         elif 'imagem' in item.name:
             mime_type ="image/png" 
         else:
             raise ValueError("Tipo de arquivo não suportado")
-        arquivo_upload = genai.upload_file(item, mime_type=mime_type)
-        arquivos_upload.append(arquivo_upload)
-    st.write(arquivos_upload)
-    chat_history = [{"role": "user", "parts": [arquivo]} for arquivo in arquivos_upload]
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
-    chat = model.start_chat(history=chat_history) 
+    chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
     response = chat.send_message(pergunta) 
     return response.text
 
