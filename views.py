@@ -359,7 +359,6 @@ def picking(data):
     verificar_se_ativo = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.status == False).all()
     se_mercado_concluido = session.query(Picklist.nota,Picklist.produto).filter(Picklist.data == str(date.today()),Picklist.status == True).all()
     lista_conferencia = [elemento for elemento in se_mercado_concluido]
-    st.write(lista_conferencia)
     for item in list(set(verificar_se_ativo)):
         try:
             if (item.numero_da_nota,item.produto) in lista_conferencia:
