@@ -697,7 +697,6 @@ def assistant():
             for item in uploaded_files:
                 tabela = treat_table(item)
                 texto += f'{tabela}\n'
-            st.write(texto)
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
