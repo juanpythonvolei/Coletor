@@ -12,6 +12,10 @@ from io import BytesIO
 session = sessionmaker(bind=engine)
 session = session()
 
+def treat_table(df)
+    table = pd.read_excel(df)
+    st.write(table)
+    return table.to_string()
 def treat_audio(texto_final):
     audio_value = st.experimental_audio_input(label="Faça sua pergunta",key='assistant')
     if audio_value:
@@ -111,9 +115,13 @@ def analisar(pergunta,conteudo):
 
 
 def carregar_arquivo(pergunta,conteudo):
+    if '.pdf' in conteudo.name:
+        arquivo = genai.upload_file(conteudo,mime_type='application/pdf')
+    elif '.xlsx' in conteudo.name:
+        arquivo = genai.upload_file(treat_table(conteudo),mime_type='text/plain')
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
-    chat = model.start_chat(history=[{"role":"user","parts":[genai.upload_file(conteudo,mime_type='application/pdf')]}]) 
+    chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
     response = chat.send_message(pergunta) 
     return response.text
 
