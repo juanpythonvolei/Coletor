@@ -116,10 +116,7 @@ def analisar(pergunta,conteudo):
 
 def carregar_arquivo(pergunta,conteudo):
     arquivos_upload = []
-    texto = ''
-    for item in conteudo:
-            tabela = treat_table(item)
-            texto += f'{tabela}\n'
+    
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[{"text":str(texto)}]}]) 
@@ -681,11 +678,15 @@ def assistant():
     treat_audio(texto_final)
     if pergunta:
         if uploaded_files:
-            
+            texto = ''
+            for item in uploaded_files:
+                tabela = treat_table(item)
+                texto += f'{tabela}\n'
+            st.write(texto)
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
-            assistente.write(carregar_arquivo(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",uploaded_files))
+            assistente.write(analisar(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",str(texto)))
         else:
             humano = st.chat_message('human')
             humano.write(pergunta)
