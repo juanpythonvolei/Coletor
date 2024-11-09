@@ -127,6 +127,7 @@ def carregar_arquivo(pergunta,conteudo):
             mime_type ="image/png" 
         else:
             raise ValueError("Tipo de arquivo não suportado")
+    st.write(texto)
     arquivo = {"text":texto}       
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
