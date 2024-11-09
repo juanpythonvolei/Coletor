@@ -629,7 +629,7 @@ def assistant():
         texto_estoque += f'produto:{item.item}, endereço: {item.endereco} , quantidade:{item.quantidade}\n'
 
     for item in faturamento:
-        texto_faturamento += f'produto:{item.produto}, endereço: {item.posicao} , quantidade:{item.quantidade},numero da nota: {item.numero_da_nota}, cliente: {item.cliente}, transportadora:{item.transportadora}, data: {item.data}\n'
+        texto_faturamento += f'produto:{item.produto}, endereço: {item.posicao} , quantidade:{item.quantidade},numero da nota: {item.numero_da_nota}, cliente: {item.cliente}, transportadora:{item.transportadora}, data: {item.data}\n, quantidade coletada: {item.qtd_coletada}'
 
     for item in picklist:
         texto_picklist += f'produto:{item.produto}, endereço: {item.endereco} , quantidade:{item.quantidade},numero da nota: {item.nota}, data: {item.data}\n'
