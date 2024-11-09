@@ -2,7 +2,7 @@ from views import *
 import streamlit as st
 import random
 
-
+image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 
 colx,coly,colz = st.columns(3)
 
