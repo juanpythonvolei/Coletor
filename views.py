@@ -16,9 +16,11 @@ def treat_table(df):
     table = pd.read_excel(df)
     return table.to_string()
     
-def treat_audio(texto_final):
+def treat_audio(texto_final,files):
+    
     audio_value = st.experimental_audio_input(label="Faça sua pergunta",key='assistant')
     if audio_value:
+        
         rec = sr.Recognizer()
         with sr.AudioFile(audio_value) as arquivo_audio:
                     audio = rec.record(arquivo_audio)
@@ -26,10 +28,15 @@ def treat_audio(texto_final):
         humano = st.chat_message('human')
         humano.write(texto)
         assistente = st.chat_message('assistant')
-        return assistente.write(analisar(
-            f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.
-            Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {texto}"""
-            ,str(texto_final)))
+        if files != None:
+            return assistente.write(analisar(
+                f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.
+                Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {texto}"""
+                ,str(texto_final)))
+        else:
+            return assistente.write(analisar(
+                f"""Por favor, analise as tabelas a seguir e, baseando-se nelas, responda ao que se pede: {texto}"""
+                ,str(files)))
          
         
 def read_ean(ean):
@@ -611,7 +618,7 @@ def query_and_update_ean(code,ean):
 def assistant():
     carregar = st.toggle('Carregar arquivo')
     if carregar:
-        uploaded_files = st.file_uploader("Seleção", type=[f'pdf','xlsx','xml'], accept_multiple_files=True,help='Insira seus arquivos aqui')
+        uploaded_files = st.file_uploader("Seleção", type=['xlsx'], accept_multiple_files=True,help='Insira seus arquivos excel aqui')
     texto_estoque = '' 
     texto_usuarios = ''
     texto_historico = ''
@@ -671,9 +678,18 @@ def assistant():
             Recebimento: {texto_recebimento}\n
             Histórico: {texto_historico}\n
             Produtos: {texto_produtos}"""
-    
-    pergunta = st.chat_input(placeholder='Faça sua pergunta')
-    treat_audio(texto_final)
+    cola,colb = st.columns(2)
+    with cola:
+        pergunta = st.chat_input(placeholder='Faça sua pergunta')
+    with colb:
+        if uploaded_files:
+            texto = ''
+            for item in uploaded_files:
+                tabela = treat_table(item)
+                texto += f'{tabela}\n'
+            treat_audio(None,texto)
+        else:
+             treat_audio(texto_final,None)
     if pergunta:
         if uploaded_files:
             texto = ''
