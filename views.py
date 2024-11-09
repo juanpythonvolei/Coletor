@@ -122,7 +122,7 @@ def carregar_arquivo(pergunta,conteudo):
             texto += f'{tabela}\n'
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
-    chat = model.start_chat(history=[{"role":"user","parts":[{"text":texto}]}]) 
+    chat = model.start_chat(history=[{"role":"user","parts":[{"text":str(texto)}]}]) 
     response = chat.send_message(pergunta) 
     return response.text
 
