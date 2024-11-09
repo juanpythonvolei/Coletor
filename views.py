@@ -616,10 +616,11 @@ def query_and_update_ean(code,ean):
         return st.error(f"O item {code} não está cadastrado")
     
 def assistant():
-     if 'selected_option' in st.session_state:
+    if 'selected_option' in st.session_state:
             Usuario_logado = st.session_state.selected_option
          
     carregar = st.toggle('Carregar arquivo')
+    
     if carregar:
         uploaded_files = st.file_uploader("Seleção", type=['xlsx'], accept_multiple_files=True,help='Insira seus arquivos excel aqui')
     texto_estoque = '' 
