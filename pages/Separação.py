@@ -16,9 +16,15 @@ with colz:
       with st.popover('📂'):
             donwload_separation()
 
-notas = session.query(Picklist.nota).filter(Picklist.status==True,Picklist.data == str(date.today())).all()
-nota_a_remover = session.query(Separacao.nota).filter(Separacao.status == True,Separacao.data == str(date.today())).all()
+notas = session.query(Picklist).filter(Picklist.status==True,Picklist.data == str(date.today())).all()
+nota_a_remover = session.query(Separacao.nota,Separacao.produto).filter(Separacao.status == True,Separacao.data == str(date.today())).all()
 lista = []
+for item in notas:
+   if (item.nota,item.produto) in nota_a_remover:
+      pass
+   else:   
+      numero= item.nota[0]
+      lista.append(numero)
 contador = 0
 col4,col5,col6 = st.columns(3)
 with col4:
