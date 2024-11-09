@@ -564,18 +564,19 @@ def create_itens_relations_for_item(data,lista,user):
     total_peso = 0
     total_volumes = 0
     for i,item in enumerate(lista):
-        verificar_items = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.status == True,Faturamento.numero_da_nota == item).first()
-        valor = session.query(Produtos).filter(Produtos.codigo == verificar_items.produto).first().preco
-        peso = session.query(Produtos).filter(Produtos.codigo ==verificar_items.produto).first().peso
+        verificar_items = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.status == True,Faturamento.numero_da_nota == item).all()
+    for i,espec in enumerate(verificar_items):
+        valor = session.query(Produtos).filter(Produtos.codigo == espec.produto).first().preco
+        peso = session.query(Produtos).filter(Produtos.codigo ==espec.produto).first().peso
         total_peso += peso
         total_valor += valor
-        total_volumes +=verificar_items.quantidade
+        total_volumes +=espec.quantidade
         infos = pd.DataFrame({
             'volumes':total_volumes,
-            'Cliente':verificar_items.cliente,
-            'Data de Emissão da nota': verificar_items.date_emissao,
-            'Transportadora':verificar_items.transportadora,
-            'Nota':verificar_items.numero_da_nota
+            'Cliente':espec.cliente,
+            'Data de Emissão da nota': espec.date_emissao,
+            'Transportadora':espec.transportadora,
+            'Nota':espec.numero_da_nota
         },index=[i])
         listagem.append(infos)
     save_table_int_text(pd.concat(listagem,ignore_index=True),user,data)
