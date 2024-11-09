@@ -483,7 +483,7 @@ def separation(listaa):
 def verify_if_billing_done(id_pickinglist):
     status_picking = session.query(Picklist).filter(Picklist.nota== id_pickinglist.nota,Picklist.produto == id_pickinglist.produto).first().status
     if status_picking == True:
-        faturamento = session.query(Faturamento).filter(Faturamento.nota == id_pickinglist.nota,Faturamento.data == str(date.today()),Faturamento.produto == id_pickinglist.produto).first()
+        faturamento = session.query(Faturamento).filter(Faturamento.numero_da_nota == id_pickinglist.nota,Faturamento.data == str(date.today()),Faturamento.produto == id_pickinglist.produto).first()
         faturamento.status = True
         session.commit()   
         return st.success(f"Faturamento {faturamento.id} concluido com sucesso") 
