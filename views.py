@@ -433,38 +433,40 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
     return contador_ok,contador_cadastro,contador_nao    
 
 def pick(product,data,note_number,user,qtd_coletada):
-    try:
-        verificar = session.query(Faturamento).filter(Faturamento.produto == product,Faturamento.data == data,Faturamento.numero_da_nota==note_number,Faturamento.status == False).first()
-        verificar_picklist = session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first()
-    except:
-        verificar = session.query(Faturamento).filter(Faturamento.produto == read_ean(product)[0],Faturamento.data == data,Faturamento.numero_da_nota==note_number,Faturamento.status == False).first()
-        verificar_picklist = session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto ==verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first()
-    if verificar_picklist:
-        if verificar_picklist.quantidade == verificar_picklist.qtd_coletada:
-            session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().status = True
-            session.commit()
-            add_history(action=f'Mercado {verificar_picklist.id} coletado',qtd=verificar_picklist.quantidade,data=data,item=product,user=user)
-            return st.success(F"O mercado {verificar_picklist.id_faturamento} foi concluido com sucesso")
-        else:
-            verificar_picklist.qtd_coletada += qtd_coletada
-            session.commit()
-            if session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().quantidade == session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().qtd_coletada:
+    if session.query(Picklist).filter(Picklist.nota == note_number,Picklist.status == False).first():
+        try:
+            verificar = session.query(Faturamento).filter(Faturamento.produto == product,Faturamento.data == data,Faturamento.numero_da_nota==note_number,Faturamento.status == False).first()
+            verificar_picklist = session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first()
+        except:
+            verificar = session.query(Faturamento).filter(Faturamento.produto == read_ean(product)[0],Faturamento.data == data,Faturamento.numero_da_nota==note_number,Faturamento.status == False).first()
+            verificar_picklist = session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto ==verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first()
+        if verificar_picklist:
+            if verificar_picklist.quantidade == verificar_picklist.qtd_coletada:
                 session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().status = True
                 session.commit()
                 add_history(action=f'Mercado {verificar_picklist.id} coletado',qtd=verificar_picklist.quantidade,data=data,item=product,user=user)
                 return st.success(F"O mercado {verificar_picklist.id_faturamento} foi concluido com sucesso")
             else:
-                return st.info(F"Ainda resta {verificar_picklist.quantidade - verificar_picklist.qtd_coletada} para concluir a coleta")
-    else:
-        novo_mercado = Picklist(usuario=user,produto=verificar.produto,quantidade=verificar.quantidade,nota=verificar.numero_da_nota,status=False,data=verificar.data,endereco=verificar.posicao,id_faturamento=verificar.id,qtd_coletada=1)
-        session.add(novo_mercado)
-        session.commit()
-        if novo_mercado.qtd_coletada == novo_mercado.quantidade:
-            novo_mercado.status = True
+                verificar_picklist.qtd_coletada += qtd_coletada
+                session.commit()
+                if session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().quantidade == session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().qtd_coletada:
+                    session.query(Picklist).filter(Picklist.id_faturamento == verificar.id,Picklist.produto == verificar.produto,Picklist.data == verificar.data,Picklist.nota == verificar.numero_da_nota,Picklist.status == verificar.status).first().status = True
+                    session.commit()
+                    add_history(action=f'Mercado {verificar_picklist.id} coletado',qtd=verificar_picklist.quantidade,data=data,item=product,user=user)
+                    return st.success(F"O mercado {verificar_picklist.id_faturamento} foi concluido com sucesso")
+                else:
+                    return st.info(F"Ainda resta {verificar_picklist.quantidade - verificar_picklist.qtd_coletada} para concluir a coleta")
+        else:
+            novo_mercado = Picklist(usuario=user,produto=verificar.produto,quantidade=verificar.quantidade,nota=verificar.numero_da_nota,status=False,data=verificar.data,endereco=verificar.posicao,id_faturamento=verificar.id,qtd_coletada=1)
+            session.add(novo_mercado)
             session.commit()
-            add_history(action=f'Mercado {novo_mercado.id} coletado',qtd=novo_mercado.quantidade,data=data,item=product,user=user)
-            return st.success(F"O mercado {novo_mercado.id_faturamento} foi concluido com sucesso")
-
+            if novo_mercado.qtd_coletada == novo_mercado.quantidade:
+                novo_mercado.status = True
+                session.commit()
+                add_history(action=f'Mercado {novo_mercado.id} coletado',qtd=novo_mercado.quantidade,data=data,item=product,user=user)
+                return st.success(F"O mercado {novo_mercado.id_faturamento} foi concluido com sucesso")
+    else:
+        pass
 def separation(listaa):
     lista = []
     lista_ok = []
