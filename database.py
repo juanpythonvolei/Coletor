@@ -86,8 +86,9 @@ class Faturamento(Base):
     data = Column('data',String)
     date_emissao = Column('data de emissão',String)
     posicao = Column('posição',ForeignKey('estoque.endereco'))
+    destino = Column('Destino',String)
 
-    def __init__(self,usuario,produto,quantidade,numero_da_nota,cliente,status,data,transportadora,data_emissao,posicao):
+    def __init__(self,usuario,produto,quantidade,numero_da_nota,cliente,status,data,transportadora,data_emissao,posicao,destino):
         self.produto = produto
         self.quantidade = quantidade
         self.data = data
@@ -98,6 +99,7 @@ class Faturamento(Base):
         self.transportadora = transportadora
         self.date_emissao = data_emissao
         self.posicao= posicao
+        self.destino = destino
 
 class Picklist(Base):
     __tablename__ = 'picklist'
