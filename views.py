@@ -786,10 +786,13 @@ def donwload_receiving():
         pass
     
 def donwload_product():
+    try:
         list = []
         produtos = session.query(Produtos).all()    
         for i,item in enumerate(produtos):
             texto_produtos = {'produto':item.codigo , 'valor': item.preco ,'peso':item.peso  ,'descrição':item.nome}
             list.append(pd.DataFrame(texto_produtos,index=[i]))
-        download_button(pd.concat(pd.concat(list),f'Produtos {date.today()}')) 
+        download_button(pd.concat(list),f'Produtos {date.today()}') 
+    except:
+        pass
 
