@@ -22,7 +22,7 @@ if tab1:
         col3,col4 = st.columns(2)
             
         with col3:    
-            transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0][:5].casefold() for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select')    
+            transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select')    
         with col4:
             if transp:
                 with st.popover("🗓️ Selecione uma data"):
