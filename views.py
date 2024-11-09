@@ -470,8 +470,12 @@ def separation(listaa):
     for item in listaa:
         try:
             mercado  = session.query(Picklist).filter(Picklist.nota == item,Picklist.status == True).all()
+            separacao = session.query(Separacao.nota,Separacao.produto).filter(Separacao.data == str(date.today()),Separacao.status==True).all()
             for mercados in mercado:
-                lista.append(mercados)
+                if (mercados.nota,mercados.produto) in separacao:
+                    pass
+                else:
+                    lista.append(mercados)
         except:
             pass
     return lista
