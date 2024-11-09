@@ -14,7 +14,6 @@ session = session()
 
 def treat_table(df):
     table = pd.read_excel(df)
-    st.write(table)
     return table.to_string()
     
 def treat_audio(texto_final):
