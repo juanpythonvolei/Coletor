@@ -120,10 +120,10 @@ def carregar_arquivo(pergunta,conteudo):
     elif '.xlsx' in conteudo.name:
         texto = ''
         if len(conteudo) > 1:
-        for item in conteudo:
-            tabela = treat_table(item)
-            texto += f'{tabela}\n'
-        arquivo = {"text":str(texto)}
+            for item in conteudo:
+                tabela = treat_table(item)
+                texto += f'{tabela}\n'
+            arquivo = {"text":str(texto)}
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
