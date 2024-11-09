@@ -118,15 +118,15 @@ def carregar_arquivo(pergunta,conteudo):
     arquivos_upload = []
 
     for item in conteudo:
-        if 'pdf' in conteudo.name:
+        if 'pdf' in item.name:
             mime_type = "application/pdf"
-        elif 'xlsx' in conteudo.name:
+        elif 'xlsx' in item.name:
             mime_type = "text/plain"
-        elif 'imagem' in conteudo.name:
+        elif 'imagem' in item.name:
             mime_type ="image/png" 
         else:
             raise ValueError("Tipo de arquivo não suportado")
-        arquivo_upload = genai.upload_file(conteudo, mime_type=mime_type)
+        arquivo_upload = genai.upload_file(item, mime_type=mime_type)
         arquivos_upload.append(arquivo_upload)
 
     chat_history = [{"role": "user", "parts": [arquivo]} for arquivo in arquivos_upload]
