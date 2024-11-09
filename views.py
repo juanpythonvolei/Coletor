@@ -18,7 +18,7 @@ def treat_table(df):
     
 def treat_audio(texto_final,files):
     
-    audio_value = st.experimental_audio_input(label="Faça sua pergunta",key='assistant')
+    audio_value = st.audio_input(label="Faça sua pergunta",key='assistant')
     if audio_value:
         
         rec = sr.Recognizer()
