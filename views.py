@@ -606,7 +606,7 @@ def query_and_update_ean(code,ean):
     
 def assistant():
     with st.popover('Carregar arquivo'):
-        st.upload_files(")
+        uploaded_files = st.file_uploader("Seleção", type=[f'pdf','xlsx','xml'], accept_multiple_files=True,help='Insira seus arquivos aqui')
     texto_estoque = '' 
     texto_usuarios = ''
     texto_historico = ''
@@ -670,13 +670,20 @@ def assistant():
     pergunta = st.chat_input(placeholder='Faça sua pergunta')
     treat_audio(texto_final)
     if pergunta:
-        humano = st.chat_message('human')
-        humano.write(pergunta)
-        assistente = st.chat_message('assistant')
-        assistente.write(analisar(
-            f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.Apenas uma observação, o termo mercado,se aparecer, se refere ao processo de pré-separação.Além disso, quanto há mercado e separação de um item ou de vários itens de mesma nota, considere o faturamento completo sendo o produto faturado e quantidade faturada a quantidade constante tanto no picklist ou mercado, quanto na separação.Porém, um item só pode ser faturado 1 vez.Caso exista mais de um faturamento para um mesmo item de uma mesma nota, considere apenas um faturamento
-            Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {pergunta}"""
-            ,str(texto_final)))
+        if uploaded_files:
+            
+            humano = st.chat_message('human')
+            humano.write(pergunta)
+            assistente = st.chat_message('assistant')
+            assistente.write(carregar_arquivo(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",uploaded_files[0])
+        else:
+            humano = st.chat_message('human')
+            humano.write(pergunta)
+            assistente = st.chat_message('assistant')
+            assistente.write(analisar(
+                f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.Apenas uma observação, o termo mercado,se aparecer, se refere ao processo de pré-separação.Além disso, quanto há mercado e separação de um item ou de vários itens de mesma nota, considere o faturamento completo sendo o produto faturado e quantidade faturada a quantidade constante tanto no picklist ou mercado, quanto na separação.Porém, um item só pode ser faturado 1 vez.Caso exista mais de um faturamento para um mesmo item de uma mesma nota, considere apenas um faturamento
+                Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {pergunta}"""
+                ,str(texto_final)))
 
 @st.cache_data
 def convert_df_to_excel(df):
