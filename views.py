@@ -670,9 +670,9 @@ def assistant():
             Recebimento: {texto_recebimento}\n
             Histórico: {texto_historico}\n
             Produtos: {texto_produtos}"""
-
-    pergunta = st.chat_input(placeholder='Faça sua pergunta')
     treat_audio(texto_final)
+    pergunta = st.chat_input(placeholder='Faça sua pergunta')
+    
     if pergunta:
         humano = st.chat_message('human')
         humano.write(pergunta)
