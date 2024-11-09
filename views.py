@@ -693,7 +693,6 @@ def assistant():
              treat_audio(texto_final,None)
     if pergunta:
        try:
-           uploaded_files:
             texto = ''
             for item in uploaded_files:
                 tabela = treat_table(item)
