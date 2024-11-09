@@ -616,6 +616,9 @@ def query_and_update_ean(code,ean):
         return st.error(f"O item {code} não está cadastrado")
     
 def assistant():
+     if 'selected_option' in st.session_state:
+            Usuario_logado = st.session_state.selected_option
+         
     carregar = st.toggle('Carregar arquivo')
     if carregar:
         uploaded_files = st.file_uploader("Seleção", type=['xlsx'], accept_multiple_files=True,help='Insira seus arquivos excel aqui')
@@ -700,14 +703,14 @@ def assistant():
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
-            assistente.write(analisar(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",str(texto)))
+            assistente.write(analisar(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede e responda se referindo ao indivíduo {Usuario_logado}: {pergunta}",str(texto)))
        except:
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
             assistente.write(analisar(
                 f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.Apenas uma observação, o termo mercado,se aparecer, se refere ao processo de pré-separação.Além disso, quanto há mercado e separação de um item ou de vários itens de mesma nota, considere o faturamento completo sendo o produto faturado e quantidade faturada a quantidade constante tanto no picklist ou mercado, quanto na separação.Porém, um item só pode ser faturado 1 vez.Caso exista mais de um faturamento para um mesmo item de uma mesma nota, considere apenas um faturamento
-                Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {pergunta}"""
+                Então você deve interpretar o que cada lista mostra de informação e responder a essa questão. Responda a esta pergunta se referindo ao índividuo {Usuario_logado}: {pergunta}"""
                 ,str(texto_final)))
 
 @st.cache_data
