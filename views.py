@@ -113,7 +113,7 @@ def analisar(pergunta,conteudo):
 def carregar_arquivo(pergunta,conteudo):
     genai.configure(api_key=st.secrets['ia'])
     model = genai.GenerativeModel('gemini-1.5-flash')
-    chat = model.start_chat(history=[{"role":"user","parts":[genai.upload_file(conteudo,mime_type="application/pdf"])
+    chat = model.start_chat(history=[{"role":"user","parts":[genai.upload_file(conteudo,mime_type="application/pdf"}])
     response = chat.send_message(pergunta)
     return response.text
 
