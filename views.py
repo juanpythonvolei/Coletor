@@ -119,7 +119,8 @@ def carregar_arquivo(pergunta,conteudo):
     if '.pdf' in conteudo.name:
         arquivo = genai.upload_file(conteudo,mime_type='application/pdf')
     elif '.xlsx' in conteudo.name:
-        arquivo = genai.upload_file(treat_table(conteudo),mime_type='text/plain')
+        tabela = treat_table(conteudo)
+        arquivo = genai.upload_file(tabela,mime_type='text/plain')
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
