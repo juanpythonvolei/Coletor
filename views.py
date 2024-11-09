@@ -123,12 +123,11 @@ def carregar_arquivo(pergunta,conteudo):
         elif 'xlsx' in item.name:
             tabela = treat_table(item)
             texto += f'{tabela}\n'
-            arquivo = {"text":texto}
         elif 'imagem' in item.name:
             mime_type ="image/png" 
         else:
             raise ValueError("Tipo de arquivo não suportado")
-   
+    arquivo = {"text":texto}       
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
