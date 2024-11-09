@@ -116,12 +116,11 @@ def analisar(pergunta,conteudo):
 
 def carregar_arquivo(pergunta,conteudo):
     arquivos_upload = []
-
+    texto = ''
     for item in conteudo:
         if 'pdf' in item.name:
             mime_type = "application/pdf"
         elif 'xlsx' in item.name:
-            texto = ''
             tabela = treat_table(item)
             texto += f'{tabela}\n'
             arquivo = {"text":texto}
@@ -129,6 +128,7 @@ def carregar_arquivo(pergunta,conteudo):
             mime_type ="image/png" 
         else:
             raise ValueError("Tipo de arquivo não suportado")
+   
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
     chat = model.start_chat(history=[{"role":"user","parts":[arquivo]}]) 
