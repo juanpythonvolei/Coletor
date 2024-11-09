@@ -370,7 +370,6 @@ def picking(data):
     return list(set(lista_ok))      
 
 def billing(code,price,transp,client,data,user,qtd,number,status,data_emition,peso,description):
-            if not session.query(Faturamento).filter(Faturamento.numero_da_nota == number,Faturamento.produto == code,Faturamento.cliente == client,Faturamento.data == str(date.today())).first():
                 verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
                 if verificar:
                     posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo).first().endereco
@@ -387,8 +386,6 @@ def billing(code,price,transp,client,data,user,qtd,number,status,data_emition,pe
                 else:
                     add_product(code=code,price=price,weigth=peso,name=description,user=user)
                     return{'tipo':'cadastrada','valor':1}
-            else:
-                pass
 def process_notes(notes_list,data,usuario,status,peso_recebido):
     contador_ok = 0
     contador_nao = 0
