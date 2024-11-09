@@ -469,8 +469,9 @@ def separation(listaa):
     lista_descarte = session.query(Separacao.id_mercado).filter(Separacao.status == True,Separacao.data == str(date.today())).all()
     for item in listaa:
         try:
-            mercado  = session.query(Picklist).filter(Picklist.nota == item,Picklist.status == True).first()
-            lista.append(mercado)
+            mercado  = session.query(Picklist).filter(Picklist.nota == item,Picklist.status == True).all()
+            for mercados in mercado:
+                lista.append(mercados)
         except:
             pass
     for elemento in lista:
@@ -482,7 +483,7 @@ def separation(listaa):
                 lista_ok.append(elemento)
         except:
             pass
-    return list(set(lista_ok))
+    return lista_ok
         
 def verify_if_billing_done(id_pickinglist):
     status_picking = session.query(Picklist).filter(Picklist.id_faturamento == id_pickinglist).first().status
