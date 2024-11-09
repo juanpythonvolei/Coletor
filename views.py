@@ -13,7 +13,7 @@ session = sessionmaker(bind=engine)
 session = session()
 
 def treat_table(df):
-    table = pd.read_excel(df.name)
+    table = pd.read_excel(df)
     st.write(table)
     return table.to_string()
     
