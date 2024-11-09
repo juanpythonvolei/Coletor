@@ -37,7 +37,7 @@ with col5:
             contador += elemento
    st.metric(label="Total de volumes",value=contador)
 with col6:
-    st.metric(label="Notas disponíveis",value=len(lista))
+    st.metric(label="Notas disponíveis",value=len(set(list(lista))))
 
 st.divider()
 st.title("Notas selecionadas")
