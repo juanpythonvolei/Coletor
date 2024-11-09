@@ -692,7 +692,8 @@ def assistant():
         except:
              treat_audio(texto_final,None)
     if pergunta:
-        if uploaded_files:
+       try:
+           uploaded_files:
             texto = ''
             for item in uploaded_files:
                 tabela = treat_table(item)
@@ -702,7 +703,7 @@ def assistant():
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
             assistente.write(analisar(f"Por favor observe o arquivo ou arquivos que você está recebendo e baseando-se nele ou neles, faça o que se pede: {pergunta}",str(texto)))
-        else:
+       except:
             humano = st.chat_message('human')
             humano.write(pergunta)
             assistente = st.chat_message('assistant')
