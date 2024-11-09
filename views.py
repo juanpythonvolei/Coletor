@@ -542,7 +542,7 @@ def create_itens_relations(data,transp,user):
     total_peso = 0
     total_volumes = 0
     verificar_transps = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.transportadora == transp,Faturamento.status == True).all()
-    st.write( verificar_transps)
+    st.write(session.query(Faturamento).all())
     for i,item in enumerate(verificar_transps):
         valor = session.query(Produtos).filter(Produtos.codigo == item.produto).first().preco
         peso = session.query(Produtos).filter(Produtos.codigo == item.produto).first().peso
