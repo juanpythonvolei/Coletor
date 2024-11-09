@@ -689,10 +689,8 @@ def assistant():
                     tabela = treat_table(item)
                     texto += f'{tabela}\n'
                 treat_audio(None,texto)
-            else:
-                 treat_audio(texto_final,None)
         except:
-            pass
+             treat_audio(texto_final,None)
     if pergunta:
         if uploaded_files:
             texto = ''
