@@ -624,7 +624,7 @@ def query_and_update_ean(code,ean):
         return st.error(f"O item {code} não está cadastrado")
     
 def assistant():
-    with st.popover('Carregar arquivo'):
+    with st.togle('Carregar arquivo'):
         uploaded_files = st.file_uploader("Seleção", type=[f'pdf','xlsx','xml'], accept_multiple_files=True,help='Insira seus arquivos aqui')
     texto_estoque = '' 
     texto_usuarios = ''
