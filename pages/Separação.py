@@ -19,12 +19,6 @@ with colz:
 notas = session.query(Picklist.nota).filter(Picklist.status==True,Picklist.data == str(date.today())).all()
 nota_a_remover = session.query(Separacao.nota).filter(Separacao.status == True,Separacao.data == str(date.today())).all()
 lista = []
-for item in notas:
-   if item in nota_a_remover:
-      pass
-   else:   
-      numero= item[0]
-      lista.append(numero)
 contador = 0
 col4,col5,col6 = st.columns(3)
 with col4:
