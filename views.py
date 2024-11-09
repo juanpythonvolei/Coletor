@@ -474,16 +474,7 @@ def separation(listaa):
                 lista.append(mercados)
         except:
             pass
-    for elemento in lista:
-        try:
-            if elemento.id in lista_descarte:
-                pass
-            else:
-                #add_history(action=f'Nota {elemento.nota} foi adicionada para separação',qtd=qtd,data=str(date.today()),item=product,user=user,)
-                lista_ok.append(elemento)
-        except:
-            pass
-    return lista_ok
+    return lista
         
 def verify_if_billing_done(id_pickinglist):
     status_picking = session.query(Picklist).filter(Picklist.id_faturamento == id_pickinglist).first().status
