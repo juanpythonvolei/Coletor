@@ -23,7 +23,7 @@ for item in notas:
    if (item.nota,item.produto) in nota_a_remover:
       pass
    else:   
-      numero= item.nota[0]
+      numero= item.nota
       lista.append(numero)
 contador = 0
 col4,col5,col6 = st.columns(3)
