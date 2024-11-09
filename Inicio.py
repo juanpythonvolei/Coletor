@@ -1,7 +1,7 @@
 import streamlit as st
 from views import *
 
-image = st.image('https://logos-world.net/wp-content/uploads/2023/03/Thule-Logo.png')
+image = st.image('https://i.pinimg.com/originals/ea/7a/9b/ea7a9b8be87a04674be6a64b2e65868b.jpg')
 st.markdown("""
     <style>
     .sidebar .sidebar-content {
