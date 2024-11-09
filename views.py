@@ -128,7 +128,7 @@ def carregar_arquivo(pergunta,conteudo):
             raise ValueError("Tipo de arquivo não suportado")
         arquivo_upload = genai.upload_file(item, mime_type=mime_type)
         arquivos_upload.append(arquivo_upload)
-
+    st.write(arquivos_upload)
     chat_history = [{"role": "user", "parts": [arquivo]} for arquivo in arquivos_upload]
     genai.configure(api_key=st.secrets['ia']) 
     model = genai.GenerativeModel('gemini-1.5-flash') 
