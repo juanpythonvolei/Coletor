@@ -115,9 +115,9 @@ def analisar(pergunta,conteudo):
 
 
 def carregar_arquivo(pergunta,conteudo):
-    if '.pdf' in conteudo.name:
+    if '.pdf' in conteudo:
         arquivo = genai.upload_file(conteudo,mime_type='application/pdf')
-    elif '.xlsx' in conteudo.name:
+    elif '.xlsx' in conteudo:
         texto = ''
         if len(conteudo) > 1:
             for item in conteudo:
