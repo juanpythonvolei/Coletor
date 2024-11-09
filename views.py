@@ -629,7 +629,7 @@ def assistant():
         texto_estoque += f'produto:{item.item}, endereço: {item.endereco} , quantidade:{item.quantidade}\n'
 
     for item in faturamento:
-        texto_faturamento += f'produto:{item.produto}, endereço: {item.posicao} , quantidade:{item.quantidade},numero da nota: {item.numero_da_nota}, cliente: {item.cliente}, transportadora:{item.transportadora}, data: {item.data}\n, quantidade coletada: {item.qtd_coletada}'
+        texto_faturamento += f'produto:{item.produto}, endereço: {item.posicao} , quantidade:{item.quantidade},numero da nota: {item.numero_da_nota}, cliente: {item.cliente}, transportadora:{item.transportadora}, data: {item.data}\n'
 
     for item in picklist:
         texto_picklist += f'produto:{item.produto}, endereço: {item.endereco} , quantidade:{item.quantidade},numero da nota: {item.nota}, data: {item.data}\n'
@@ -672,7 +672,7 @@ def assistant():
         humano.write(pergunta)
         assistente = st.chat_message('assistant')
         assistente.write(analisar(
-            f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.Apenas uma observação, o termo mercado,se aparecer, se refere ao processo de pré-separação.
+            f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.Apenas uma observação, o termo mercado,se aparecer, se refere ao processo de pré-separação.Além disso, quanto há mercado e separação de um item ou de vários itens de mesma nota, considere o faturamento completo sendo o produto faturado e quantidade faturada a quantidade constante tanto no picklist ou mercado, quanto na separação.
             Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {pergunta}"""
             ,str(texto_final)))
 
