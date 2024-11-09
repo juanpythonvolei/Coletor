@@ -35,7 +35,7 @@ if tab1:
             with col2:
                 botao_ver_automático = st.button(f"Vizualizar Romaneio automátio para a tranpostadora {transp}")
             with botao_novo:
-                notas = st.multiselect(label="Seleção",placeholder="Selecione as notas da transportadora",options=[item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data == str(data),Faturamento.transportadora == transp).all()],key='nenhuma')
+                notas = st.multiselect(label="Seleção",placeholder="Selecione as notas da transportadora",options=list(set([item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data == str(data),Faturamento.transportadora == transp).all()])),key='nenhuma')
             if transp and notas and data:
                     
                     if not botao_ver_automático:
