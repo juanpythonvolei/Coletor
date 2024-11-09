@@ -625,31 +625,31 @@ def assistant():
     recebimento = session.query(Recebimento).all()
     produtos = session.query(Produtos).all()
 
-    for item in estoque:
+    for item in list(set(estoque)):
         texto_estoque += f'produto:{item.item}, endereço: {item.endereco} , quantidade:{item.quantidade}\n'
 
-    for item in faturamento:
+    for item in list(set(faturamento)):
         texto_faturamento += f'produto:{item.produto}, endereço: {item.posicao} , quantidade:{item.quantidade},numero da nota: {item.numero_da_nota}, cliente: {item.cliente}, transportadora:{item.transportadora}, data: {item.data}\n'
 
-    for item in picklist:
+    for item in list(set(picklist)):
         texto_picklist += f'produto:{item.produto}, endereço: {item.endereco} , quantidade:{item.quantidade},numero da nota: {item.nota}, data: {item.data}\n'
 
-    for item in separacao:
+    for item in list(set(separacao)):
         texto_separacao +=  f'produto:{item.produto}, endereço: {item.endereco} , quantidade:{item.quantidade},numero da nota: {item.nota}, data: {item.data}\n'
 
-    for item in romaneios:
+    for item in list(set(romaneios)):
         texto_romaneios += f'romaneio:{item.romaneio}, data: {item.data} , usuario:{item.usuario}\n'
 
-    for item in usuarios:
+    for item in list(set(usuarios)):
         texto_usuarios += f'Usuário:{item.usuario}\n'
 
-    for item in recebimento:
+    for item in list(set(recebimento)):
         texto_recebimento += f'produto:{item.produto} , quantidade:{item.quantidade}\n,data{item.data}'
 
-    for item in produtos:
+    for item in list(set(produtos)):
         texto_produtos += f'produto:{item.codigo} , valor: {item.preco}R$ ,peso{item.peso} Kg ,descrição:{item.nome}\n'
 
-    for item in historico:
+    for item in list(set(historico)):
         texto_historico += f'Evento:{item.evento} , quantidade:{item.quantidade},data{item.data},usuário:{item.usuario},item:{item.item}\n'
 
 
