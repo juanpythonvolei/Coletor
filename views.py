@@ -848,7 +848,7 @@ def calculate_distance(destiny):
 def define_destiny_list(note):
     destinos = []
     for item in note:
-                verificar = session.query(Faturamento).filter(Faturamento.data == item.data,Faturamento.numero_da_nota == item.numero_da_nota,Faturamento.status == True,Faturamento.produto == item.produto).first()
+                verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
                 distancia = calculate_distance(verificar.destino)
                 nota = item.numero_da_nota
                 cliente = item.cliente
