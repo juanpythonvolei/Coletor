@@ -868,7 +868,7 @@ def define_destiny_list(note):
             pass
     return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
-    origem = list[0][2]
+    origem = list[0]['origem']
     lista = []
     for i,item in enumerate(list):
         lista.append(
