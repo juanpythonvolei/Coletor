@@ -11,6 +11,7 @@ from io import BytesIO
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from time import sleep
+import requests
 
 session = sessionmaker(bind=engine)
 session = session()
