@@ -25,9 +25,6 @@ with col4:
                     data = st.date_input("Selecione uma data",value=None)
 if transp and data:
       notas = session.query(Faturamento.numero_da_nota).filter(Faturamento.data==str(data),Faturamento.status==True,Faturamento.transportadora == transp).all()
-      try:
-            result = build_google_map(route(define_destiny_list(item[0] for item in notas)))
-            st.table(result[1])
-      except:
-            pass
+      result = build_google_map(route(define_destiny_list(item[0] for item in notas)))
+      st.table(result[1])
      
