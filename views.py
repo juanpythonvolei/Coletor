@@ -882,27 +882,32 @@ def define_destiny_list(note):
     except:
         pass
 def route(list):
-    origem = list[0]['origem']
-    lista = []
-    for i,item in enumerate(list):
-        lista.append(
-            {
-            f'Distância':round(item['distancia']),
-             'nota':item['nota'],
-             'cliente':item['cliente'],   
-             'coordenadas':item['lat e long'],
-             'coordenadas origem':item['origem'],
-             'descricao':item['descricao'],
-             'tempo': round(float(item['distancia']*60/80),1)   
-            }
-        )
-        origem = item['descricao']
-        sleep(1)
-    return lista
+    try:
+        origem = list[0]['origem']
+        lista = []
+        for i,item in enumerate(list):
+            lista.append(
+                {
+                f'Distância':round(item['distancia']),
+                 'nota':item['nota'],
+                 'cliente':item['cliente'],   
+                 'coordenadas':item['lat e long'],
+                 'coordenadas origem':item['origem'],
+                 'descricao':item['descricao'],
+                 'tempo': round(float(item['distancia']*60/80),1)   
+                }
+            )
+            origem = item['descricao']
+            sleep(1)
+        return lista
+    except:
+        pass
         
 def build_google_map(list):
-    base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
-    final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
-    return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)])
-    
+    try:
+        base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
+        final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
+        return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)])
+    except:
+        pass
     
