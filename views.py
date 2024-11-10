@@ -834,12 +834,12 @@ def donwload_product():
         pass
 
 def calculate_distance(destiny):
-    try:
         location = destiny.split(',')
         if 'Itupeva' in destiny:
             local = f"{location[1]},{location[2]}"
         else:
             local = f"{location[1]},{location[2]}"
+            st.write(local)
         geocoder = Nominatim(user_agent="meu_app/1.0")
         localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
         localizacao2 = geocoder.geocode(local)
@@ -850,8 +850,6 @@ def calculate_distance(destiny):
             return distancia,coordenadas2,coordenadas1
         else:
             st.error("Uma ou ambas as localizações não foram encontradas.")
-    except:
-        pass
 
 def define_destiny_list(note):
     try:
