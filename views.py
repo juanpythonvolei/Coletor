@@ -888,6 +888,6 @@ def route(list):
 def build_google_map(list):
     base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
     final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
-    return st.info(final)
+    return st.link_button(label="Acessar Rota",url=final)
     
     
