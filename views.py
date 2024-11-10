@@ -858,7 +858,7 @@ def define_destiny_list(note):
                 cliente = verificar.cliente
                 destinos.append(
                     {
-                    'distancia':distancia[0],
+                    'distancia':distancia,
                     'nota':nota,
                     'cliente':cliente,
                     'lat e long':distancia[1],
@@ -874,13 +874,13 @@ def route(list):
     for i,item in enumerate(list):
         lista.append(
             {
-            f'Distância':round(item['distancia'],1),
+            f'Distância':round(item['distancia']),
              'nota':item['nota'],
              'cliente':item['cliente'],   
              'coordenadas':item['lat e long'],
              'coordenadas origem':item['origem'],
              'descricao':item['descricao'],
-             'tempo': round(float(float(item['distancia'])*60/80),1)   
+             'tempo': round(float(item['distancia']*60/80),1)   
             }
         )
         origem = item['descricao']
