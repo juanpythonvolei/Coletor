@@ -852,13 +852,14 @@ def define_destiny_list(note):
     for item in note:
                 verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
                 distancia = calculate_distance(verificar.destino)
+                st.write(distancia)
                 location = str(verificar.destino).split(',')
                 descricao = f"{location[0]},{location[1]},{location[2]}"
                 nota = verificar.numero_da_nota
                 cliente = verificar.cliente
                 destinos.append(
                     {
-                    'distancia':distancia,
+                    'distancia':distancia[0],
                     'nota':nota,
                     'cliente':cliente,
                     'lat e long':distancia[1],
