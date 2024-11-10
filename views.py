@@ -836,9 +836,13 @@ def donwload_product():
 def calculate_distance(destiny):
     st.write(destiny)
     location = destiny.split(',')
+    if 'Itupeva' in destiny:
+        local = f"{location[1]},{location[2]}"
+    else:
+        local = f"{location[0]},{location[1]},{location[2]}"
     geocoder = Nominatim(user_agent="meu_app/1.0")
     localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
-    localizacao2 = geocoder.geocode(f"{location[0]},{location[1]},{location[2]}")
+    localizacao2 = geocoder.geocode(local)
     if localizacao1 is not None and localizacao2 is not None:
         coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
         coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
