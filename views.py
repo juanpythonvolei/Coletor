@@ -872,7 +872,7 @@ def route(list):
     for i,item in enumerate(list):
         lista.append(
             {
-            f'Distância para o destino: {i}':item['descricao']),
+            f'Distância para o destino: {i}':item['descricao'],
              'nota':item['nota'],
              'cliente':item['cliente'],   
              'coordenadas':item['lat e long'],
