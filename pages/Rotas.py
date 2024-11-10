@@ -24,6 +24,6 @@ with col4:
                 with st.popover("🗓️ Selecione uma data"):
                     data = st.date_input("Selecione uma data",value=None)
 if transp and data:
-      notas = session.query(Faturamento.numero_da_nota).filter(Faturamento.data == data,Faturamento.transportadora == transp,Faturamento.status == True).all()
+      notas = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.transportadora == transp,Faturamento.status == True).all()
       st.write(notas)
       build_google_map(route(define_destiny_list([item[0] for item in notas])))
