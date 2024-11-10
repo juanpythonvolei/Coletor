@@ -842,7 +842,7 @@ def calculate_distance(destiny):
                 'key': st.secrets['chave_api_googlemaps']
                 }
         response = requests.get(url, params=params)
-        st.info(response)
+        st.info(response.json())
         if response.status_code == 200:
             data = response.json()
             route = data['routes'][0]
