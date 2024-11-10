@@ -834,48 +834,53 @@ def donwload_product():
         pass
 
 def calculate_distance(destiny):
-    st.write(destiny)
-    location = destiny.split(',')
-    if 'Itupeva' in destiny:
-        local = f"{location[1]},{location[2]}"
-    else:
-        local = f"{location[0]},{location[1]},{location[2]}"
-    geocoder = Nominatim(user_agent="meu_app/1.0")
-    localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
-    localizacao2 = geocoder.geocode(local)
-    if localizacao1 is not None and localizacao2 is not None:
-        coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
-        coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
-        distancia = geodesic(coordenadas1, coordenadas2).km
-        return distancia,coordenadas2,coordenadas1
-    else:
-        st.error("Uma ou ambas as localizações não foram encontradas.")
+    try:
+        location = destiny.split(',')
+        if 'Itupeva' in destiny:
+            local = f"{location[1]},{location[2]}"
+        else:
+            local = f"{location[0]},{location[1]},{location[2]}"
+        geocoder = Nominatim(user_agent="meu_app/1.0")
+        localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
+        localizacao2 = geocoder.geocode(local)
+        if localizacao1 is not None and localizacao2 is not None:
+            coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
+            coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
+            distancia = geodesic(coordenadas1, coordenadas2).km
+            return distancia,coordenadas2,coordenadas1
+        else:
+            st.error("Uma ou ambas as localizações não foram encontradas.")
+    except:
+        pass
 
 def define_destiny_list(note):
-    destinos = []
-    for item in note:
-                verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
-                distancia = calculate_distance(verificar.destino)
-                st.write(distancia)
-                location = str(verificar.destino).split(',')
-                descricao = f"{location[0]},{location[1]},{location[2]}"
-                nota = verificar.numero_da_nota
-                cliente = verificar.cliente
-                dict= {
-                    'distancia':distancia[0],
-                    'nota':nota,
-                    'cliente':cliente,
-                    'lat e long':distancia[1],
-                    'origem':distancia[2],
-                    'descricao':descricao
-                    }
-                
-                if dict in destinos:
-                    pass
-                else:
-                    destinos.append(dict)
-                sleep(1)
-    return sorted(destinos,key=lambda x:x['distancia'])
+    try:
+        destinos = []
+        for item in note:
+                    verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
+                    distancia = calculate_distance(verificar.destino)
+                    st.write(distancia)
+                    location = str(verificar.destino).split(',')
+                    descricao = f"{location[0]},{location[1]},{location[2]}"
+                    nota = verificar.numero_da_nota
+                    cliente = verificar.cliente
+                    dict= {
+                        'distancia':distancia[0],
+                        'nota':nota,
+                        'cliente':cliente,
+                        'lat e long':distancia[1],
+                        'origem':distancia[2],
+                        'descricao':descricao
+                        }
+                    
+                    if dict in destinos:
+                        pass
+                    else:
+                        destinos.append(dict)
+                    sleep(1)
+        return sorted(destinos,key=lambda x:x['distancia'])
+    except:
+        pass
 def route(list):
     origem = list[0]['origem']
     lista = []
