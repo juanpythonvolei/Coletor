@@ -847,12 +847,11 @@ def calculate_distance(destiny):
         st.error("Uma ou ambas as localizações não foram encontradas.")
 
 def define_destiny_list(note):
-    st.write(note)
     destinos = []
     for item in note:
                 verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
-                st.write(verificar)
                 distancia = calculate_distance(verificar.destino)
+                st.write(distancia)
                 nota = verificar.numero_da_nota
                 cliente = verificar.cliente
                 destinos.append(
