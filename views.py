@@ -838,7 +838,7 @@ def calculate_distance(destiny):
     location = destiny.split(',')
     geocoder = Nominatim(user_agent="meu_app/1.0")
     localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
-    localizacao2 = geocoder.geocode(query = { "q": f"{location[0]},{location[1]},{location[2]}", "country": "Brasil"})
+    localizacao2 = geocoder.geocode(f"{location[0]},{location[1]},{location[2]}")
     if localizacao1 is not None and localizacao2 is not None:
         coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
         coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
