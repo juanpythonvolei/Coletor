@@ -845,28 +845,28 @@ def calculate_distance(destiny):
     else:
         st.error("Uma ou ambas as localizações não foram encontradas.")
 
-def define_destiny_list(note,data):
+def define_destiny_list(note,data,produto):
     destinos = []
-    try:
-        verificar = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.numero_da_nota == note,Faturamento.status == True).all()
-        for item in verificar:
-            distancia = calculate_distance(item.destino)
-            nota = item.numero_da_nota
-            cliente = item.cliente
-            destinos.append(
-                {
-                'distancia':distancia[0],
-                'nota':nota,
-                'cliente':cliente,
-                'lat e long':distancia[1],
-                'origem':distancia[2],
-                'descricao':item.destino
-                }
-            )
-            sleep(1)
-        return sorted(destinos,key=lambda x:x['distancia'])
-    except:
-        pass
+    for item in note:
+        try:
+                verificar = session.query(Faturamento).filter(Faturamento.data == item.data,Faturamento.numero_da_nota == item.numero_da_nota,Faturamento.status == True,Faturamento.produto == item.produto).first()
+                distancia = calculate_distance(verificar.destino)
+                nota = item.numero_da_nota
+                cliente = item.cliente
+                destinos.append(
+                    {
+                    'distancia':distancia[0],
+                    'nota':nota,
+                    'cliente':cliente,
+                    'lat e long':distancia[1],
+                    'origem':distancia[2],
+                    'descricao':item.destino
+                    }
+                )
+                sleep(1)
+        except:
+            pass
+    return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
     origem = list[0][2]
     lista = []
