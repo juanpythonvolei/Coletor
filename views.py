@@ -834,7 +834,6 @@ def donwload_product():
         pass
 
 def calculate_distance(destiny):
-        location = destiny.split(',')
         url = 'https://maps.googleapis.com/maps/api/directions/json'
         params = {
                 'origin': f'Itupeva-sp', 
@@ -852,6 +851,8 @@ def calculate_distance(destiny):
                 distancia = distance.replace('km', '').replace(',', '.')
                 duration = route['legs'][0]['duration']['text']            
             return route,distancica,duration   
+        else:
+            st.error('erro')
 def define_destiny_list(note):
         destinos = []
         for item in note:
