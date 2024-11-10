@@ -861,8 +861,7 @@ def define_destiny_list(note):
                 descricao = f"{location[0]},{location[1]},{location[2]}"
                 nota = verificar.numero_da_nota
                 cliente = verificar.cliente
-                destinos.append(
-                    {
+                dict= {
                     'distancia':distancia[0],
                     'nota':nota,
                     'cliente':cliente,
@@ -870,7 +869,12 @@ def define_destiny_list(note):
                     'origem':distancia[2],
                     'descricao':descricao
                     }
-                )
+                
+                if dict in destinos:
+                    pass:
+                else:
+                    destinos.append(dict)
+                   
                 sleep(1)
     return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
