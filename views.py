@@ -874,12 +874,13 @@ def route(list):
     for i,item in enumerate(list):
         lista.append(
             {
-            f'Distância para o destino: {i}':item['descricao'],
+            f'Distância para o destino: {i}':item['distancia'],
              'nota':item['nota'],
              'cliente':item['cliente'],   
              'coordenadas':item['lat e long'],
              'coordenadas origem':item['origem'],
-             'descricao':item['descricao']   
+             'descricao':item['descricao'],
+             'tempo': float(float(item['distancia'])*60/80)   
             }
         )
         origem = item['descricao']
@@ -889,6 +890,6 @@ def route(list):
 def build_google_map(list):
     base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
     final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
-    return st.link_button(label="Acessar Rota",url=final)
+    return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame(item,index=[i]) for item in enumarate(list)])
     
     
