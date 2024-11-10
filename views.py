@@ -889,6 +889,6 @@ def build_google_map(list):
     base_url = "https://www.google.com/maps/dir/"
     for item in list(set(list)):
         base_url += f'{item['descricao']}'
-    return base_url
+    return st.info(base_url)
     
     
