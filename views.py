@@ -871,10 +871,9 @@ def define_destiny_list(note):
                     }
                 
                 if dict in destinos:
-                    pass:
+                    pass
                 else:
                     destinos.append(dict)
-                   
                 sleep(1)
     return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
