@@ -851,7 +851,8 @@ def define_destiny_list(note):
     for item in note:
                 verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
                 distancia = calculate_distance(verificar.destino)
-                st.write(distancia)
+                location = str(verificar.destino).split(',')
+                descricao = f"{location[0]},{location[1]},{location[2]}"
                 nota = verificar.numero_da_nota
                 cliente = verificar.cliente
                 destinos.append(
@@ -861,7 +862,7 @@ def define_destiny_list(note):
                     'cliente':cliente,
                     'lat e long':distancia[1],
                     'origem':distancia[2],
-                    'descricao':verificar.destino
+                    'descricao':descricao
                     }
                 )
                 sleep(1)
@@ -886,7 +887,7 @@ def route(list):
         
 def build_google_map(list):
     base_url = "https://www.google.com/maps/dir/"
-    final=base_url + '/'.join([f'{item['coordenadas'][0]},{item['coordenadas'][1]}' for item in list])
+    final=base_url + '/'.join([f'{item['descricao']}' for item in list])
     return st.info(final)
     
     
