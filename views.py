@@ -848,7 +848,6 @@ def calculate_distance(destiny):
 def define_destiny_list(note):
     destinos = []
     for item in note:
-        try:
                 verificar = session.query(Faturamento).filter(Faturamento.data == item.data,Faturamento.numero_da_nota == item.numero_da_nota,Faturamento.status == True,Faturamento.produto == item.produto).first()
                 distancia = calculate_distance(verificar.destino)
                 nota = item.numero_da_nota
@@ -864,8 +863,6 @@ def define_destiny_list(note):
                     }
                 )
                 sleep(1)
-        except:
-            pass
     return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
     origem = list[0]['origem']
