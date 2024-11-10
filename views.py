@@ -8,6 +8,9 @@ import xmltodict
 import os 
 import speech_recognition as sr
 from io import BytesIO
+from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
+from time import sleep
 
 session = sessionmaker(bind=engine)
 session = session()
@@ -830,3 +833,62 @@ def donwload_product():
     except:
         pass
 
+def calculate_distance(destiny):
+    geocoder = Nominatim(user_agent="meu_app/1.0")
+    localizacao1 = geocoder.geocode("Itupeva,São Paulo, Brasil")
+    localizacao2 = geocoder.geocode(f"{destiny}, Brasil")
+    if localizacao1 is not None and localizacao2 is not None:
+        coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
+        coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
+        distancia = geodesic(coordenadas1, coordenadas2)
+        return Float(distancia),coordenadas2,coordenadas1
+    else:
+        st.error("Uma ou ambas as localizações não foram encontradas.")
+
+def define_destiny_list(note,data):
+    destinos = []
+    try:
+        verificar = session.query(Faturamento).filter(Faturamento.data == data,Faturamento.numero_da_nota == note,Faturamento.status == True).all()
+        for item in verificar:
+            distancia = calculate_distance(item.destino)
+            nota = item.numero_da_nota
+            cliente = item.cliente
+            destinos.append(
+                {
+                'distancia':distancia[0],
+                'nota':nota,
+                'cliente':cliente,
+                'lat e long':distancia[1],
+                'origem':distancia[2],
+                'descricao':item.destino
+                }
+            )
+            sleep(1)
+        return sorted(destinos,key=lambda x:x['distancia'])
+    except:
+        pass
+def route(list):
+    origem = list[0][2]
+    lista = []
+    for i,item in enumerate(list):
+        lista.append(
+            {
+            f'Distância para o destino: {i}':calculate_distance(item[1]),
+             'nota':item['nota'],
+             'cliente':item['cliente'],   
+             'coordenadas':item['lat e long'],
+             'coordenadas origem':item['origem'],
+             'descricao':item['descricao']   
+            }
+        )
+        origem = item[1]
+        sleep(1)
+    return lista
+        
+def build_google_map(list):
+    base_url = "https://www.google.com/maps/dir/"
+    for item in list(set(list)):
+        base_url += f'{item['descricao']}'
+    return base_url
+    
+    
