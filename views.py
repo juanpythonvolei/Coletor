@@ -847,11 +847,8 @@ def calculate_distance(destiny):
             data = response.json()
             route = data['routes'][0]
             distance = route['legs'][0]['distance']['text'][:4]
-            try:
-                distancia = float(distance.replace('km', '').replace(',', '.'))
-            except:
-                distancia = distance.replace('km', '').replace(',', '.')
-                duration = route['legs'][0]['duration']['text']            
+            distancia = float(distance.replace('km', '').replace(',', '.'))
+            duration = route['legs'][0]['duration']['text']            
             return route,distancica,duration   
         else:
             st.error('erro')
