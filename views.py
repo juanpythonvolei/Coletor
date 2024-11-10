@@ -874,13 +874,13 @@ def route(list):
     for i,item in enumerate(list):
         lista.append(
             {
-            f'Distância para o destino: {i}':round(item['distancia']),
+            f'Distância para o destino: {i}':round(item['distancia'],2),
              'nota':item['nota'],
              'cliente':item['cliente'],   
              'coordenadas':item['lat e long'],
              'coordenadas origem':item['origem'],
              'descricao':item['descricao'],
-             'tempo': round(float(float(item['distancia'])*60/80))   
+             'tempo': round(float(float(item['distancia'])*60/80),2)   
             }
         )
         origem = item['descricao']
