@@ -24,6 +24,6 @@ with col4:
                 with st.popover("🗓️ Selecione uma data"):
                     data = st.date_input("Selecione uma data",value=None)
 if transp and data:
-      notas = session.query(Faturamento).all()
+      notas = session.query(Faturamento.status).all()
       st.write(notas)
      
