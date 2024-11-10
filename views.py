@@ -834,7 +834,7 @@ def donwload_product():
         pass
 
 def calculate_distance(destiny):
-    loaction = destiny.split(',')
+    location = destiny.split(',')
     geocoder = Nominatim(user_agent="meu_app/1.0")
     localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
     localizacao2 = geocoder.geocode(f"{location[0]},{location[1]},{location[2]}")
