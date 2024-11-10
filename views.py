@@ -845,7 +845,7 @@ def calculate_distance(destiny):
     else:
         st.error("Uma ou ambas as localizações não foram encontradas.")
 
-def define_destiny_list(note,data,produto):
+def define_destiny_list(note):
     destinos = []
     for item in note:
         try:
