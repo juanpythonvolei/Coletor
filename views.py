@@ -887,8 +887,7 @@ def route(list):
         
 def build_google_map(list):
     base_url = "https://www.google.com/maps/dir/"
-    final=base_url + '/'.join([f'{item['descricao']}' for item in list])
-    final = str(final).strip()
+    final=base_url + '/'.join([str(f'{item['descricao']}').strip() for item in list])
     return st.info(final)
     
     
