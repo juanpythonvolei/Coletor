@@ -25,4 +25,4 @@ with col4:
                     data = st.date_input("Selecione uma data",value=None)
 if transp and data:
       notas = session.query(Faturamento.numero_da_nota).filter(Faturamento.data == data,Faturamento.transportadora == transp,Faturamento.status == True).all()
-      
+      build_google_maps(route(define_destiny(calculate_destiny())))
