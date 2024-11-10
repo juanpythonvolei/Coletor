@@ -853,7 +853,6 @@ def calculate_distance(destiny):
                 duration = route['legs'][0]['duration']['text']            
             return route,distancica,duration   
 def define_destiny_list(note):
-    try:
         destinos = []
         for item in note:
                     verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
@@ -877,10 +876,7 @@ def define_destiny_list(note):
                         destinos.append(dict)
                     sleep(1)
         return sorted(destinos,key=lambda x:x['distancia'])
-    except:
-        pass
 def route(list):
-    try:
         origem = 'Itupeva,sp'
         lista = []
         for i,item in enumerate(list):
@@ -896,14 +892,11 @@ def route(list):
             origem = item['descricao']
             sleep(1)
         return lista
-    except:
-        pass
         
 def build_google_map(list):
-    try:
+
         base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
         final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
         return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)])
-    except:
-        pass
+
     
