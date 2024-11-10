@@ -835,22 +835,23 @@ def donwload_product():
 
 def calculate_distance(destiny):
         location = destiny.split(',')
-        if 'Itupeva' in destiny:
-            local = f"{location[1]},{location[2]}"
-        else:
-            local = f"{location[0]},{location[1]},{location[2]}"
-            st.write(local)
-        geocoder = Nominatim(user_agent="meu_app/1.0")
-        localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
-        localizacao2 = geocoder.geocode(local)
-        if localizacao1 is not None and localizacao2 is not None:
-            coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
-            coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
-            distancia = geodesic(coordenadas1, coordenadas2).km
-            return distancia,coordenadas2,coordenadas1
-        else:
-            pass
-
+        url = 'https://maps.googleapis.com/maps/api/directions/json'
+        params = {
+                'origin': f'Itupeva-sp', 
+                'destination': f'{destiny}', 
+                'key': st.secrets['chave_api_googlemaps']
+                }
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            data = response.json()
+            route = data['routes'][0]
+            distance = route['legs'][0]['distance']['text'][:4]
+            try:
+                distancia = float(distance.replace('km', '').replace(',', '.'))
+            except:
+                distancia = distance.replace('km', '').replace(',', '.')
+                duration = route['legs'][0]['duration']['text']            
+            return route,distancica,duration   
 def define_destiny_list(note):
     try:
         destinos = []
@@ -862,12 +863,12 @@ def define_destiny_list(note):
                     nota = verificar.numero_da_nota
                     cliente = verificar.cliente
                     dict= {
-                        'distancia':distancia[0],
+                        'distancia':distancia[1],
                         'nota':nota,
                         'cliente':cliente,
-                        'lat e long':distancia[1],
-                        'origem':distancia[2],
-                        'descricao':descricao
+                        'origem':'Itupeva,sp',
+                        'descricao':descricao,
+                        'tempo':distancia[2]
                         }
                     
                     if dict in destinos:
@@ -880,7 +881,7 @@ def define_destiny_list(note):
         pass
 def route(list):
     try:
-        origem = list[0]['origem']
+        origem = 'Itupeva,sp'
         lista = []
         for i,item in enumerate(list):
             lista.append(
@@ -888,10 +889,8 @@ def route(list):
                 f'Distância':round(item['distancia']),
                  'nota':item['nota'],
                  'cliente':item['cliente'],   
-                 'coordenadas':item['lat e long'],
-                 'coordenadas origem':item['origem'],
                  'descricao':item['descricao'],
-                 'tempo': round(float(item['distancia']*60/80),1)   
+                 'tempo': item['tempo']   
                 }
             )
             origem = item['descricao']
