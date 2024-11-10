@@ -838,7 +838,7 @@ def calculate_distance(destiny):
         if 'Itupeva' in destiny:
             local = f"{location[1]},{location[2]}"
         else:
-            local = f"{location[1]},{location[2]}"
+            local = f"{location[0]},{location[1]},{location[2]}"
             st.write(local)
         geocoder = Nominatim(user_agent="meu_app/1.0")
         localizacao1 = geocoder.geocode("Itupeva,São Paulo,Brasil")
