@@ -890,6 +890,6 @@ def route(list):
 def build_google_map(list):
     base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
     final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
-    return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame(item,index=[i]) for item in enumarate(list)])
+    return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame(item,index=[i]) for i,item in enumarate(list)])
     
     
