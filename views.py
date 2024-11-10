@@ -849,7 +849,7 @@ def calculate_distance(destiny):
             distancia = geodesic(coordenadas1, coordenadas2).km
             return distancia,coordenadas2,coordenadas1
         else:
-            st.error("Uma ou ambas as localizações não foram encontradas.")
+            pass
 
 def define_destiny_list(note):
     try:
