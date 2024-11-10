@@ -416,7 +416,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                 valor_produto = documento['nfeProc']['NFe']['infNFe']['det']['prod']['vProd']
                 cliente = documento['nfeProc']['NFe']['infNFe']['dest']['xNome']
                 data_emit = documento['nfeProc']['NFe']['infNFe']['ide']['dhEmi'][:10]
-                destino = f'{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xLgr"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["nro"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xBairro"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xMun"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["UF"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["CEP"]}'
+                destino = documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xLgr"]
                 try:
                     peso = float(documento['nfeProc']['NFe']['infNFe']['transp']['vol']['pesoL'])
                 except:
@@ -437,7 +437,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                             transportadora = documento['nfeProc']['NFe']['infNFe']['transp']['transporta']['xNome']
                             numero_da_nota = documento['nfeProc']['NFe']['infNFe']['ide']['nNF']
                             data_emit = documento['nfeProc']['NFe']['infNFe']['ide']['dhEmi'][:10]
-                            destino =  f'{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xLgr"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["nro"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xBairro"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xMun"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["UF"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["CEP"]}'
+                            destino =  documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xLgr"]
                             resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso_recebido,destino=destino)
                             if resultado['tipo'] == 'cadastrada':
                                 contador_cadastro +=1
