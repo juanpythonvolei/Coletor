@@ -840,7 +840,7 @@ def calculate_distance(destiny):
     if localizacao1 is not None and localizacao2 is not None:
         coordenadas1 = (localizacao1.latitude, localizacao1.longitude)
         coordenadas2 = (localizacao2.latitude, localizacao2.longitude)
-        distancia = geodesic(coordenadas1, coordenadas2)
+        distancia = geodesic(coordenadas1, coordenadas2).km
         return Float(distancia),coordenadas2,coordenadas1
     else:
         st.error("Uma ou ambas as localizações não foram encontradas.")
