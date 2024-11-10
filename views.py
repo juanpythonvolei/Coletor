@@ -421,7 +421,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                     peso = float(documento['nfeProc']['NFe']['infNFe']['transp']['vol']['pesoL'])
                 except:
                     peso =float(0)
-                resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso,destino=str(destino))
+                resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso,destino=destino)
                 if resultado['tipo'] == 'cadastrada':
                         contador_cadastro +=1
                 contador_ok += 1
@@ -438,7 +438,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                             numero_da_nota = documento['nfeProc']['NFe']['infNFe']['ide']['nNF']
                             data_emit = documento['nfeProc']['NFe']['infNFe']['ide']['dhEmi'][:10]
                             destino =  f'{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xLgr"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["nro"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xBairro"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xMun"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["UF"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["CEP"]}'
-                            resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso_recebido,destino=str(destino))
+                            resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso_recebido,destino=destino)
                             if resultado['tipo'] == 'cadastrada':
                                 contador_cadastro +=1
                             contador_ok += 1 
