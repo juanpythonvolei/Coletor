@@ -48,6 +48,6 @@ elif tabb:
                               valor: {item.valor}
                               '''
                               texto += info
-                         st.info(texto)
+                        st.info(texto)
                         
             
