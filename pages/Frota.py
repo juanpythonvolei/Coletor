@@ -23,7 +23,7 @@ autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do
 if marca and modelo and autonomia:
     verificar = session.query(Veiculos).filter(Veiculos.modelo==modelo).first()
     if verificar:
-          st.write(verificar)
+          st.error(f'O modelo: {verificar.modelo} já está cadastrado')
     else:  
           session.add(Veiculos(marca=marca,modelo=modelo,autonomia=autonomia))
           session.commit()    
