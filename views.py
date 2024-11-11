@@ -846,8 +846,7 @@ def calculate_distance(destiny,origem):
         if response.status_code == 200:
             data = response.json()
             route = data['routes']
-            st.write(route)
-            for step in routes[0]['legs'][0]['steps']:
+            for step in route[0]['legs'][0]['steps']:
                 text = step['html_instructions']
                 texto += text
             distance = route[0]['legs'][0]['distance']['text']
