@@ -191,6 +191,44 @@ class Rotas(Base):
         self.transportadora = transportadora
         self.data = data
         self.rota = rota
+
+
+class Veiculos(Base):
+    __tablename__ = 'Veículos'
+
+    id = Column('id',Integer,primary_key=True,autoincrement=True,)
+    marca = Column('Marca',String)
+    modelo = Column('Modelo',String)
+    autonomia = column('Autonomia',Float)
+
+    def __init__(self,marca,modelo,autonomia):
+        self.marca = marca
+        self.modelo = modelo
+        self.autonomia = autonomia
+
+
+class Entregas(Base):
+    __tablename__ = 'Entregas'
+
+    id = Column('id',Integer,primary_key=True,autoincrement=True,)
+    transportadora = Column('Tranportadora',String)
+    data = Column('Data',String)
+    cliente = Column('Cliente',String)
+    nota = Column('Nota',String)
+    produto = Column('Produto',ForeignKey('produtos.id'))
+    quantidade = Column('Quantidade',Float)
+    status = Column('Completa',Boolean)
+
+    def __init__(self,transportadora,data,cliente,nota,produto,quantidade):
+        self.transportadora = transportadora
+        self.data = data
+        self.cliente = cliente
+        self.nota = nota
+        self.produto = produto
+        self.quantidade = quantidade
+        self.status = status
+        
+
         
 engine = create_engine('sqlite:///estoque.db')
 base =Base.metadata.create_all(engine)
