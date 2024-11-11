@@ -21,8 +21,9 @@ modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
 autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
 
 if marca and modelo and autonomia:
+    session.add(Veiculos(marca=marca,modelo=modelo,autonomia=autonomia))
+    session.commit()    
+    st.success(f'O veículo modelo: {modelo} foi cadastrado com sucesso')
 
-    
-    st.write(session.query(Veiculos).filter(Veiculos.modelo == modelo).first())
 
 
