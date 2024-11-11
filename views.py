@@ -922,9 +922,17 @@ def save_route(routes,data,transp):
             session.add(Rotas(data==data,transp==transp,rota=str(texto)))
             session.commit()
 
-def delilver(car,)
+def delilver(car,product,qtd,data,transp,note,client,status):
+    try:
+        verificar = session.query(Entregas).filter(Entregas.data == data,Entregas.nota == note, Entregas.cliente == client).firts()
+        return st.info(f'A entrega do cliente {client} já foi realizada')
+    except:
+        session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True))
+        session.commit()
+        return st.success(f'Entrega do cliente {client} realizada com sucesso')
+    
 
-def load_delivery(notes,data):
+def load_delivery(notes,data,veiculo):
     contador_nao = 0
     contador_sim = 0
     for i,item in enumerate(notes):
@@ -938,6 +946,7 @@ def load_delivery(notes,data):
         completa = st.toggle('Entrega Completa',key=i)
         if completa:
             contador_sim += 1 
+            deliver(car=veiculo,product=verificar.produto,qtd=verificar.quantidade,client=verificar.cliente,note=verificar.numero_da_nota,transp=verificar.transportadora,data=data)
         st.divider()
     return contador_nao,contador_sim
     
