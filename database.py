@@ -199,7 +199,7 @@ class Veiculos(Base):
     id = Column('id',Integer,primary_key=True,autoincrement=True,)
     marca = Column('Marca',String)
     modelo = Column('Modelo',String)
-    autonomia = column('Autonomia',Float)
+    autonomia = Column('Autonomia',Float)
 
     def __init__(self,marca,modelo,autonomia):
         self.marca = marca
