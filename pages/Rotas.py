@@ -87,4 +87,5 @@ with tabd:
                   if transp:
                         notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
                         if notas: 
+                              St.title('Entregas')
                               load_delivery(notas,data)
