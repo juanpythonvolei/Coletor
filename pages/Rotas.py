@@ -3,7 +3,7 @@ from views import *
 
 image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 
-taba,tabb,tabc,tabd = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro','Entregas'])
+taba,tabb,tabc,tabd,tabe = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro','Entregas','Visão Geral'])
 
 if taba:
       with taba:
@@ -93,3 +93,13 @@ with tabd:
                                     response =load_delivery(notas,data,veiculo)
                                     st.metric('Entregas não completas',response[0])
                                     st.metric('Entregas completas',response[1])
+with tabe:
+      data = st.date_input("Selecione uma data",value=None,key='Data_selector_one')
+      if data:
+            transp = st.selectbox(label="Transportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_one')    
+            if transp:
+                  response = complete_delivery(data,transp)
+                  st.table(response[0])
+                  st.metric('Total Gasto',value=response[1])
+                  st.metric('Total Percorrido',value=response[2])
+                  st.metric('Quantidade total entregue',value=response[3])
