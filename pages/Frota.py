@@ -22,7 +22,7 @@ autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do
 
 if marca and modelo and autonomia:
 
-    session.query(Veiculos).filter(Veiculos.modelo == modelo).first()
-    st.error(f'O veículo modelo: {modelo} já existe')
+    
+    st.write(session.query(Veiculos).filter(Veiculos.modelo == modelo).first())
 
 
