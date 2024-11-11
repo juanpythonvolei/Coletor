@@ -5,7 +5,7 @@ image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-e
 
 taba,tabb,tabc = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro'])
 
-if tabaa:
+if taba:
       with taba:
             colx,coly,colz = st.columns(3)
             
