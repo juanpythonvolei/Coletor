@@ -53,4 +53,4 @@ with tabb:
                               save_route(data=data,transp=transp,routes=result[2])
                   
 with tabc:
-      st.info(session.query(Rotas.rota).all())
+      st.write(session.query(Rotas.rota).all())
