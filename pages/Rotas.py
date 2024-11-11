@@ -46,5 +46,5 @@ with tabb:
                               '''
                             texto += info
                         st.info(texto)
-                        
+                        result = build_google_map(route(define_destiny_list([item.numero_da_nota])))
             
