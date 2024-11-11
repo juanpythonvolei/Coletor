@@ -915,6 +915,7 @@ def save_route(routes,data,transp):
         for item in routes:
             text = item['rotas']
             texto += text
+        st.write(texto)
         try:
             existe = session.query(Rotas).filter(Rotas.transportadora == transp,Rotas.data == data).first()
             existe.rota = texto
