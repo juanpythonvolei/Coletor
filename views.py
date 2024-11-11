@@ -923,6 +923,7 @@ def save_route(routes,data,transp):
             session.commit()
         
 def load_delivery(notes,data):
+    st.title('Entregas')
     for i,item in enumerate(notes):
         verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
         st.info(f'Cliente:{verificar.cliente} - Nota:{verificar.numero_da_nota} - Quantidade: {verificar.quantidade}')
