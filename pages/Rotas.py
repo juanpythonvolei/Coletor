@@ -31,9 +31,7 @@ if taba:
                   notas = session.query(Faturamento.numero_da_nota).filter(Faturamento.data==str(data),Faturamento.status==True,Faturamento.transportadora == transp).all()
                   result = build_google_map(route(define_destiny_list(item[0] for item in notas)))
                   st.table(result[1])
-     
-elif tabb:
-      with tabb:
+with tabb:
             data = st.date_input("Selecione uma data",value=None,key='Data_selector_epecific')
             if data:
                   nota = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.nota).filter(Faturamento.status == True,Faturamento.data==data).all()])),index=None,key='select_note')    
