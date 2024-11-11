@@ -68,7 +68,13 @@ with tabc:
                                     if text in texto:
                                            pass
                                     else:
-                                           texto += f'Rota {i} clinte: {item['cliente']}: {text}\n'
+                                           texto += f'''
+                                           Rota {i} 
+                                           clinte: {item['cliente']} 
+                                           Destino: {item['descricao']}
+                                           Rota: 
+                                           {text}
+                                           \n'''
                               
                               assistant = st.chat_message('assistant')
                               response = analisar(f"Analise o texto que você está recebendo, oraganizeo e, baseando-se nele, responda ao que se pede: {message}",str(texto))
