@@ -850,8 +850,8 @@ def calculate_distance(destiny,origem):
                 distancia = float(distance.replace('km', '').replace(',', '.'))
             distancia = str(distance.replace('m','')).strip()
             duration = route[0]['legs'][0]['duration']['text'] 
-            for item in route[0]['legs'][0]['steps']:
-                st.info(item['html_instructions'])
+            for item in :
+                st.info()
             return route,distancia,duration   
         else:
             st.error('erro')
@@ -905,6 +905,13 @@ def build_google_map(list):
 
         base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
         final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
-        return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)])
+        return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)]),list
 
-    
+def save_route(routes,data,transp)
+    for item in routes['rotas']:
+        texto = '' 
+        for step in item[0]['legs'][0]['steps']:
+            text = step['html_instructions']
+            texto += text
+        
+            
