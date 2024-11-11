@@ -922,6 +922,20 @@ def save_route(routes,data,transp):
             session.add(Rotas(data==data,transp==transp,rota=str(texto)))
             session.commit()
 
+def complete_deliverys(data,transp):
+    
+    try:
+        verificar = session.query(Entregas).filter(Entregas.data=data,Entregas.transportadora == transp,Entregas.status==True).all()
+        for i,item in enumerate(entregas):
+            distancia_percorrida = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.nota==item.nota,Faturamento.data==item.data).first().destino
+            
+            dict={
+                'Cliente':item.cliente,
+                'Nota':item.nota,
+                ''
+            }
+            
+
 def delilver(car,product,qtd,data,transp,note,client,status):
     try:
         verificar = session.query(Entregas).filter(Entregas.data == data,Entregas.nota == note, Entregas.cliente == client).firts()
@@ -929,8 +943,7 @@ def delilver(car,product,qtd,data,transp,note,client,status):
     except:
         session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True))
         session.commit()
-        return st.success(f'Entrega do cliente {client} realizada com sucesso')
-    
+        return st.success(f'Entrega do cliente {client} realizada com sucesso'   
 
 def load_delivery(notes,data,veiculo):
     contador_nao = 0
