@@ -849,7 +849,6 @@ def calculate_distance(destiny,origem):
             for step in route[0]['legs'][0]['steps']:
                 text = step['html_instructions']
                 texto += text
-            st.write(texto)
             distance = route[0]['legs'][0]['distance']['text']
             if 'km' in distance:
                 distancia = float(distance.replace('km', '').replace(',', '.'))
@@ -915,7 +914,6 @@ def save_route(routes,data,transp):
         for item in routes:
             text = item['rotas']
             texto += text
-        st.write(texto)
         try:
             existe = session.query(Rotas).filter(Rotas.transportadora == transp,Rotas.data == data).first()
             existe.rota = str(texto)
