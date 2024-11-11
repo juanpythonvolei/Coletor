@@ -40,9 +40,9 @@ with tabb:
                         infos = session.query(Faturamento).filter(Faturamento.numero_da_nota==nota,Faturamento.status == True,Faturamento.data == data).all()
                         for item in infos:
                             info=  f'''
-                              Cliente: {item.cliente}
-                              Destino: {item.destino}
-                              quantidade: {item.quantidade}
+                              Cliente: {item.cliente}\n
+                              Destino: {item.destino}\n
+                              quantidade: {item.quantidade}\n
                               '''
                             texto += info
                         st.info(texto)
