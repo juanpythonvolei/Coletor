@@ -53,23 +53,23 @@ with tabb:
                               save_route(data=data,transp=transp,routes=result[2])
                   
 with tabc:
+      texto = ''
       data = st.date_input("Selecione uma data",value=None,key='Data_selector_ia')
       if data:
                   transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_ia')    
                   if transp:
-                        texto = ''
-                        resultado = build_google_map(route(define_destiny_list(item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.data==data,Faturamento.status==True,Faturamento.transportadora==transp))))
-                        for i,item in enumerate(resultado[2]):
-                               text = item['rotas']
-                               if text in texto:
-                                     pass
-                               else:
-                                     texto += f'Rota {i}: {text}\n'
                         message = st.chat_input('escreva o que você quer especificar')
                         if message:
-                              st.write(texto)
                               human = st.chat_message('human')
                               human.write(message)
-                              assistant = st.chat_message('assistant')
-                              assistant.write(analisar(f"Você é um analisador de rotas e sua a função é receber um texto. nesse texto, está grande número de rotas que irei te passar, analisar cada uma da rotas, compara-las e me retornar uma rota que você acredite que seja a melhor do ponto de vista de valocidade e praticidade e que atenda as rotas que você recebeu. Além disso vale citar que tais rotas estão em inglês em dentro de tags html então você deverá fazer a limpeza dos dados. Tendo esse cenário, analise o complemento a seguir vindo do usuário: {message}",str(texto) ))
+                              resultado = build_google_map(route(define_destiny_list(item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.data==data,Faturamento.status==True,Faturamento.transportadora==transp))))
+                              for i,item in enumerate(resultado[2]):
+                                     text = item['rotas']
+                                     if text in texto:
+                                           pass
+                                     else:
+                                           texto += f'Rota {i}: {text}\n'
+                              
+                                    assistant = st.chat_message('assistant')
+                                    assistant.write(analisar(f"Analise o texto que você está recebendo e, baseando-se nele, responda ao que se pede: {message}",str(texto)))
                         
