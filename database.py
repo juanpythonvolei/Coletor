@@ -178,6 +178,19 @@ class EansProdutos(Base):
     def __init__(self,codigo_ean,produto):
         self.codigo_ean = codigo_ean
         self.produto = produto
+        
+class Rotas(Base):
+    __tablename__ = 'Rotas'
 
+    id = Column('id',Integer,primary_key=True,autoincrement=True,)
+    transportadora = Column('Tranportadora',String)
+    data = Column('Data',String)
+    rota = Column('Rota',String)
+
+    def __init__(self,transportadora,data,rota):
+        self.transportadora = transportadora
+        self.data = data
+        self.rota = rota
+        
 engine = create_engine('sqlite:///estoque.db')
 base =Base.metadata.create_all(engine)
