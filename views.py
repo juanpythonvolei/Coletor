@@ -857,7 +857,7 @@ def calculate_distance(destiny,origem):
 def define_destiny_list(note):
         destinos = []
         origem = 'Itupeva,sp'
-        for item in note:
+        for item in list(set(note)):
                     verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
                     distancia = calculate_distance(verificar.destino,origem)
                     location = str(verificar.destino).split(',')
@@ -892,7 +892,7 @@ def route(list):
                  'descricao':item['descricao'],
                  'tempo': item['tempo']   
                 }
-            if dict['cliente'] in lista:
+            if dict in lista:
                 pass
             else:
                 lista.append(dict)
