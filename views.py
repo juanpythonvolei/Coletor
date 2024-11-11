@@ -875,6 +875,7 @@ def define_destiny_list(note):
                     else:
                         destinos.append(dict)
                     origem = verificar.destino
+                    st.write(origem)
                     sleep(1)
         return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
