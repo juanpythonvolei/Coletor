@@ -922,19 +922,33 @@ def save_route(routes,data,transp):
             session.add(Rotas(data==data,transp==transp,rota=str(texto)))
             session.commit()
 
-def complete_deliverys(data,transp):
-    
+def complete_delivery(data,transp):
+    gasto = 0
+    distancia_per = 0
+    qtd = 0
+    lista = []
     try:
         verificar = session.query(Entregas).filter(Entregas.data=data,Entregas.transportadora == transp,Entregas.status==True).all()
         for i,item in enumerate(entregas):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.nota==item.nota,Faturamento.data==item.data).first().destino
-            distancia = build_google_map(route(define_destiny_list([destino])))[0]['distancia']
+            distancia = build_google_map(route(define_destiny_list([destino])))[2][0]['Distância']
+            kml = session.query(Veiculos).filter(Veiculo.modelo==item.modelo).first().autonomia
             dict={
                 'Cliente':item.cliente,
                 'Nota':item.nota,
-                ''
+                'Produto':item.produto,
+                'Quantidade':item.quantidade,
+                'Gasto em R$': round(float((distancia/kml)*5.50)),
+                'Distância percorrida':distancia
             }
-            
+            gasto += round(float((distancia/kml)*5.50))
+            distancia_per += distancia
+            qtd += item.quantidade
+            if dict in lista:
+                pass
+            else:
+                lista.append(dict,index=[i])
+         return pd.concat(lista),gasto,distancia_per,qtd
 
 def delilver(car,product,qtd,data,transp,note,client,status):
     try:
