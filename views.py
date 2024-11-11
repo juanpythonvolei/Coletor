@@ -881,7 +881,7 @@ def route(list):
         for i,item in enumerate(list):
             lista.append(
                 {
-                f'Distância':round(item['distancia']),
+                f'Distância':round(calculate_distance(item['descricao'][1])),
                  'nota':item['nota'],
                  'cliente':item['cliente'],   
                  'descricao':item['descricao'],
