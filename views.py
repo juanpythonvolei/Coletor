@@ -949,6 +949,8 @@ def complete_delivery(data,transp):
             else:
                 lista.append(dict,index=[i])
         return pd.concat(lista),gasto,distancia_per,qtd
+    except:
+        pass
 
 def delilver(car,product,qtd,data,transp,note,client,status):
     try:
