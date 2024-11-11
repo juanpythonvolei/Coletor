@@ -34,7 +34,7 @@ if taba:
 with tabb:
             data = st.date_input("Selecione uma data",value=None,key='Data_selector_epecific')
             if data:
-                  nota = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.nota).filter(Faturamento.status == True,Faturamento.data==data).all()])),index=None,key='select_note')    
+                  nota = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data==data).all()])),index=None,key='select_note')    
                   if nota:
                         texto = ''
                         infos = session.query(Faturamento).filter(Faturamento.numero_da_nota==nota,Faturamento.status == True,Faturamento.data == data).all()
