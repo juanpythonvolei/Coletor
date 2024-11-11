@@ -57,9 +57,9 @@ with tabc:
       if data:
                   transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_ia')    
                   if transp:
-                         texto = ''
-                         resultado = build_google_map(route(define_destiny_list(item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.data==data,Faturamento.status==True,Faturamento.transportadora==transp))))
-                         for i,item in enumerate(resultado[2]):
+                        texto = ''
+                        resultado = build_google_map(route(define_destiny_list(item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.data==data,Faturamento.status==True,Faturamento.transportadora==transp))))
+                        for i,item in enumerate(resultado[2]):
                                text = item['rotas']
                                if text in texto:
                                      pass
