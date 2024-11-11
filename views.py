@@ -842,14 +842,13 @@ def calculate_distance(destiny):
                 'key': st.secrets['chave_api_googlemaps']
                 }
         response = requests.get(url, params=params)
-        st.info(response.json())
         if response.status_code == 200:
             data = response.json()
             route = data['routes'][0]
             distance = route['legs'][0]['distance']['text'][:4]
             distancia = float(distance.replace('km', '').replace(',', '.'))
             duration = route['legs'][0]['duration']['text']            
-            return route,distancica,duration   
+            return route,distancia,duration   
         else:
             st.error('erro')
 def define_destiny_list(note):
