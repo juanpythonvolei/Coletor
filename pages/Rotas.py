@@ -77,7 +77,7 @@ with tabc:
                                            \n'''
                               
                               assistant = st.chat_message('assistant')
-                              response = analisar(f"Analise o texto que você está recebendo. Ele é uma representação de rotas. Nele estão os destinos, e o nome dos clientes. Oraganize-os e, baseando-se nele, responda ao que se pede: {message}",str(texto))
+                              response = analisar(f"Analise o texto que você está recebendo. Ele é uma representação de rotas. Nele estão os destinos, e o nome dos clientes. Oraganize-os e, baseando-se nele, responda ao que se pede retornando além da resposta, uma rota organizada: {message}",str(texto))
                               assistant.write(response)
                               
                         
