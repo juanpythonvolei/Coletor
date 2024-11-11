@@ -952,7 +952,7 @@ def complete_delivery(data,transp):
     except:
         pass
 
-def deliver(car,product,qtd,data,transp,note,client,status):
+def deliver(car,product,qtd,data,transp,note,client):
     try:
         verificar = session.query(Entregas).filter(Entregas.data == data,Entregas.nota == note, Entregas.cliente == client).firts()
         return st.info(f'A entrega do cliente {client} já foi realizada')
