@@ -885,15 +885,17 @@ def route(list):
         origem = 'Itupeva,sp'
         lista = []
         for i,item in enumerate(list):
-            lista.append(
-                {
+            dict = {
                 f'Distância':item['distancia'],
                  'nota':item['nota'],
                  'cliente':item['cliente'],   
                  'descricao':item['descricao'],
                  'tempo': item['tempo']   
                 }
-            )
+            if dict in lista:
+                pass
+            else:
+                lista.append(dict)
             origem = item['descricao']
             sleep(1)
         return lista
