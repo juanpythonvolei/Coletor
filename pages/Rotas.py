@@ -67,6 +67,7 @@ with tabc:
                                      texto += f'Rota {i}: {text}\n'
                         message = st.chat_input('escreva o que você quer especificar')
                         if message:
+                              st.write(texto)
                               human = st.chat_message('human')
                               human.write(message)
                               assistant = st.chat_message('assistant')
