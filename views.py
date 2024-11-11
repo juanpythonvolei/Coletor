@@ -892,7 +892,7 @@ def route(list):
                  'descricao':item['descricao'],
                  'tempo': item['tempo']   
                 }
-            if dict in lista:
+            if dict['cliente'] in lista:
                 pass
             else:
                 lista.append(dict)
