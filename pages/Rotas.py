@@ -47,7 +47,7 @@ elif tabb:
                               quantidade: {item.quantidade}
                               valor: {item.valor}
                               '''
-                              texto += info
+                            texto += info
                         st.info(texto)
                         
             
