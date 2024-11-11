@@ -52,3 +52,5 @@ with tabb:
                               result = build_google_map(route(define_destiny_list([item.numero_da_nota])))
                               save_route(data=data,transp=transp,routes=result[2])
                   
+with tabc:
+      st.info(session.query(Rotas.rota).all())
