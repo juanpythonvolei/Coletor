@@ -849,6 +849,7 @@ def calculate_distance(destiny,origem):
             for step in route[0]['legs'][0]['steps']:
                 text = step['html_instructions']
                 texto += text
+            st.write(texto)
             distance = route[0]['legs'][0]['distance']['text']
             if 'km' in distance:
                 distancia = float(distance.replace('km', '').replace(',', '.'))
