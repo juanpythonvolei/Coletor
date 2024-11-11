@@ -53,8 +53,8 @@ with tabb:
                               save_route(data=data,transp=transp,routes=result[2])
                   
 with tabc:
-       data = st.date_input("Selecione uma data",value=None,key='Data_selector_ia')
-            if data:
+      data = st.date_input("Selecione uma data",value=None,key='Data_selector_ia')
+      if data:
                   transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_ia')    
                   if transp:
                          texto = ''
