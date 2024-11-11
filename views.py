@@ -906,6 +906,7 @@ def build_google_map(list):
         return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)]),list
 
 def save_route(routes,data,transp):
+    st.write(routes)
     for item in routes['rotas']:
         texto = '' 
         for step in item[0]['legs'][0]['steps']:
