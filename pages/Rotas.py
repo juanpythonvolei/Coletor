@@ -34,4 +34,20 @@ if taba:
      
 elif tabb:
       with tabb:
-            nota  = transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.nota).filter(Faturamento.status == True).all()])),index=None,key='select_note')    
+            data = st.date_input("Selecione uma data",value=None,key='Data_selector_epecific')
+            if data:
+                  nota = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.nota).filter(Faturamento.status == True,Faturamento.data==data).all()])),index=None,key='select_note')    
+                  if nota:
+                        texto = ''
+                        infos = session.query(Faturamento).filter(Faturamento.numero_da_nota==nota,Faturamento.status == True,Faturamento.data == data).all()
+                        for item in infos:
+                            info=  f'''
+                              Cliente: {item.cliente}
+                              Destino: {item.destino}
+                              quantidade: {item.quantidade}
+                              valor: {item.valor}
+                              '''
+                              texto += info
+                        st.info(texto)
+                        
+            
