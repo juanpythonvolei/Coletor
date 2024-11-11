@@ -846,7 +846,10 @@ def calculate_distance(destiny,origem):
             data = response.json()
             route = data['routes'][0]
             distance = route['legs'][0]['distance']['text'][:4]
-            distancia = float(distance.replace('km', '').replace(',', '.'))
+            if 'km' in distance:
+                distancia = float(distance.replace('km', '').replace(',', '.'))
+            elif 'm' in distance:
+                distancia = float(distance.replace('m', '')).strip()
             duration = route['legs'][0]['duration']['text']            
             return route,distancia,duration   
         else:
