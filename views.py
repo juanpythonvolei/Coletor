@@ -845,7 +845,7 @@ def calculate_distance(destiny,origem):
         if response.status_code == 200:
             data = response.json()
             route = data['routes']
-            distance = route['legs'][0]['distance']['text'][:4]
+            distance = route['legs'][0]['distance']['text']
             if 'km' in distance:
                 distancia = float(distance.replace('km', '').replace(',', '.'))
             distancia = str(distance.replace('m','')).strip()
