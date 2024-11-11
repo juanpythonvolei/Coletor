@@ -957,7 +957,7 @@ def deliver(car,product,qtd,data,transp,note,client):
         verificar = session.query(Entregas).filter(Entregas.data == data,Entregas.nota == note, Entregas.cliente == client).firts()
         return st.info(f'A entrega do cliente {client} já foi realizada')
     except:
-        session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True))
+        session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True,nota=note))
         session.commit()
         return st.success(f'Entrega do cliente {client} realizada com sucesso')   
 
