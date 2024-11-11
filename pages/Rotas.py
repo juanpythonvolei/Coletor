@@ -77,11 +77,7 @@ with tabc:
                                            \n'''
                               
                               assistant = st.chat_message('assistant')
-                              response = analisar(f"Analise o texto que você está recebendo, oraganizeo e, baseando-se nele, responda ao que se pede: {message}",str(texto))
+                              response = analisar(f"Analise o texto que você está recebendo. Ele é uma representação de rotas. Nele estão os destinos, e o nome dos clientes. Oraganize-os e, baseando-se nele, responda ao que se pede: {message}",str(texto))
                               assistant.write(response)
-                              salvar = st.toggle('salvar análise')
-                              if salvar:
-                                    save_route(data=data,transp=transp,routes=response)
-                                    st.sucess(f'Rota salva com sucesso')
                               
                         
