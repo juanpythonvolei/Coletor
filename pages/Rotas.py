@@ -70,6 +70,6 @@ with tabc:
                                     else:
                                            texto += f'Rota {i}: {text}\n'
                               
-                                    assistant = st.chat_message('assistant')
-                                    assistant.write(analisar(f"Analise o texto que você está recebendo e, baseando-se nele, responda ao que se pede: {message}",str(texto)))
+                              assistant = st.chat_message('assistant')
+                              assistant.write(analisar(f"Analise o texto que você está recebendo e, baseando-se nele, responda ao que se pede: {message}",str(texto)))
                         
