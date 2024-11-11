@@ -71,5 +71,10 @@ with tabc:
                                            texto += f'Rota {i}: {text}\n'
                               
                               assistant = st.chat_message('assistant')
-                              assistant.write(analisar(f"Analise o texto que você está recebendo e, baseando-se nele, responda ao que se pede: {message}",str(texto)))
+                              response = analisar(f"Analise o texto que você está recebendo, oraganizeo e, baseando-se nele, responda ao que se pede: {message}",str(texto))
+                              assistant.write(response)
+                              with st.toggle('salvar análise'):
+                                    save_route(data=data,transp=transp,routes=response)
+                                    st.sucess(f'Rota salva com sucesso')
+                              
                         
