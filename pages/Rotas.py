@@ -34,17 +34,20 @@ if taba:
 with tabb:
             data = st.date_input("Selecione uma data",value=None,key='Data_selector_epecific')
             if data:
-                  nota = st.selectbox(label="Nota",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data==data).all()])),index=None,key='select_note')    
-                  if nota:
-                        texto = ''
-                        infos = session.query(Faturamento).filter(Faturamento.numero_da_nota==nota,Faturamento.status == True,Faturamento.data == data).all()
-                        for item in infos:
-                            info=  f'''
-                              Cliente: {item.cliente}\n
-                              Destino: {item.destino}\n
-                              quantidade: {item.quantidade}\n
-                              '''
-                            texto += info
-                        st.info(texto)
-                        result = build_google_map(route(define_destiny_list([item.numero_da_nota])))
-            
+                  transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp')    
+                  if transp:
+                        nota = st.selectbox(label="Nota",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.data==data,Faturamento.transportadora==transp).all()])),index=None,key='select_note')    
+                        if nota:
+                              texto = ''
+                              infos = session.query(Faturamento).filter(Faturamento.numero_da_nota==nota,Faturamento.status == True,Faturamento.data == data).all()
+                              for item in infos:
+                                  info=  f'''
+                                    Cliente: {item.cliente}\n
+                                    Destino: {item.destino}\n
+                                    quantidade: {item.quantidade}\n
+                                    '''
+                                  texto += info
+                              st.info(texto)
+                              result = build_google_map(route(define_destiny_list([item.numero_da_nota])))
+                              save_routes(data=data,transp=transp,route=result[2]['rotas'])s
+                  
