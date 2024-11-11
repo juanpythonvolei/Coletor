@@ -30,7 +30,7 @@ if taba:
             if transp and data:
                   notas = session.query(Faturamento.numero_da_nota).filter(Faturamento.data==str(data),Faturamento.status==True,Faturamento.transportadora == transp).all()
                   result = build_google_map(route(define_destiny_list(item[0] for item in notas)))
-                  save_routes(data=data,transp=transp,route=result[2]['rotas'])
+                  save_route(data=data,transp=transp,route=result[2]['rotas'])
                   st.table(result[1])
 with tabb:
             data = st.date_input("Selecione uma data",value=None,key='Data_selector_epecific')
@@ -50,5 +50,5 @@ with tabb:
                                   texto += info
                               st.info(texto)
                               result = build_google_map(route(define_destiny_list([item.numero_da_nota])))
-                              save_routes(data=data,transp=transp,route=result[2]['rotas'])
+                              save_route(data=data,transp=transp,route=result[2]['rotas'])
                   
