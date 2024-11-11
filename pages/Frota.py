@@ -16,8 +16,8 @@ with colz:
             donwload_billing()
 
 
-marca = st.text_input(label="Marca",palceholder="Insira a marca do veículo")
-modelo = st.text_input(label="Modelo",palceholder="Insira o modelo do veículo")
+marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
+modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
 autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
 
 if marca and modelo and autonomia:
