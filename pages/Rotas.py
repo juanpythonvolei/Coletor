@@ -3,7 +3,7 @@ from views import *
 
 image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 
-taba,tabb = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro'])
+taba,tabb,tabc = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro'])
 
 if tabaa:
       with taba:
@@ -32,3 +32,6 @@ if tabaa:
                   result = build_google_map(route(define_destiny_list(item[0] for item in notas)))
                   st.table(result[1])
      
+elif tabb:
+      with tabb:
+            nota  = transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.nota).filter(Faturamento.status == True).all()])),index=None,key='select_note')    
