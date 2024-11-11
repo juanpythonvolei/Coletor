@@ -918,10 +918,10 @@ def save_route(routes,data,transp):
         st.write(texto)
         try:
             existe = session.query(Rotas).filter(Rotas.transportadora == transp,Rotas.data == data).first()
-            existe.rota = texto
+            existe.rota = str(texto)
             existe.commit()
         except:
-            session.add(Rotas(data==data,transp==transp,rota=texto))
+            session.add(Rotas(data==data,transp==transp,rota=str(texto)))
             session.commit()
         
             
