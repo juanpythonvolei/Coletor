@@ -65,6 +65,9 @@ with tabc:
                                      pass
                                else:
                                      texto += f'Rota {i}: {text}\n'
+                        message = st.chat_input('escreva o que você quer especificar')
+                        human = st.chat_message('human')
+                        human.write(message)
                         assistant = st.chat_message('assistant')
-                        assistant.write(analisar("Você é um analisador de rotas e sua a função é receber o grande número de rotas que irei te passar, analisar cada uma da rotas, compara-las e me retornar uma rota que você acredite que seja a melhor do ponto de vista de valocidade e praticidade e que atenda as rotas que você recebeu",str(texto) ))
+                        assistant.write(analisar(f"Você é um analisador de rotas e sua a função é receber o grande número de rotas que irei te passar, analisar cada uma da rotas, compara-las e me retornar uma rota que você acredite que seja a melhor do ponto de vista de valocidade e praticidade e que atenda as rotas que você recebeu. Além disso vale citar que tais rotas estão em inglês em dentro de tags html então você deverá fazer a limpeza dos dados. Tendo esse cenário, analise o complemento a seguir vindo do usuário: {message}",str(texto) ))
                         
