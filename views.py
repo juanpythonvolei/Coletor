@@ -844,9 +844,8 @@ def calculate_distance(destiny,origem):
         response = requests.get(url, params=params)
         if response.status_code == 200:
             data = response.json()
-            route = data['routes'][0]
+            route = data['routes']
             distance = route['legs'][0]['distance']['text'][:4]
-            st.write(distance)
             if 'km' in distance:
                 distancia = float(distance.replace('km', '').replace(',', '.'))
             distancia = str(distance.replace('m','')).strip()
@@ -870,15 +869,14 @@ def define_destiny_list(note):
                         'cliente':cliente,
                         'origem':'Itupeva,sp',
                         'descricao':descricao,
-                        'tempo':distancia[2]
+                        'tempo':distancia[2],
+                        'rotas':distancia[0]        
                         }
-                    
                     if dict in destinos:
                         pass
                     else:
                         destinos.append(dict)
                     origem = verificar.destino
-                    st.write(origem)
                     sleep(1)
         return sorted(destinos,key=lambda x:x['distancia'],reverse=True)
 def route(list):
@@ -890,7 +888,8 @@ def route(list):
                  'nota':item['nota'],
                  'cliente':item['cliente'],   
                  'descricao':item['descricao'],
-                 'tempo': item['tempo']   
+                 'tempo': item['tempo'],
+                 'rotas':str(item['rotas'])   
                 }
             if dict in lista:
                 pass
