@@ -835,6 +835,7 @@ def donwload_product():
         pass
 
 def calculate_distance(destiny,origem):
+        texto = '' 
         url = 'https://maps.googleapis.com/maps/api/directions/json'
         params = {
                 'origin': f'{origem}', 
@@ -845,12 +846,16 @@ def calculate_distance(destiny,origem):
         if response.status_code == 200:
             data = response.json()
             route = data['routes']
+            st.write(route)
+            for step in routes[0]['legs'][0]['steps']:
+                text = step['html_instructions']
+                texto += text
             distance = route[0]['legs'][0]['distance']['text']
             if 'km' in distance:
                 distancia = float(distance.replace('km', '').replace(',', '.'))
             distancia = str(distance.replace('m','')).strip()
             duration = route[0]['legs'][0]['duration']['text'] 
-            return route,distancia,duration   
+            return texto,distancia,duration   
         else:
             st.error('erro')
 def define_destiny_list(note):
@@ -906,11 +911,9 @@ def build_google_map(list):
         return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)]),list
 
 def save_route(routes,data,transp):
-    st.write(routes)
-    for item in routes['rotas']:
-        texto = '' 
-        for step in item[0]['legs'][0]['steps']:
-            text = step['html_instructions']
+        texto = ''
+        for item in routes:
+            text = item['rotas']
             texto += text
         try:
             existe = session.query(Rotas).filter(Rotas.transportadora == transp,Rotas.data == data).first()
