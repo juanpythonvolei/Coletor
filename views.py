@@ -959,7 +959,7 @@ def delilver(car,product,qtd,data,transp,note,client,status):
     except:
         session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True))
         session.commit()
-        return st.success(f'Entrega do cliente {client} realizada com sucesso'   
+        return st.success(f'Entrega do cliente {client} realizada com sucesso')   
 
 def load_delivery(notes,data,veiculo):
     contador_nao = 0
