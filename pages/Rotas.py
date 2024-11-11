@@ -64,10 +64,10 @@ with tabc:
                               human.write(message)
                               resultado = build_google_map(route(define_destiny_list(item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.data==data,Faturamento.status==True,Faturamento.transportadora==transp))))
                               for i,item in enumerate(resultado[2]):
-                                     text = item['rotas']
-                                     if text in texto:
+                                    text = item['rotas']
+                                    if text in texto:
                                            pass
-                                     else:
+                                    else:
                                            texto += f'Rota {i}: {text}\n'
                               
                                     assistant = st.chat_message('assistant')
