@@ -43,7 +43,6 @@ with tabb:
                               Cliente: {item.cliente}
                               Destino: {item.destino}
                               quantidade: {item.quantidade}
-                              valor: {item.valor}
                               '''
                             texto += info
                         st.info(texto)
