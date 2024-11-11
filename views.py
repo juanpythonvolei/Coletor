@@ -880,7 +880,7 @@ def define_destiny_list(note):
                     origem = verificar.destino
                     st.write(origem)
                     sleep(1)
-        return sorted(destinos,key=lambda x:x['distancia'])
+        return sorted(destinos,key=lambda x:x['distancia'],reverse=True)
 def route(list):
         origem = 'Itupeva,sp'
         lista = []
