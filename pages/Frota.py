@@ -21,11 +21,8 @@ modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
 autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
 
 if marca and modelo and autonomia:
-  try:
+
     session.query(Veiculos).filter(Veiculos.modelo == modelo).first()
     st.error(f'O veículo modelo: {modelo} já existe')
-  except:
-    session.add(Veiculos(marca=marca,modelo=modelo,autonomia=autonomia))
-    st.success(f'O veículo modelo: {modelo} foi cadastrado com sucesso')
 
 
