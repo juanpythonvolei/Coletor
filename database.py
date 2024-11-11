@@ -220,7 +220,7 @@ class Entregas(Base):
     status = Column('Completa',Boolean)
     veiculo = Column('Veiculo',ForeignKey('Veículos.modelo'))
 
-    def __init__(self,transportadora,data,cliente,nota,produto,quantidade,veiculo):
+    def __init__(self,transportadora,data,cliente,nota,produto,quantidade,veiculo,status):
         self.transportadora = transportadora
         self.data = data
         self.cliente = cliente
