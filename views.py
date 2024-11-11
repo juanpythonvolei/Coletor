@@ -926,7 +926,11 @@ def load_delivery(notes,data):
     st.title('Entregas')
     for i,item in enumerate(notes):
         verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
-        st.info(f'Cliente:{verificar.cliente} - Nota:{verificar.numero_da_nota} - Quantidade: {verificar.quantidade}')
+        st.info(f'''
+        Cliente:{verificar.cliente}\n
+        Nota:{verificar.numero_da_nota}\n
+        Quantidade: {verificar.quantidade}\n
+        ''')
         completa = st.toggle('Entrega Completa',key=i)
         st.divider()
     
