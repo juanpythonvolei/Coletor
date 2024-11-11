@@ -83,6 +83,6 @@ with tabc:
 with tabd:
       data = st.date_input("Selecione uma data",value=None,key='Data_selector_deli')
       if data:
-                  transp = st.multiselect(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),value=None,key='select_transp_deli')    
+                  transp = st.multiselect(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),key='select_transp_deli')    
                   if transp: 
                         load_deliverys(transp)
