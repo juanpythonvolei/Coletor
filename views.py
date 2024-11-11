@@ -923,11 +923,10 @@ def save_route(routes,data,transp):
             session.commit()
 
 def complete_delivery(data,transp):
-    gasto = 0
-    distancia_per = 0
-    qtd = 0
-    lista = []
-    try:
+        gasto = 0
+        distancia_per = 0
+        qtd = 0
+        lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
         for i,item in enumerate(entregas):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.nota==item.nota,Faturamento.data==item.data).first().destino
@@ -949,8 +948,7 @@ def complete_delivery(data,transp):
             else:
                 lista.append(dict,index=[i])
         return pd.concat(lista),gasto,distancia_per,qtd
-    except:
-        pass
+
 
 def deliver(car,product,qtd,data,transp,note,client):
     try:
