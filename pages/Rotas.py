@@ -3,7 +3,7 @@ from views import *
 
 image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 
-taba,tabb,tabc = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro'])
+taba,tabb,tabc,tabd = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro','Entregas'])
 
 if taba:
       with taba:
@@ -80,4 +80,9 @@ with tabc:
                               response = analisar(f"Analise o texto que você está recebendo. Ele é uma representação de rotas. Nele estão os destinos, e o nome dos clientes. Oraganize-os e, baseando-se nele, responda ao que se pede retornando além da resposta, uma rota organizada: {message}",str(texto))
                               assistant.write(response)
                               
-                        
+ with tabd:
+      data = st.date_input("Selecione uma data",value=None,key='Data_selector_deli')
+      if data:
+                  transp = st.multi_select(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_deli')    
+                  if transp: 
+                        load_deliverys(transp)
