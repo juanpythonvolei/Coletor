@@ -921,7 +921,9 @@ def save_route(routes,data,transp):
         except:
             session.add(Rotas(data==data,transp==transp,rota=str(texto)))
             session.commit()
-        
+
+def delilver(car,)
+
 def load_delivery(notes,data):
     contador_nao = 0
     contador_sim = 0
