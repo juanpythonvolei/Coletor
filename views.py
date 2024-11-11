@@ -923,7 +923,8 @@ def save_route(routes,data,transp):
             session.commit()
         
 def load_delivery(notes,data):
-    st.title('Entregas')
+    contador_nao = 0
+    contador_sim = 0
     for i,item in enumerate(notes):
         verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
         st.info(f'''
@@ -931,6 +932,10 @@ def load_delivery(notes,data):
         Nota:{verificar.numero_da_nota}\n
         Quantidade: {verificar.quantidade}\n
         ''')
+        contador_nao += 1 
         completa = st.toggle('Entrega Completa',key=i)
+        if completa:
+            contador_sim += 1 
         st.divider()
+    return contador_nao,contador_sim
     
