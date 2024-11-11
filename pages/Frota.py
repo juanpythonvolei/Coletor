@@ -30,7 +30,7 @@ if marca and modelo and autonomia:
           st.success(f'O veículo modelo: {modelo} foi cadastrado com sucesso')
 
 botao_mudar = st.button('Alterar informações')
-with botao_mudar:
+if botao_mudar:
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo")
 botao_excluir = st.button('Excluir informações')
 
