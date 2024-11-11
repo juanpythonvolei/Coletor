@@ -888,7 +888,7 @@ def route(list):
         for i,item in enumerate(list):
             lista.append(
                 {
-                f'Distância':round(item['distancia']),
+                f'Distância':item['distancia'],
                  'nota':item['nota'],
                  'cliente':item['cliente'],   
                  'descricao':item['descricao'],
