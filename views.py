@@ -834,10 +834,10 @@ def donwload_product():
     except:
         pass
 
-def calculate_distance(destiny):
+def calculate_distance(destiny,origem):
         url = 'https://maps.googleapis.com/maps/api/directions/json'
         params = {
-                'origin': f'Itupeva-sp', 
+                'origin': f'{origem}', 
                 'destination': f'{destiny}', 
                 'key': st.secrets['chave_api_googlemaps']
                 }
@@ -853,9 +853,10 @@ def calculate_distance(destiny):
             st.error('erro')
 def define_destiny_list(note):
         destinos = []
+        origem = 'Itupeva,sp'
         for item in note:
                     verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.status == True).first()
-                    distancia = calculate_distance(verificar.destino)
+                    distancia = calculate_distance(verificar.destino,origem)
                     location = str(verificar.destino).split(',')
                     descricao = verificar.destino
                     nota = verificar.numero_da_nota
@@ -873,6 +874,7 @@ def define_destiny_list(note):
                         pass
                     else:
                         destinos.append(dict)
+                    origem = verificar.destino
                     sleep(1)
         return sorted(destinos,key=lambda x:x['distancia'])
 def route(list):
