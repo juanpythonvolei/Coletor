@@ -850,7 +850,7 @@ def calculate_distance(destiny,origem):
             if 'km' in distance:
                 distancia = float(distance.replace('km', '').replace(',', '.'))
             distancia = str(distance.replace('m','')).strip()
-            duration = route['legs'][0]['duration']['text']            
+            duration = route[0]['legs'][0]['duration']['text']            
             return route,distancia,duration   
         else:
             st.error('erro')
