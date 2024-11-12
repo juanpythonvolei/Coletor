@@ -928,10 +928,12 @@ def complete_delivery(data,transp):
         qtd = 0
         lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
+        distancia_a = calculate_distance(verificar[0],'Itupeva,sp')
         for i,item in enumerate(list(set(verificar[:2]))):
             distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True).first().numero_da_nota])))[2][0]['Distância']
             if ' k' in distancia:
-                distancia = float(distancia.replace('k', '').replace(',', '.').strip())
+                distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
+            distancia = distancia + distancia_a    
             kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
             dict={
                 'Cliente':item.cliente,
