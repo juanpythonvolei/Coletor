@@ -11,9 +11,6 @@ with colx:
 with coly:
       with st.popover('🤖'):
             assistant()
-with colz:
-      with st.popover('📂'):
-            donwload_billing()
 try:
       logado = st.session_state.selected_option
       with st.popover('Cadastrar veículos 🚚'):
