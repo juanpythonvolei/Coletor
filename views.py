@@ -974,7 +974,7 @@ def load_delivery(notes,data,veiculo):
     contador_sim = 0
     for i,item in enumerate(list(set(notes))):
         try:
-            entrega = session.query(Entregas).filter(Entregas.nota == item,Faturamento.data == data,Entrega.status == True).first()
+            entrega = session.query(Entregas).filter(Entregas.nota == item,Entrega.data == data,Entrega.status == True).first()
             pass
         except:
             verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
