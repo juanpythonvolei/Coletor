@@ -928,6 +928,7 @@ def save_route(routes,data,transp):
             session.commit()
 
 def complete_delivery(data,transp):
+        origem = 'Itupeva,sp'
         gasto = 0
         distancia_per = 0
         qtd = 0
@@ -937,7 +938,7 @@ def complete_delivery(data,transp):
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
         for i,item in enumerate(list(set(verificar))):
-            distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True).first().numero_da_nota])))[2][0]['Distância']
+            distancia = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino,origem)[1]
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
             distancia += float(distancia_a)    
