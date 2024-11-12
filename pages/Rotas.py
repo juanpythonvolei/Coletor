@@ -94,6 +94,8 @@ with tabd:
                                     st.metric('Entregas não completas',response[0])
                                     st.metric('Entregas completas',response[1])
 with tabe:
+      session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
+      st.write(verificar)
       data = st.date_input("Selecione uma data",value=None,key='Data_selector_one')
       if data:
             transp = st.selectbox(label="Transportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_one')    
