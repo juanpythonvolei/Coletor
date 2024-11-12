@@ -101,6 +101,6 @@ with tabe:
             if transp:
                   response = complete_delivery(data,transp)
                   st.table(response[0])
-                  st.metric('Total Gasto',value=response[1])
-                  st.metric('Total Percorrido',value=response[2])
+                  st.metric('Total Gasto R$',value=response[1])
+                  st.metric('Total Percorrido Km',value=response[2])
                   st.metric('Quantidade total entregue',value=response[3])
