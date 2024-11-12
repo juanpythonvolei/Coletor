@@ -1014,4 +1014,4 @@ def complete_desciption(car):
                 pass
             else:
                 lista.append(dict)
-        return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
+        return gasto,distancia_per,qtd
