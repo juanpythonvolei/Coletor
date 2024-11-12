@@ -69,6 +69,6 @@ with st.popover('Ver Frota 🔍'):
                   st.info(f'''
                   Marca: {verificar.marca}\n
                   autonomia: {verificar.autonomia} km/l\n
-                  Total gasto: R$ {0}
-                  Total percorrido: Km: {1}
+                  Total gasto: R$ {response[0]}\n
+                  Total percorrido: Km: {response[1]}\n
                   ''')
