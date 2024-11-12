@@ -21,49 +21,49 @@ def new_logged_infos(user):
     sleep(1)
     first.empty()
     second = st.header(f'Seja Bem vindo,{user},ao aplicativo do coletor')
-    sleep(3)
+    sleep(4)
     second.empty()
     third = st.header(f'Sinta-se a vontade para explorar o sistema')
-    sleep(3)
+    sleep(4)
     third.empty()
     fourth = st.header(f'Porém, para te ajudar,irei mencionar qual é o fluxo de atividades que fazem o app funcionar!')
-    sleep(3)
+    sleep(4)
     fourth.empty()
-    fith = st.header('O Fluxo é o seguinte:')
-    sleep(3)
+    fifth = st.header('O Fluxo é o seguinte:')
+    sleep(4)
     fifth.empty()
     sixth = st.header('1. Vá para cadastro de produtos, e preencha os campos para que o cadastro seja finalizado')
-    sleep(3)
+    sleep(4)
     sixth.empty()
     seventh = st.header('''2. Em Seguida, siga para Recebimento. Na caixa de seleção, escolha o item que você separou, 
     ou os que estão disponíveis, e faço o recebimento de uma quantidade de sua preferência
     ''')
-    sleep(3)
+    sleep(4)
     seventh.empty()
     eigth = st.header('''3. Com o item já recebido, vá para a aba de Transferência. Nesse espaço, para trazer os itens,
     selecione a opção "Recebimento" em "origem". Após isso, Insira, no campo de destino, um endereço no seguinte
     formato: 0>0n<08-0>00n<20-0>0n<05. Na aba seguinte, escolha o item, e a quantidade.''')
-    sleep(3)
+    sleep(4)
     eigth.empty()
     nineth = st.header('''4. Agora, você já pode ir para aba de faturamento, e realizar o faturamento manual. Assim, preencha todos os
     campos e, ao fim, o faturamento terá se iniciado. obs: Caso você queira realizar o faturamento com arquivos de notas fiscais, clique no icone maior
     a primeira ação que ele fará é, automaticamente, cadastrar os itens da nota. Depois, você deve realizar o processo de recebimento e transferência. q
     Quando concluir, é só retornar no icone e reselecionar as notas. Isso fará com que o Faturamento se inicie.
     ''')
-    sleep(3)
+    sleep(4)
     nineth.empty()
     tenth = st.header('''5. Entre na aba de Pickinglist. Para coletar os itens, observe sua localização e quantidade. A coleta se da na ação
     de inserir o código do produto no campo. Se houver apenas 1 item, o processo se encerrará. Se não, o mostrador irá mudar até que você colete
     a quantidade da nota. Se completar esse campo, vá para Separação. Nessa aba, é o mesmo procedimento porém, além do item, deve-se inserir a posição dele
     no estoque para contabilizar uma coleta
     ''')
-    sleep(3)
+    sleep(4)
     tenth.empty()
     eleventh = st.header('''6.Pronto, seu faturamento acabou. Agora, vá para Rotas e depois em entregas. Nessa aba selecione a data de hoje, a transportadora e um carro de tranporte.
     Após isso, serão exibidos todos os pedidos faturados e separados. Para entregar, é só ativar a chave. Nesse caso,você assume o papel do entregador. Ops, esqueci. O carro utilizado também
     deve ser cadastrado. Para isso, vá para a aba "Frota" e lá, preencha os dados do veículo. Eles são importantes para as informações vindas da entrega. 
     ''')
-    sleep(3)
+    sleep(4)
     eleventh.empty()
     twelveth = st.header('''7. Pronto!, Esse é o fluxo. Além, dele, você pode acessar diversos outros menus de consulta, falar com o assitente inteligente, ver o histórico etc.
     O assistente possúi uma aba dedicada, mas está em todos os menus na forma de um robozinho. Ele sabe tudo sobre as movimentações feitas no aplicativo, então se precisar de uma esclarecimento[
@@ -72,11 +72,11 @@ def new_logged_infos(user):
     Obs: Este app, não foi desenvolvido para uso empresarial. Por conta disso, algumas etapas, como o faturamento, não podem ser equiparadas a um faturamento real visto que careço da posse de sistemas
     e credenciais que somente estão em posse de empresa. Outro ponto importante é que ele está em constante desenvolvimento, então algumas funções melhorarão ou serão substituidas e até acrescentadas.
     ''')
-    sleep(3)
+    sleep(4)
     twelveth.empty()
     final = st.header('''8. Bom, já falei demais. Aproveite sua experiência!
     ''')
-    sleep(3)
+    sleep(4)
     final.empty()
     sleep(1)
 def treat_table(df):
