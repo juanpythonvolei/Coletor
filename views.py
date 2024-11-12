@@ -940,7 +940,7 @@ def complete_delivery(data,transp):
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
         distancia_per += distancia_a*2   
-        gasto += round(float((distancia_per/kml)*5.50))
+        gasto += round(float((distancia_per/autonomia_itupeva)*5.50))
         for i,item in enumerate(list(set(verificar))):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino
             distancia = calculate_distance(destino,origem)[1]
@@ -1008,7 +1008,7 @@ def complete_desciption(car):
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
         distancia_per += 2*distancia_a[1]    
-        gasto += round(float((distancia_per/kml)*5.50))
+        gasto += round(float((distancia_per/verificar_car)*5.50))
         for i,item in enumerate(list(set(verificar[:2]))):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
             distancia = calculate_distance(destino,origem)
