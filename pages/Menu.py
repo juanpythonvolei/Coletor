@@ -44,7 +44,7 @@ try:
                         deletar = st.button("🗑️")
                         if deletar:
                           senha = text_input(label='Senha',placeholder='Insira a senha do administrador')      
-                          if senha == '1020':    
+                          if senha == st.secrets['key']:    
                                 st.info(delete_product(item,user=st.session_state.selected_option))
                   if item and elemento and valor:
                       st.info(update_product(item,elemento,valor,user=st.session_state.selected_option))
