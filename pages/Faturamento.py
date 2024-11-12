@@ -28,7 +28,7 @@ try:
                   for produto in produtos:
                         try:
                               outro = session.query(Recebimento).filter(Recebimento.produto == produto).first().produto
-                              outro_estoque = session.query(Estoque).filter(Estoque.item== outro).first().produto
+                              outro_estoque = session.query(Estoque).filter(Estoque.item== outro).first().item
                               lista.append(outro_estoque)
                         except:
                               pass
