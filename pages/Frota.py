@@ -31,9 +31,9 @@ if marca and modelo and autonomia:
 
 botao_mudar = st.popover('Alterar informações ⚙️')
 with botao_mudar:
-      veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='escolha')
+      veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='escolha',index=None)
       if veiculo:
-            alteracao = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=['Marca','Modelo','Autonomia'],key='alteração')
+            alteracao = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=['Marca','Modelo','Autonomia'],key='alteração',index=None)
             if alteracao:
                   valor = st.text_input(label='Alteração',placeholder='Insira sua alteração')
                   verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
@@ -52,7 +52,7 @@ with botao_mudar:
             
 botao_excluir = st.popover('Excluir informações')
 with botao_excluir:
-      veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar')
+      veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
       if veiculo:
             senha = st.text_input(label='Insira a senha do administrador');
             if senha == '1020':
