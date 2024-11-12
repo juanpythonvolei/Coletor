@@ -28,7 +28,7 @@ with st.popover('Faturar Manualmente'):
                               lista.append(outro_estoque)
                         except:
                               pass
-                  produto = st.selectbox(label='Produto',placeholder='Insira o Produto',key='Produto',options=lista)
+                  produto = st.selectbox(label='Produto',placeholder='Insira o Produto',key='Produto',options=lista,index=None)
                   transp = st.text_input(label='transp',placeholder='Insira a transportadora',key='transp')
                   qtd = st.number_input(label='Quantidade',placeholder='Insira a quantidade',key='Quantidade',value=None)
                   cliente = st.text_input(label='cliente',placeholder='Insira o cliente',key='cliente')
