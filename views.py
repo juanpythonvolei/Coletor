@@ -689,7 +689,7 @@ def assistant():
         texto_veiculos += f'Modelo:{item.modelo} , Marca:{item.marca}, Autonomia: {item.autonomia}\n'
         
     for item in list(set(entregas)):
-        texto_entregas += f'Nota:{item.Nota} , Cliente:{item.cliente},data{item.data},Veiculo:{item.veiculo}\n'    
+        texto_entregas += f'Nota:{item.nota} , Cliente:{item.cliente},data{item.data},Veiculo:{item.veiculo}\n'    
         
 
 
