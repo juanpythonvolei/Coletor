@@ -935,7 +935,7 @@ def complete_delivery(data,transp):
         lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
         verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
-        autonomia_itupeva = session.query(Veículos).filter(Veiculos.modelo == verificar_car).autonomia
+        autonomia_itupeva = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).autonomia
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
