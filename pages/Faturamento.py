@@ -17,7 +17,7 @@ try:
       with colz:
             with st.popover('📂'):
                   donwload_billing()
-      st.write(session.query(Faturamento.numero_da_nota,Faturamento.produto).filter(Faturamento.status == False,Faturamento.data == str(date.today())).all())   
+      st.write(session.query(Faturamento.numero_da_nota,Faturamento.produto).filter(Faturamento.status == True,Faturamento.data == str(date.today())).all())   
       try:
             fat = session.query(Faturamento).filter(Faturamento.status == False,Faturamento.data == str(date.today())).first().id
             st.warning(f'Existe um Faturamento de id: {fat} em curso. Por favor conclua-o')    
