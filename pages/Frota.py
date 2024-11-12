@@ -15,7 +15,7 @@ with colz:
       with st.popover('📂'):
             donwload_billing()
 
-with st.popover('Cadastrar veículos 🚚')
+with st.popover('Cadastrar veículos 🚚'):
       marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
       modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
       autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
