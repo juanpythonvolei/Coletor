@@ -23,7 +23,7 @@ try:
       except:
             uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui',key='Faturamento')
             with st.popover('Faturar Manualmente'):
-                  produto = st.selectbox(label='Produto',placeholder='Insira o Produto',key='Produto',options=[item.produto for item in session.query(Produtos).all()])
+                  produto = st.selectbox(label='Produto',placeholder='Insira o Produto',key='Produto',options=[item.codigo for item in session.query(Produtos).all()])
                   transp = st.text_input(label='transp',placeholder='Insira a transportadora',key='transp')
                   qtd = st.number_input(label='Quantidade',placeholder='Insira a quantidade',key='Quantidade',value=None)
                   cliente = st.text_input(label='cliente',placeholder='Insira o cliente',key='cliente')
