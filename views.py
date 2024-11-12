@@ -947,8 +947,8 @@ def complete_delivery(data,transp):
             if dict in lista:
                 pass
             else:
-                lista.append(pd.DataFrame(dict,index=[i]))
-        return pd.concat(lista),gasto,distancia_per,qtd
+                lista.append(dict)
+        return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
 
 
 def deliver(car,product,qtd,data,transp,note,client):
