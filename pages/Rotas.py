@@ -2,9 +2,6 @@ import streamlit as st
 from views import *
 
 image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
-
-if 'selected_option' in st.session_state:
-            st.title(f'Usuário logado: {st.session_state.selected_option}')
       
 try:
       logado = st.session_state.selected_option
@@ -25,8 +22,7 @@ try:
       
       if taba:
             with taba:
-
-                  
+                        
                   col3,col4 = st.columns(2)
                               
                   with col3:    
