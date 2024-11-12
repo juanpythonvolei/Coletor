@@ -50,7 +50,7 @@ with botao_mudar:
                         session.commit()
                         st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
             
-botao_excluir = st.popover('Excluir informações')
+botao_excluir = st.popover('Excluir informações 🗑️')
 with botao_excluir:
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
       if veiculo:
@@ -59,3 +59,12 @@ with botao_excluir:
                   session.delete(session.query(Veiculos).filter(Veiculos.modelo==veiculo).firts())
                   session.commit()
                   st.success(f'O Veículo de modelo: {veiculo} foi deletado com sucesso')
+
+with st.popover('Ver Frota 🔍'):
+      veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
+      if veiculo:
+                  verificar = session.delete(session.query(Veiculos).filter(Veiculos.modelo==veiculo).firts())
+                  st.info(f'''
+                  Marca: {verificar.marca}
+                  autonomia: {verificar.autonomia}
+                  ''')
