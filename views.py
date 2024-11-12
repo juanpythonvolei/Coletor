@@ -946,13 +946,13 @@ def complete_delivery(data,transp):
                 'Cliente':item.cliente,
                 'Nota':item.nota,
                 'Produto':item.produto,
-                'Quantidade':item.quantidade,
+                'Quantidade':session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade,
                 'Gasto em R$': round(float((float(distancia)/float(kml))*5.50)),
                 'Distância percorrida':distancia
             }
             gasto += round(float((distancia/kml)*5.50))
             distancia_per += distancia
-            qtd += item.quantidade
+            qtd += session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
             if dict in lista:
                 pass
             else:
