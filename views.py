@@ -372,6 +372,7 @@ def add_new_user(user,password):
         st.session_state.selected_option = user
         new_logged_infos(st.session_state.selected_option)
         
+        
 
 def login(usuario,senha):
     if 'selected_option' not in st.session_state:
