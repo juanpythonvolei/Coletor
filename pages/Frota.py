@@ -66,15 +66,6 @@ with st.popover('Ver Frota 🔍'):
       val = 0 
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='ver',index=None)
       if veiculo:
-            autonomia  = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first().autonomia
-      entregas = session.query(Entregas).filter(Entregas.veiculo==veiculo).all()
-      for entrega in entregas:
-            distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == entrega.nota).first().numero_da_nota])))[2][0]['Distância']
-            if ' k' in distancia:
-                distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
-            dist += distancia
-            val += (float(distancia)/float(autonomia)*5.50)
-      if veiculo:
                   verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
                   st.info(f'''
                   Marca: {verificar.marca}\n
