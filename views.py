@@ -973,20 +973,24 @@ def load_delivery(notes,data,veiculo):
     contador_nao = 0
     contador_sim = 0
     for i,item in enumerate(list(set(notes))):
-        verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
-        if verificar:
-            if session.query(Entregas).filter(Entregas.data == verificar.data,Entregas.cliente == verificar.cliente,Entregas.status==False).first():
-                st.info(f'''
-                Cliente:{verificar.cliente}\n
-                Nota:{verificar.numero_da_nota}\n
-                Quantidade: {verificar.quantidade}\n
-                ''')
-                contador_nao += 1 
-                completa = st.toggle('Entrega Completa',key=i)
-                if completa:
-                    contador_sim += 1 
-                    deliver(car=veiculo,product=verificar.produto,qtd=verificar.quantidade,client=verificar.cliente,note=verificar.numero_da_nota,transp=verificar.transportadora,data=data)
-                st.divider()
+        try:
+            entrega = session.query(Entregas).filter(Entregas.nota == item,Faturamento.data == data,Entrega.status == True).first()
+            pass
+        except:
+            verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
+            if verificar:
+                if session.query(Entregas).filter(Entregas.data == verificar.data,Entregas.cliente == verificar.cliente,Entregas.status==False).first():
+                    st.info(f'''
+                    Cliente:{verificar.cliente}\n
+                    Nota:{verificar.numero_da_nota}\n
+                    Quantidade: {verificar.quantidade}\n
+                    ''')
+                    contador_nao += 1 
+                    completa = st.toggle('Entrega Completa',key=i)
+                    if completa:
+                        contador_sim += 1 
+                        deliver(car=veiculo,product=verificar.produto,qtd=verificar.quantidade,client=verificar.cliente,note=verificar.numero_da_nota,transp=verificar.transportadora,data=data)
+                    st.divider()
     return contador_nao,contador_sim
     
 def complete_desciption(car):
