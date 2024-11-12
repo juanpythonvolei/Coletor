@@ -1036,7 +1036,7 @@ def complete_desciption(car):
         gasto += round(float((distancia_per/verificar_car)*5.50))
         for i,item in enumerate(list(set(verificar[:2]))):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
-            distancia = calculate_distance(destino,origem)
+            distancia = calculate_distance(destino,origem)[1]
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip())  
             kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
