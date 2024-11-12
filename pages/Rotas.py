@@ -87,7 +87,7 @@ with tabd:
                   if veiculo:
                         transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_deli')    
                         if transp:
-                              notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Faturamento.numero_da_nota).filter(Faturamento.status == True,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
+                              notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Entregas.numero_da_nota).filter(Entregas.status == False,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
                               if notas: 
                                     st.title('Entregas')
                                     response =load_delivery(notas,data,veiculo)
@@ -95,7 +95,6 @@ with tabd:
                                     st.metric('Entregas completas',response[1])
 with tabe:
       verificar = session.query(Entregas.data).filter(Entregas.status==True).all()
-      st.write(verificar)
       data = st.date_input("Selecione uma data",value=None,key='Data_selector_one')
       if data:
             transp = st.selectbox(label="Transportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_one')    
