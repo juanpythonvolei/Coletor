@@ -934,20 +934,25 @@ def complete_delivery(data,transp):
         qtd = 0
         lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
+        verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
+        autonomia_itupeva = session.query(Veículos).filter(Veiculos.modelo == verificar_car).autonomia
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
+        distancia_per += distancia_a*2   
+        gasto += round(float((distancia_per/kml)*5.50))
         for i,item in enumerate(list(set(verificar))):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino
             distancia = calculate_distance(destino,origem)[1]
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
-            distancia += float(distancia_a)    
             kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
             dict={
                 'Cliente':item.cliente,
                 'Nota':item.nota,
                 'Produto':item.produto,
+                'distancia km':distancia,
+                'Valor': round(float((distancia/kml)*5.50))
             }
             gasto += round(float((distancia/kml)*5.50))
             distancia_per += distancia
@@ -992,19 +997,24 @@ def load_delivery(notes,data,veiculo):
     return contador_nao,contador_sim
     
 def complete_desciption(car):
+        origem = 'Itupe,sp'
         gasto = 0
         distancia_per = 0
         qtd = 0
         lista = []
         verificar = session.query(Entregas).filter(Entregas.veiculo == car,Entregas.status==True).all()
+        verificar_car = session.query(Veiculos).filter(Veiculos.modelo == car).first().autonomia
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
+        distancia_per += 2*distancia_a[1]    
+        gasto += round(float((distancia_per/kml)*5.50))
         for i,item in enumerate(list(set(verificar[:2]))):
-            distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().numero_da_nota])))[2][0]['Distância']
+            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
+            distancia = calculate_distance(destino,origem)
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
-            distancia += float(distancia_a)    
+            distancia_a += float(distancia) 
             kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
             dict={
                 'Cliente':item.cliente,
@@ -1021,5 +1031,5 @@ def complete_desciption(car):
                 pass
             else:
                 lista.append(dict)
-                
+            origem =  destino
         return gasto,distancia_per,qtd
