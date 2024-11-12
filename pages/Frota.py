@@ -15,7 +15,7 @@ with colz:
       with st.popover('📂'):
             donwload_billing()
 try:
-      st.session_state.selected_option
+      logado = st.session_state.selected_option
       with st.popover('Cadastrar veículos 🚚'):
             marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
             modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
