@@ -907,7 +907,7 @@ def build_google_map(list):
 
         base_url = f"https://www.google.com/maps/dir/Itupeva,sp/"
         final=base_url + '/'.join([str(f'{item['descricao']}').replace(' ','+') for item in list])
-        return st.link_button(label="Acessar Rota",url=final),pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)]),list
+        return final,pd.concat([pd.DataFrame({'nota':elemento['nota'],'cliente':elemento['cliente'],'Distância em km':elemento['Distância'],'tempo em minutos':elemento['tempo']},index=[i]) for i,elemento in enumerate(list)]),list
 
 def save_route(routes,data,transp):
         texto = ''
