@@ -686,10 +686,10 @@ def assistant():
         texto_historico += f'Evento:{item.evento} , quantidade:{item.quantidade},data{item.data},usuário:{item.usuario},item:{item.item}\n'
         
     for item in list(set(veiculos)):
-        texto_veiculos += f'Modelo:{item.modelo} , Marca:{item.Marca}, Autonomia: {item.autonomia}\n'
+        texto_veiculos += f'Modelo:{item.modelo} , Marca:{item.marca}, Autonomia: {item.autonomia}\n'
         
     for item in list(set(entregas)):
-        texto_entregas += f'Nota:{item.Nota} , Cliente:{item.Cliente},data{item.data},Veiculo:{item.veiculo}\n'    
+        texto_entregas += f'Nota:{item.Nota} , Cliente:{item.cliente},data{item.data},Veiculo:{item.veiculo}\n'    
         
 
 
