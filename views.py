@@ -644,7 +644,7 @@ def assistant():
     texto_recebimento = ''
     texto_produtos = ''
     texto_veiculos = ''
-    texto_Entregas = ''
+    texto_entregas = ''
 
     estoque = session.query(Estoque).all()
     faturamento = session.query(Faturamento).all()
@@ -684,10 +684,13 @@ def assistant():
 
     for item in list(set(historico)):
         texto_historico += f'Evento:{item.evento} , quantidade:{item.quantidade},data{item.data},usuário:{item.usuario},item:{item.item}\n'
-    for item in list(set(Veiculos)):
+        
+    for item in list(set(veiculos)):
         texto_veiculos += f'Modelo:{item.modelo} , Marca:{item.Marca}, Autonomia: {item.autonomia}\n'
-    for item in list(set(Entregas)):
-        texto_historico += f'Nota:{item.Nota} , Cliente:{item.Cliente},data{item.data},Veiculo:{item.veiculo}\n'    
+        
+    for item in list(set(entregas)):
+        texto_entregas += f'Nota:{item.Nota} , Cliente:{item.Cliente},data{item.data},Veiculo:{item.veiculo}\n'    
+        
 
 
 
@@ -700,7 +703,10 @@ def assistant():
             Usuários: {texto_usuarios}\n
             Recebimento: {texto_recebimento}\n
             Histórico: {texto_historico}\n
-            Produtos: {texto_produtos}"""
+            Produtos: {texto_produtos}\n
+            Entregas: {texto_entregas}\n
+            Veículos: {texto_veiculos}
+            """
     cola,colb = st.columns(2)
     with cola:
         pergunta = st.chat_input(placeholder='Faça sua pergunta')
