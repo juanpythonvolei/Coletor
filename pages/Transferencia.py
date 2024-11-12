@@ -4,6 +4,7 @@ import speech_recognition as sr
 
 image = st.image('https://img.freepik.com/vetores-gratis/modelo-de-logotipo-da-empresa-de-caminhoes_441059-258.jpg?w=996')
 try:
+      logado = st.session_state.selected_option
       colx,coly,colz = st.columns(3)
       
       with colx:
