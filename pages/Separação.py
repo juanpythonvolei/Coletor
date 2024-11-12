@@ -55,10 +55,8 @@ try:
             if item == str(elemento.produto) and posicao == str(elemento.endereco):
                         separate(user=st.session_state.selected_option,product=item,data=str(date.today()),note_number=elemento.nota,qtd_coletada=float(1))
                         with col3:
-                              try:
-                                 quantidade_coletada = st.metric(label="quantidade coletada",value=session.query(Separacao).filter(Separacao.produto == item,Separacao.id_mercado == elemento.id,Separacao.data == str(date.today()),Separacao.nota == elemento.nota).first().qtd_coletada)   
-                              except:
-                                 quantidade_coletada = st.metric(label="quantidade coletada",value=0)
+                                 quantidade_coletada = st.metric(label="quantidade coletada",value=session.query(Separacao).filter(Separacao.produto == item,Separacao.data == str(date.today()),Separacao.nota == elemento.nota).first().qtd_coletada)   
+
                   
             st.divider()
 except:
