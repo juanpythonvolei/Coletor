@@ -51,16 +51,16 @@ try:
                                     verificar.autonomia = float(valor)
                                     session.commit()
                                     st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
-                        
-      botao_excluir = st.popover('Excluir informações 🗑️')
-      with botao_excluir:
-            veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
-            if veiculo:
-                  senha = st.text_input(label='Insira a senha do administrador');
-                  if senha == '1020':
-                        session.delete(session.query(Veiculos).filter(Veiculos.modelo==veiculo).firts())
-                        session.commit()
-                        st.success(f'O Veículo de modelo: {veiculo} foi deletado com sucesso')
+      if str(st.session_state.selected_option) == 'Juan':                 
+            botao_excluir = st.popover('Excluir informações 🗑️')
+            with botao_excluir:
+                  veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
+                  if veiculo:
+                        senha = st.text_input(label='Insira a senha do administrador');
+                        if senha == '1020':
+                              session.delete(session.query(Veiculos).filter(Veiculos.modelo==veiculo).firts())
+                              session.commit()
+                              st.success(f'O Veículo de modelo: {veiculo} foi deletado com sucesso')
       
       with st.popover('Ver Frota 🔍'):
             veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='ver',index=None)
