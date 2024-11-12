@@ -16,7 +16,7 @@ with colz:
             with st.popover('📂'):
                   donwload_billing()
 
-
+st.write(session.query(Faturamento.transportadora).all())
 uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui',key='Faturamento')
 with st.popover('Faturar Manualmente'):
                   lista = []
