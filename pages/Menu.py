@@ -71,8 +71,8 @@ try:
                       query_and_update_ean(x,codigo_ean)
   
       if str(st.session_state.selected_option) == 'Juan':
-                  with st.popover('Deletar_tabelas'):
-                        senha = text_input(label='Senha',placeholder='Insira a senha do administrador',key='tabs') 
+                  with st.popover('Deletar tabelas'):
+                        senha = st.text_input(label='Senha',placeholder='Insira a senha do administrador',key='tabs') 
                         if senha == '1020':
                                   session.query(Estoque).delete()  
                                   session.query(Faturamento).delete()  
