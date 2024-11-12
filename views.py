@@ -1047,7 +1047,7 @@ def manual_billing(code,transp,client,user,qtd,number,destino):
                                 verify_if_still_exists(code=code,adress=posicao)
                                 session.commit()
                                 st.success(f"O Item {code}, foi faturado com sucesso e já está disponível para ser coletado")
-                         else:
+                        else:
                             st.error(f'O item: {codigo} não possúi quantidade suficiente em estoque para ser faturado')
                     else:
                         st.error(f'O Código: {code} não está cadastrado')
