@@ -928,7 +928,7 @@ def complete_delivery(data,transp):
         qtd = 0
         lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
-        for i,item in enumerate(list(set(verificar))):
+        for i,item in enumerate(list(set(verificar[:2]))):
             distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True).first().numero_da_nota])))[2][0]['Distância']
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip())
