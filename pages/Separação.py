@@ -54,11 +54,11 @@ try:
                item = st.text_input(label=f"Produto: {elemento.produto}",key=i+100,placeholder="Insira o produto")
             if item == str(elemento.produto) and posicao == str(elemento.endereco):
                         separate(user=st.session_state.selected_option,product=item,data=str(date.today()),note_number=elemento.nota,qtd_coletada=float(1))
-            with col3:
-                  try:
-                     quantidade_coletada = st.metric(label="quantidade coletada",value=session.query(Separacao).filter(Separacao.produto == item,Separacao.id_mercado == elemento.id,Separacao.data == str(date.today()),Separacao.nota == elemento.nota).first().qtd_coletada)   
-                  except:
-                     quantidade_coletada = st.metric(label="quantidade coletada",value=0)
+                        with col3:
+                              try:
+                                 quantidade_coletada = st.metric(label="quantidade coletada",value=session.query(Separacao).filter(Separacao.produto == item,Separacao.id_mercado == elemento.id,Separacao.data == str(date.today()),Separacao.nota == elemento.nota).first().qtd_coletada)   
+                              except:
+                                 quantidade_coletada = st.metric(label="quantidade coletada",value=0)
                   
             st.divider()
 except:
