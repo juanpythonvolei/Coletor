@@ -860,7 +860,7 @@ def donwload_deliverys():
         for i,item in enumerate(entregas):
             texto_entregas = {'Data':item.data , 'Cliente': item.cliente ,'Nota':item.nota  ,'Veículo':item.veiculo}
             list.append(pd.DataFrame(texto_entregas,index=[i]))
-        download_button(pd.concat(list),f'Produtos {date.today()}') 
+        download_button(pd.concat(list),f'Entregas {date.today()}') 
     except:
         pass
 
@@ -990,12 +990,14 @@ def complete_delivery(data,transp):
         return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
 
 
-def deliver(car,product,qtd,data,transp,note,client):
+def deliver(car,product,qtd,data,transp,note,client,user):
     try:
         verificar = session.query(Entregas).filter(Entregas.data == data,Entregas.nota == note, Entregas.cliente == client,Entrega.status == True).firts()
         return st.info(f'A entrega do cliente {client} já foi realizada')
     except:
         session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True,nota=note))
+        session.commit()
+        session.add(add_history(action=f"Entrega realizada para o cliente: {client}",data=str(date.today()),qtd=qtd,item=product,user=user))
         session.commit()
         return st.success(f'Entrega do cliente {client} realizada com sucesso')   
 
