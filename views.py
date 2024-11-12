@@ -927,7 +927,7 @@ def complete_delivery(data,transp):
         distancia_per = 0
         qtd = 0
         lista = []
-        verificar = session.query(Entregas.status).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
+        verificar = session.query(Entregas.nota).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
         for i,item in enumerate(verificar):
             st.write(item.nota)
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota,Faturamento.data==item.data).first().destino
