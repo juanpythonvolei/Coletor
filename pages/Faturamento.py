@@ -18,7 +18,8 @@ try:
             with st.popover('📂'):
                   donwload_billing()
       try:
-            session.query(Faturamento).filter(Faturamento.status == False).first()
+            a = session.query(Faturamento).filter(Faturamento.status == False).all()
+            st.write(a)
             st.warnig('Aind há notas a serem fatuardas')
       except:
             uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui',key='Faturamento')
