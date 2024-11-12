@@ -69,22 +69,7 @@ try:
                   query_and_register_ean(x,codigo_ean)
                   if st.button("⚙️ Consultar código ean"):
                       query_and_update_ean(x,codigo_ean)
-      if str(st.session_state.selected_option) == 'Juan':
-            with pop_over('Deletar_tabelas'):
-                  senha = text_input(label='Senha',placeholder='Insira a senha do administrador',key='tabs') 
-                  if senha == '1020':
-                            session.query(Estoque).delete()  
-                            session.query(Faturamento).delete()  
-                            session.query(Picklist).delete()  
-                            session.query(Separacao).delete()  
-                            session.query(Romaneios).delete()  
-                            session.query(Historico).delete()  
-                            session.query(Usuarios).delete()  
-                            session.query(Recebimento).delete()  
-                            session.query(Produtos).delete()  
-                            session.query(Entregas).delete()  
-                            session.query(Veiculos).delete()  
-                            st.success('Todas as tabelas foram excluidas com sucesso')  
+  
                         
 except:
       st.error('Você deve estar logado para acessar essa página')
