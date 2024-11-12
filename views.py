@@ -601,7 +601,6 @@ def create_itens_relations_for_item(data,lista,user):
             'Nota':espec.numero_da_nota
         },index=[i])
         listagem.append(infos)
-    save_table_int_text(pd.concat(listagem,ignore_index=True),user,data)
     add_history(action=f"Criação de Romaneio para tranportadora",qtd=1,data=data,item='romaneio',user=user)    
     return st.table(pd.concat(listagem,ignore_index=True)),total_peso,total_valor,total_volumes
 
