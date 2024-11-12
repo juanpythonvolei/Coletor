@@ -36,20 +36,21 @@ with botao_mudar:
             alteracao = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=['Marca','Modelo','Autonomia'],key='alteração',index=None)
             if alteracao:
                   valor = st.text_input(label='Alteração',placeholder='Insira sua alteração')
-                  verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
-                  if alteracao == 'Marca':
-                        verificar.marca = valor
-                        session.commit()
-                        st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
-                  elif alteracao == 'Modelo':
-                        verificar.modelo = valor
-                        session.commit()
-                        st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
-                  elif alteracao == 'Autonomia':
-                        verificar.autonomia = float(valor)
-                        session.commit()
-                        st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
-            
+                  if valor:
+                        verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
+                        if alteracao == 'Marca':
+                              verificar.marca = valor
+                              session.commit()
+                              st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
+                        elif alteracao == 'Modelo':
+                              verificar.modelo = valor
+                              session.commit()
+                              st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
+                        elif alteracao == 'Autonomia':
+                              verificar.autonomia = float(valor)
+                              session.commit()
+                              st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
+                  
 botao_excluir = st.popover('Excluir informações 🗑️')
 with botao_excluir:
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
