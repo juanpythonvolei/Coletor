@@ -14,9 +14,8 @@ with coly:
 with colz:
       with st.popover('📂'):
             donwload_billing()
-if st.session_state.selected_option == None:
-      st.error('Você deve estar logado para acessar essa página')
-else:
+try:
+      st.session_state.selected_option
       with st.popover('Cadastrar veículos 🚚'):
             marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
             modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
@@ -74,3 +73,7 @@ else:
                         Total gasto: R$ {response[0]}\n
                         Total percorrido: {response[1]} Km
                         ''')
+
+      
+except:
+      st.error('Você deve estar logado para acessar essa página')
