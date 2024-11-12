@@ -23,12 +23,12 @@ try:
       except:
             uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui',key='Faturamento')
             with st.popover('Faturar Manualmente'):
-                  produto = st.text_input(label='Produto',key='Produto')
-                  transp = st.text_input(label='transp',key='transp')
-                  qtd = st.number_input(label='Quantidade',key='Quantidade')
-                  cliente = st.text_input(label='cliente',key='cliente')
-                  nota = st.text_input(label='Nota',key='Nota')
-                  destino = st.text_input(label='Destino',key='Destino')
+                  produto = st.text_input(label='Produto',placeholder='Insira o Produto',key='Produto')
+                  transp = st.text_input(label='transp',placeholder='Insira a transportadora',key='transp')
+                  qtd = st.number_input(label='Quantidade',placeholder='Insira a quantidade',key='Quantidade',value=None)
+                  cliente = st.text_input(label='cliente',placeholder='Insira o cliente',key='cliente')
+                  nota = st.text_input(label='Nota',placeholder='Insira a nota',key='Nota')
+                  destino = st.text_input(label='Destino',placeholder='Insira o destino',key='Destino')
                   try:
                         manual_billing(code=produto,transp=transp,client=cliente,user=st.session_state.selected_option,qtd=qtd,number=nota,destino=destino)
                   except:
