@@ -25,7 +25,7 @@ def new_logged_infos(user):
     second.empty()
     third = st.header(f'Sinta-se a vontade para explorar o sistema')
     sleep(3)
-    thrid.empty()
+    third.empty()
     fourth = st.header(f'Porém, para te ajudar,irei mencionar qual é o fluxo de atividades que fazem o app funcionar!')
     sleep(3)
     fourth.empty()
