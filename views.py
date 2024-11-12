@@ -928,7 +928,7 @@ def complete_delivery(data,transp):
         qtd = 0
         lista = []
         verificar = session.query(Entregas.nota).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
-        for i,item in enumerate(verificar):
+        for i,item in enumerate(list(set(verificar))):
             st.write(item.nota)
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota,Faturamento.data==item.data).first().destino
             distancia = build_google_map(route(define_destiny_list([destino])))[2][0]['Distância']
