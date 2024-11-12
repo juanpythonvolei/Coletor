@@ -52,5 +52,5 @@ with novo:
     if novo:
         novo_usuario = st.text_input(label="Novo Usuário",placeholder="Insira um novo usuário",key="novo_usuario")
         nova_senha = st.text_input(label="Nova Senha",placeholder="Insira uma nova senha",key="senha_novo_usuario")
-        if novo_usuario and nova_senha:
+if novo_usuario and nova_senha:
             add_new_user(novo_usuario,nova_senha)
