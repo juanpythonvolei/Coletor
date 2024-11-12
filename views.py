@@ -976,7 +976,7 @@ def load_delivery(notes,data,veiculo):
             verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
             if verificar:
                 if session.query(Entregas).filter(Entregas.data == verificar.data,Entregas.cliente == verificar.cliente,Entregas.status==True).first():
-                    pass
+                    return st.warning(f'A entrega do cliente :{session.query(Entregas).filter(Entregas.data == verificar.data,Entregas.cliente == verificar.cliente,Entregas.status==True).first().cliente} já foi realizada')
                 else:
                     st.info(f'''
                     Cliente:{verificar.cliente}\n
