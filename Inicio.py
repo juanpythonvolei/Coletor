@@ -54,4 +54,6 @@ with novo:
         nova_senha = st.text_input(label="Nova Senha",placeholder="Insira uma nova senha",key="senha_novo_usuario")
 if novo_usuario and nova_senha:
             image.empty()
+            novo_usuario.empty()
+            nova_senha.empty()
             add_new_user(novo_usuario,nova_senha)
