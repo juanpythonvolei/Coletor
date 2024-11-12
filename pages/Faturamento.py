@@ -35,7 +35,7 @@ with st.popover('Faturar Manualmente'):
                   nota = st.text_input(label='Nota',placeholder='Insira a nota',key='Nota')
                   destino = st.text_input(label='Destino',placeholder='Insira o destino',key='Destino')
                   if produto and transp and qtd and cliente and nota and destino:
-                        manual_billing(code=produto,transp=transp,client=cliente,user=st.session_state.selected_option,qtd=qtd,number=nota,destino=destino)
+                        manual_billing(code=produto,transp=transp,client=cliente,user=st.session_state.selected_option,qtd=qtd,number=int(nota),destino=destino)
                   else:
                         st.error('Ainda há campos a serem preenchidos')
 if uploaded_files:
