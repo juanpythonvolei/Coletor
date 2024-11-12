@@ -643,6 +643,8 @@ def assistant():
     texto_separacao = ''
     texto_recebimento = ''
     texto_produtos = ''
+    texto_veiculos = ''
+    texto_Entregas = ''
 
     estoque = session.query(Estoque).all()
     faturamento = session.query(Faturamento).all()
@@ -653,6 +655,8 @@ def assistant():
     usuarios = session.query(Usuarios).all()
     recebimento = session.query(Recebimento).all()
     produtos = session.query(Produtos).all()
+    veiculos = session.query(Veiculos).all()
+    entregas = session.query(Entregas).all()
 
     for item in list(set(estoque)):
         texto_estoque += f'produto:{item.item}, endereço: {item.endereco} , quantidade:{item.quantidade}\n'
@@ -680,6 +684,10 @@ def assistant():
 
     for item in list(set(historico)):
         texto_historico += f'Evento:{item.evento} , quantidade:{item.quantidade},data{item.data},usuário:{item.usuario},item:{item.item}\n'
+    for item in list(set(Veiculos)):
+        texto_veiculos += f'Modelo:{item.modelo} , Marca:{item.Marca}, Autonomia: {item.autonomia}\n'
+    for item in list(set(Entregas)):
+        texto_historico += f'Nota:{item.Nota} , Cliente:{item.Cliente},data{item.data},Veiculo:{item.veiculo}\n'    
 
 
 
@@ -835,6 +843,17 @@ def donwload_product():
         for i,item in enumerate(produtos):
             texto_produtos = {'produto':item.codigo , 'valor': item.preco ,'peso':item.peso  ,'descrição':item.nome}
             list.append(pd.DataFrame(texto_produtos,index=[i]))
+        download_button(pd.concat(list),f'Produtos {date.today()}') 
+    except:
+        pass
+
+def donwload_deliverys():
+    try:
+        list = []
+        entregas = session.query(Entregas).all()    
+        for i,item in enumerate(entregas):
+            texto_entregas = {'Data':item.data , 'Cliente': item.cliente ,'Nota':item.nota  ,'Veículo':item.veiculo}
+            list.append(pd.DataFrame(texto_entregas,index=[i]))
         download_button(pd.concat(list),f'Produtos {date.today()}') 
     except:
         pass
