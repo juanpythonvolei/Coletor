@@ -90,7 +90,14 @@ try:
                         if veiculo:
                               transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_deli')    
                               if transp:
-                                    notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Entregas.nota).filter(Entregas.status == False,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
+                                    list_deli = []
+                                    notas_faturadas = session.query(Faturamento).filter(Faturamento.status == True,Faturamento.transportadora == transp).all()
+                                    for fat in notas_faturadas:
+                                          if session.query(Entregas).filter(Entregas.nota == fat.numero_da_nota).first()
+                                                pass
+                                          else:
+                                                list_deli.append(fat.numero_da_nota)
+                                    notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set(list_deli)),key='select_notes_deli')    
                                     if notas: 
                                           st.title('Entregas')
                                           response = load_delivery(notas,data,veiculo)
