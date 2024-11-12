@@ -15,19 +15,19 @@ with colz:
       with st.popover('📂'):
             donwload_billing()
 
-
-marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
-modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
-autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
-
-if marca and modelo and autonomia:
-    verificar = session.query(Veiculos).filter(Veiculos.modelo==modelo).first()
-    if verificar:
-          st.error(f'O modelo: {verificar.modelo} já está cadastrado')
-    else:  
-          session.add(Veiculos(marca=marca,modelo=modelo,autonomia=autonomia))
-          session.commit()    
-          st.success(f'O veículo modelo: {modelo} foi cadastrado com sucesso')
+with st.popover('Cadastrar veículos 🚚')
+      marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
+      modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
+      autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
+      
+      if marca and modelo and autonomia:
+          verificar = session.query(Veiculos).filter(Veiculos.modelo==modelo).first()
+          if verificar:
+                st.error(f'O modelo: {verificar.modelo} já está cadastrado')
+          else:  
+                session.add(Veiculos(marca=marca,modelo=modelo,autonomia=autonomia))
+                session.commit()    
+                st.success(f'O veículo modelo: {modelo} foi cadastrado com sucesso')
 
 botao_mudar = st.popover('Alterar informações ⚙️')
 with botao_mudar:
