@@ -984,12 +984,12 @@ def load_delivery(notes,data,veiculo):
                 st.divider()
     return contador_nao,contador_sim
     
-def complete_desciption(data,car):
+def complete_desciption(car):
         gasto = 0
         distancia_per = 0
         qtd = 0
         lista = []
-        verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.veiculo == car,Entregas.status==True).all()
+        verificar = session.query(Entregas).filter(Entregas.veiculo == car,Entregas.status==True).all()
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
