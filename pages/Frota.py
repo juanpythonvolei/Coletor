@@ -63,7 +63,7 @@ with botao_excluir:
 with st.popover('Ver Frota 🔍'):
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='ver',index=None)
       if veiculo:
-                  verificar = session.delete(session.query(Veiculos).filter(Veiculos.modelo==veiculo).first())
+                  verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
                   st.info(f'''
                   Marca: {verificar.marca}
                   autonomia: {verificar.autonomia}
