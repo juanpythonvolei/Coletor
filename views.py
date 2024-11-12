@@ -15,7 +15,21 @@ import requests
 
 session = sessionmaker(bind=engine)
 session = session()
-
+def new_logged_infos(user):
+    st.empty()
+    st.title('Olá')
+    sleep(1)
+    st.empty()
+    st.header(f'Seja Bem vindo,{user},ao aplicativo do coletor')
+    sleep(3)
+    st.empty()
+    st.header(f'Sinta-se a vontade para explorar o sistema')
+    sleep(3)
+    st.empty()
+    st.header(f'Porém, para te ajudar,irei mencionar qual é o fluxo de atividades que fazem o app funcionar!')
+    sleep(3)
+    st.empty()
+    
 def treat_table(df):
     table = pd.read_excel(df)
     return table.to_string()
@@ -357,6 +371,7 @@ def add_new_user(user,password):
         session.add(Usuarios(usuario=user,senha=password))
         session.commit()
         st.session_state.selected_option = user
+        new_logged_infos(st.session_state.selected_option):
         st.switch_page('pages/Menu.py')
 
 def login(usuario,senha):
@@ -1077,4 +1092,4 @@ def manual_billing(code,transp,client,user,qtd,number,destino):
                             st.error(f'O item: {codigo} não possúi quantidade suficiente em estoque para ser faturado')
                     else:
                         st.error(f'O Código: {code} não está cadastrado')
-                    
+
