@@ -1000,7 +1000,7 @@ def deliver(car,product,qtd,data,transp,note,client,user):
         session.commit()
         return st.success(f'Entrega do cliente {client} realizada com sucesso')   
 
-def load_delivery(notes,data,veiculo):
+def load_delivery(notes,data,veiculo,user):
     contador_nao = 0
     contador_sim = 0
     for i,item in enumerate(list(set(notes))):
@@ -1018,7 +1018,7 @@ def load_delivery(notes,data,veiculo):
                     completa = st.toggle('Entrega Completa',key=i)
                     if completa:
                         contador_sim += 1 
-                        deliver(car=veiculo,product=verificar.produto,qtd=verificar.quantidade,client=verificar.cliente,note=verificar.numero_da_nota,transp=verificar.transportadora,data=data)
+                        deliver(car=veiculo,product=verificar.produto,qtd=verificar.quantidade,client=verificar.cliente,note=verificar.numero_da_nota,transp=verificar.transportadora,data=data,user=user)
                     st.divider()
     return contador_nao,contador_sim
     
