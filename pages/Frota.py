@@ -62,14 +62,13 @@ with botao_excluir:
                   st.success(f'O Veículo de modelo: {veiculo} foi deletado com sucesso')
 
 with st.popover('Ver Frota 🔍'):
-      dist = 0
-      val = 0 
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='ver',index=None)
       if veiculo:
-                  complete_desciption(veiculo,str)
+                  verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
+                  response = complete_desciption(veiculo)
                   st.info(f'''
                   Marca: {verificar.marca}\n
                   autonomia: {verificar.autonomia} km/l\n
-                  Total gasto: R$ {val}
-                  Total percorrido: Km: {dist}
+                  Total gasto: R$ {0}
+                  Total percorrido: Km: {1}
                   ''')
