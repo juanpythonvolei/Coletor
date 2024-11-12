@@ -232,5 +232,5 @@ class Entregas(Base):
         
 
         
-engine = create_engine('sqlite:///estoque.db')
+engine = create_engine(st.secrets['db'])
 base =Base.metadata.create_all(engine)
