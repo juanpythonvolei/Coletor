@@ -936,7 +936,7 @@ def complete_delivery(data,transp):
                 'Nota':item.nota,
                 'Produto':item.produto,
                 'Quantidade':item.quantidade,
-                'Gasto em R$': round(float((distancia/kml)*5.50)),
+                'Gasto em R$': round(float((float(distancia)/float(kml))*5.50)),
                 'Distância percorrida':distancia
             }
             gasto += round(float((distancia/kml)*5.50))
