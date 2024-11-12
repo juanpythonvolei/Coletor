@@ -1032,7 +1032,7 @@ def complete_desciption(car):
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
-        distancia_per += 2*distancia_a[1]    
+        distancia_per += 2*distancia_a
         gasto += round(float((distancia_per/verificar_car)*5.50))
         for i,item in enumerate(list(set(verificar[:2]))):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
