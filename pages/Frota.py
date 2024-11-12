@@ -66,7 +66,7 @@ with st.popover('Ver Frota 🔍'):
       val = 0 
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='ver',index=None)
       if veiculo:
-                  verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
+                  complete_desciption(veiculo,str)
                   st.info(f'''
                   Marca: {verificar.marca}\n
                   autonomia: {verificar.autonomia} km/l\n
