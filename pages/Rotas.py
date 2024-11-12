@@ -93,7 +93,7 @@ try:
                                     list_deli = []
                                     notas_faturadas = session.query(Faturamento).filter(Faturamento.status == True,Faturamento.transportadora == transp).all()
                                     for fat in notas_faturadas:
-                                          if session.query(Entregas).filter(Entregas.nota == fat.numero_da_nota).first():
+                                          if session.query(Entregas).filter(Entregas.nota == fat.numero_da_nota,Entregas.status == True).first():
                                                 pass
                                           else:
                                                 list_deli.append(fat.numero_da_nota)
