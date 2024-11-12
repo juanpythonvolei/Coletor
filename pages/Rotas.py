@@ -94,7 +94,7 @@ with tabd:
                                     st.metric('Entregas não completas',response[0])
                                     st.metric('Entregas completas',response[1])
 with tabe:
-      verificar = session.query(Entregas.nota).filter(Entregas.status==True).all()
+      verificar = session.query(Entregas.data).filter(Entregas.status==True).all()
       st.write(verificar)
       data = st.date_input("Selecione uma data",value=None,key='Data_selector_one')
       if data:
