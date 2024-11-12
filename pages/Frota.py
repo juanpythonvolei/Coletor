@@ -14,9 +14,8 @@ with coly:
 with colz:
       with st.popover('📂'):
             donwload_billing()
-try:
-      logado = st.session_state.selected_option
-      with st.popover('Cadastrar veículos 🚚'):
+
+with st.popover('Cadastrar veículos 🚚'):
             marca = st.text_input(label="Marca",placeholder="Insira a marca do veículo")
             modelo = st.text_input(label="Modelo",placeholder="Insira o modelo do veículo")
             autonomia = st.number_input(label="Autonomia",placeholder="Insira a Autonomia do veículo",value=None)
@@ -30,8 +29,8 @@ try:
                       session.commit()    
                       st.success(f'O veículo modelo: {modelo} foi cadastrado com sucesso')
       
-      botao_mudar = st.popover('Alterar informações ⚙️')
-      with botao_mudar:
+botao_mudar = st.popover('Alterar informações ⚙️')
+with botao_mudar:
             veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='escolha',index=None)
             if veiculo:
                   alteracao = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=['Marca','Modelo','Autonomia'],key='alteração',index=None)
@@ -51,9 +50,9 @@ try:
                                     verificar.autonomia = float(valor)
                                     session.commit()
                                     st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
-      if str(st.session_state.selected_option) == 'Juan':                 
+if str(st.session_state.selected_option) == 'Juan':                 
             botao_excluir = st.popover('Excluir informações 🗑️')
-            with botao_excluir:
+with botao_excluir:
                   veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
                   if veiculo:
                         senha = st.text_input(label='Insira a senha do administrador');
@@ -62,7 +61,7 @@ try:
                               session.commit()
                               st.success(f'O Veículo de modelo: {veiculo} foi deletado com sucesso')
       
-      with st.popover('Ver Frota 🔍'):
+with st.popover('Ver Frota 🔍'):
             veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='ver',index=None)
             if veiculo:
                         verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
@@ -75,5 +74,4 @@ try:
                         ''')
 
       
-except:
-      st.error('Você deve estar logado para acessar essa página')
+
