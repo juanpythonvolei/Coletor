@@ -984,3 +984,34 @@ def load_delivery(notes,data,veiculo):
                 st.divider()
     return contador_nao,contador_sim
     
+def complete_desciption(data,car):
+        gasto = 0
+        distancia_per = 0
+        qtd = 0
+        lista = []
+        verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.veiculo == car,Entregas.status==True).all()
+        distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
+        if ' k' in distancia_a:
+                distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
+        for i,item in enumerate(list(set(verificar[:2]))):
+            distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().numero_da_nota])))[2][0]['Distância']
+            if ' k' in distancia:
+                distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
+            distancia += float(distancia_a)    
+            kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
+            dict={
+                'Cliente':item.cliente,
+                'Nota':item.nota,
+                'Produto':item.produto,
+                'Quantidade':item.quantidade,
+                'Gasto em R$': round(float((float(distancia)/float(kml))*5.50)),
+                'Distância percorrida':distancia
+            }
+            gasto += round(float((distancia/kml)*5.50))
+            distancia_per += distancia
+            qtd += item.quantidade
+            if dict in lista:
+                pass
+            else:
+                lista.append(dict)
+        return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
