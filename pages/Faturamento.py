@@ -28,7 +28,8 @@ try:
                   for produto in produtos:
                         try:
                               outro = session.query(Recebimento).filter(Recebimento.produto == produto).first().produto
-                              lista.append(outro)
+                              outro_estoque = session.query(Estoque).filter(Estoque.produto == outro).first().produto
+                              lista.append(outro_estoque)
                         except:
                               pass
                   produto = st.selectbox(label='Produto',placeholder='Insira o Produto',key='Produto',options=lista)
