@@ -1032,3 +1032,17 @@ def complete_desciption(car):
                 lista.append(dict)
             origem =  destino
         return gasto,distancia_per,qtd
+    
+def manual_billing(code,price,transp,client,data,user,qtd,number,status,data_emition,peso,description,destino):
+                    verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
+                    if verificar:
+                        posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.quantidade >= qtd).first().endereco
+                        if posicao:
+                            if session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade >= qtd:
+                                session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade -= qtd
+                                session.commit()
+                                session.add(Faturamento(produto=verificar.codigo,usuario=user,quantidade=qtd,numero_da_nota=number,data=data,status=status,transportadora=transp,cliente=client,data_emissao=data_emition,posicao=posicao,destino=destino))
+                                session.commit()
+                                add_history(action=f"Faturamento",qtd=qtd,data=data,item=code,user=user)
+                                verify_if_still_exists(code=code,adress=posicao)
+                                session.commit()
