@@ -87,7 +87,7 @@ with tabd:
                   if veiculo:
                         transp = st.selectbox(label="Trasnportadora",placeholder="Selecione uma transportadora",options=list(set([item[0] for item in session.query(Faturamento.transportadora).filter(Faturamento.status == True).all()])),index=None,key='select_transp_deli')    
                         if transp:
-                              notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Entregas.numero_da_nota).filter(Entregas.status == False,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
+                              notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Entregas.nota).filter(Entregas.status == False,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
                               if notas: 
                                     st.title('Entregas')
                                     response =load_delivery(notas,data,veiculo)
