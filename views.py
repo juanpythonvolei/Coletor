@@ -975,7 +975,9 @@ def load_delivery(notes,data,veiculo):
     for i,item in enumerate(list(set(notes))):
             verificar = session.query(Faturamento).filter(Faturamento.numero_da_nota == item,Faturamento.data == data,Faturamento.status == True).first()
             if verificar:
-                if session.query(Entregas).filter(Entregas.data == verificar.data,Entregas.cliente == verificar.cliente,Entregas.status==False).first():
+                if session.query(Entregas).filter(Entregas.data == verificar.data,Entregas.cliente == verificar.cliente,Entregas.status==True).first():
+                    pass
+                else:
                     st.info(f'''
                     Cliente:{verificar.cliente}\n
                     Nota:{verificar.numero_da_nota}\n
