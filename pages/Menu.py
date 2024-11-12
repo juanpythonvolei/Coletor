@@ -16,7 +16,7 @@ try:
             with st.popover('📂'):
                   donwload_product()
       
-      col1,col2,col3,col4,col5 = st.columns(5)
+      col1,col2,col3,col4 = st.columns(4)
       
       with col1:
           cadastrar_produtos = st.popover("➕ Cadastrar Produtos")
@@ -70,9 +70,8 @@ try:
                   if st.button("⚙️ Consultar código ean"):
                       query_and_update_ean(x,codigo_ean)
   
-      with col5:     
-            if str(st.session_state.selected_option) == 'Juan':
-                  with popover('Deletar_tabelas'):
+      if str(st.session_state.selected_option) == 'Juan':
+                  with st.popover('Deletar_tabelas'):
                         senha = text_input(label='Senha',placeholder='Insira a senha do administrador',key='tabs') 
                         if senha == '1020':
                                   session.query(Estoque).delete()  
