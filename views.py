@@ -385,22 +385,26 @@ def picking(data):
     return lista_ok      
 
 def billing(code,price,transp,client,data,user,qtd,number,status,data_emition,peso,description,destino):
-                verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
-                if verificar:
-                    posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo).first().endereco
-                    if posicao:
-                        if session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade >= qtd:
-                            session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade -= qtd
-                            session.commit()
-                            session.add(Faturamento(produto=verificar.codigo,usuario=user,quantidade=qtd,numero_da_nota=number,data=data,status=status,transportadora=transp,cliente=client,data_emissao=data_emition,posicao=posicao,destino=destino))
-                            session.commit()
-                            add_history(action=f"Faturamento",qtd=qtd,data=data,item=code,user=user)
-                            verify_if_still_exists(code=code,adress=posicao)
-                            session.commit()
-                            return {'tipo':'faturada','valor':1}
-                else:
-                    add_product(code=code,price=price,weigth=peso,name=description,user=user)
-                    return{'tipo':'cadastrada','valor':1}
+                try:
+                    fat = session.query(Faturamento).filter(Faturamento.status == False,Faturamento.data == str(date.today())).first().id
+                    st.warnig(f'Já exsite um Processo de Faturamento de id: {fat}. Por favor conclua-o')
+                except:
+                    verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
+                    if verificar:
+                        posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo).first().endereco
+                        if posicao:
+                            if session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade >= qtd:
+                                session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade -= qtd
+                                session.commit()
+                                session.add(Faturamento(produto=verificar.codigo,usuario=user,quantidade=qtd,numero_da_nota=number,data=data,status=status,transportadora=transp,cliente=client,data_emissao=data_emition,posicao=posicao,destino=destino))
+                                session.commit()
+                                add_history(action=f"Faturamento",qtd=qtd,data=data,item=code,user=user)
+                                verify_if_still_exists(code=code,adress=posicao)
+                                session.commit()
+                                return {'tipo':'faturada','valor':1}
+                    else:
+                        add_product(code=code,price=price,weigth=peso,name=description,user=user)
+                        return{'tipo':'cadastrada','valor':1}
 def process_notes(notes_list,data,usuario,status,peso_recebido):
     contador_ok = 0
     contador_nao = 0
@@ -443,7 +447,7 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                             
                         except:
                             pass
-                        contador_ok +=1
+                contador_ok +=1
         else:
             contador_nao += 1
     return contador_ok,contador_cadastro,contador_nao    
