@@ -65,6 +65,6 @@ with st.popover('Ver Frota 🔍'):
       if veiculo:
                   verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
                   st.info(f'''
-                  Marca: {verificar.marca}
-                  autonomia: {verificar.autonomia}
+                  Marca: {verificar.marca}\n
+                  autonomia: {verificar.autonomia} km/l\n
                   ''')
