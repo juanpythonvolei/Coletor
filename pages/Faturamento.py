@@ -37,7 +37,10 @@ try:
                   cliente = st.text_input(label='cliente',placeholder='Insira o cliente',key='cliente')
                   nota = st.text_input(label='Nota',placeholder='Insira a nota',key='Nota')
                   destino = st.text_input(label='Destino',placeholder='Insira o destino',key='Destino')
-                  manual_billing(code=produto,transp=transp,client=cliente,user=st.session_state.selected_option,qtd=qtd,number=nota,destino=destino)
+                  try:
+                        manual_billing(code=produto,transp=transp,client=cliente,user=st.session_state.selected_option,qtd=qtd,number=nota,destino=destino)
+                  except:
+                        st.error(f'Há algo errado')
             if uploaded_files:
                           resultado = process_notes(notes_list=uploaded_files,data=str(date.today()),usuario=st.session_state.selected_option,status=False,peso_recebido=float(1))
                           if resultado:
