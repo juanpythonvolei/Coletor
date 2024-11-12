@@ -371,7 +371,7 @@ def add_new_user(user,password):
         session.add(Usuarios(usuario=user,senha=password))
         session.commit()
         st.session_state.selected_option = user
-        new_logged_infos(st.session_state.selected_option):
+        new_logged_infos(st.session_state.selected_option)
         st.switch_page('pages/Menu.py')
 
 def login(usuario,senha):
