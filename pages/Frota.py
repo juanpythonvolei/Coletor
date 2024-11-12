@@ -33,7 +33,7 @@ botao_mudar = st.popover('Alterar informações ⚙️')
 with botao_mudar:
       veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='escolha')
       if veiculo:
-            alteracao = st.selectbox(label='Seleção',placeholder="Selecione o veículo",option=['Marca','Modelo','Autonomia'],key='alteração')
+            alteracao = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=['Marca','Modelo','Autonomia'],key='alteração')
             if alteracao:
                   valor = st.text_input(label='Alteração',placeholder='Insira sua alteração')
                   verificar = session.query(Veiculos).filter(Veiculos.modelo==veiculo).first()
