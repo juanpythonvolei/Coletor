@@ -929,8 +929,7 @@ def complete_delivery(data,transp):
         lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
         for i,item in enumerate(list(set(verificar))):
-            destino = session.query(Faturamento).filter(Faturamento.status==True).first().destino
-            st.write(destino)
+            destino = session.query(Faturamento).filter(Faturamento.status==True).first().numero_da_nota
             distancia = build_google_map(route(define_destiny_list([destino])))[2][0]['Distância']
             kml = session.query(Veiculos).filter(Veiculo.modelo==item.modelo).first().autonomia
             dict={
