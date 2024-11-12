@@ -1034,7 +1034,6 @@ def complete_desciption(car):
         return gasto,distancia_per,qtd
     
 def manual_billing(code,transp,client,user,qtd,number,destino):
-                try:
                     verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
                     if verificar:
                         posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.quantidade >= qtd).first().endereco
@@ -1048,8 +1047,8 @@ def manual_billing(code,transp,client,user,qtd,number,destino):
                                 verify_if_still_exists(code=code,adress=posicao)
                                 session.commit()
                                 st.success(f"O Item {code}, foi faturado com sucesso e já está disponível para ser coletado")
-                        else:
+                         else:
                             st.error(f'O item: {codigo} não possúi quantidade suficiente em estoque para ser faturado')
-                except:
-                    st.error(f'O Código: {code} não está cadastrado')
+                    else:
+                        st.error(f'O Código: {code} não está cadastrado')
                     
