@@ -931,7 +931,7 @@ def complete_delivery(data,transp):
         for i,item in enumerate(list(set(verificar))):
             distancia = build_google_map(route(define_destiny_list([session.query(Faturamento).filter(Faturamento.status==True).first().numero_da_nota])))[2][0]['Distância']
             if ' k' in distancia:
-                distancia = float(distancia.replace('km', '').replace(',', '.'))
+                distancia = float(distancia.replace('k', '').replace(',', '.').strip())
             kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
             dict={
                 'Cliente':item.cliente,
