@@ -440,11 +440,12 @@ def process_notes(notes_list,data,usuario,status,peso_recebido):
                             data_emit = documento['nfeProc']['NFe']['infNFe']['ide']['dhEmi'][:10]
                             destino =  f'{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xLgr"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["nro"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xBairro"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["xMun"]}-{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["UF"]},{documento['nfeProc']['NFe']['infNFe']["dest"]["enderDest"]["CEP"]}'
                             resultado = billing(code=codigo_produto,price=valor_produto,transp=str(transportadora)[:5].casefold(),client=cliente,data=data,user=usuario,number=numero_da_nota,status=status,qtd=float(quantidade_produto),data_emition=data_emit,description=descricao_produto,peso=peso_recebido,destino=destino)
-                            if resultado['tipo'] == 'cadastrada':
-                                contador_cadastro +=1
-                            contador_ok += 1 
+                            
                         except:
-                            contador_nao += 1 
+                            pass
+                        contador_ok +=1
+        else:
+            contador_nao += 1
     return contador_ok,contador_cadastro,contador_nao    
 
 def pick(product,data,note_number,user,qtd_coletada):
