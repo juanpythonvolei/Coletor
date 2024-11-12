@@ -8,21 +8,24 @@ if 'selected_option' in st.session_state:
       
 try:
       logado = st.session_state.selected_option
+
+      colx,coly,colz = st.columns(3)
+                  
+      with colx:
+            if 'selected_option' in st.session_state:
+                              st.title(f'Usuário logado: {st.session_state.selected_option}')
+      with coly:
+            with st.popover('🤖'):
+                        assistant()
+      with colz:
+            with st.popover('📂'):
+                        donwload_deliverys()     
+                        
       taba,tabb,tabc,tabd,tabe = st.tabs(['Ver rotas','Rotas espefíficas','Roteiro','Entregas','Visão Geral'])
       
       if taba:
             with taba:
-                  colx,coly,colz = st.columns(3)
-                  
-                  with colx:
-                        if 'selected_option' in st.session_state:
-                              st.title(f'Usuário logado: {st.session_state.selected_option}')
-                  with coly:
-                        with st.popover('🤖'):
-                              assistant()
-                  with colz:
-                        with st.popover('📂'):
-                              donwload_deliverys()
+
                   
                   col3,col4 = st.columns(2)
                               
