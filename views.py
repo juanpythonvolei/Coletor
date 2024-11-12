@@ -391,9 +391,9 @@ def billing(code,price,transp,client,data,user,qtd,number,status,data_emition,pe
                 except:
                     verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
                     if verificar:
-                        posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.quantidade > 0).first().endereco
+                        posicao = session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.quantidade >= qtd).first().endereco
                         if posicao:
-                            if session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade > 0:
+                            if session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade >= qtd:
                                 session.query(Estoque).filter(Estoque.item == verificar.codigo,Estoque.endereco == posicao).first().quantidade -= qtd
                                 session.commit()
                                 session.add(Faturamento(produto=verificar.codigo,usuario=user,quantidade=qtd,numero_da_nota=number,data=data,status=status,transportadora=transp,cliente=client,data_emissao=data_emition,posicao=posicao,destino=destino))
