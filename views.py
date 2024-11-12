@@ -997,7 +997,7 @@ def load_delivery(notes,data,veiculo):
     return contador_nao,contador_sim
     
 def complete_desciption(car):
-        origem = 'Itupe,sp'
+        origem = 'Itupeva,sp'
         gasto = 0
         distancia_per = 0
         qtd = 0
@@ -1013,8 +1013,7 @@ def complete_desciption(car):
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
             distancia = calculate_distance(destino,origem)
             if ' k' in distancia:
-                distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
-            distancia_a += float(distancia) 
+                distancia = float(distancia.replace('k', '').replace(',', '.').strip())  
             kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
             dict={
                 'Cliente':item.cliente,
