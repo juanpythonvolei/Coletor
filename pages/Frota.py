@@ -47,7 +47,7 @@ if botao_mudar:
                         st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
                   elif alteracao == 'Autonomia':
                         verificar.autonomia = float(valor)
-                        session.commit()]
+                        session.commit()
                         st.success(f'Alteração no campo {alteracao} para o veículo: {veiculo} realizada com sucesso')
             
 botao_excluir = st.button('Excluir informações')
