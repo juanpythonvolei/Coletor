@@ -12,7 +12,6 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from time import sleep
 import requests
-from db import database
 
 session = sessionmaker(bind=engine)
 session = session()
