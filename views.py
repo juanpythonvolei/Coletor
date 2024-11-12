@@ -938,7 +938,8 @@ def complete_delivery(data,transp):
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
         for i,item in enumerate(list(set(verificar))):
-            distancia = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino,origem)[1]
+            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino
+            distancia = calculate_distance(destino,origem)[1]
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
             distancia += float(distancia_a)    
@@ -958,6 +959,7 @@ def complete_delivery(data,transp):
                 pass
             else:
                 lista.append(dict)
+            origem = destino
         return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
 
 
@@ -1022,4 +1024,5 @@ def complete_desciption(car):
                 pass
             else:
                 lista.append(dict)
+                
         return gasto,distancia_per,qtd
