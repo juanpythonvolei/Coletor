@@ -22,6 +22,17 @@ try:
                   st.warnig('Aind há notas a serem fatuardas')
       except:
             uploaded_files = st.file_uploader("Seleção", type=[f'xml'], accept_multiple_files=True,help='Insira suas notas aqui',key='Faturamento')
+            with st.popover('Faturar Manualmente'):
+                  produto = st.text_input(label='Produto',key='Produto')
+                  transp = st.text_input(label='transp',key='transp')
+                  qtd = st.number_input(label='Quantidade',key='Quantidade')
+                  cliente = st.text_input(label='cliente',key='cliente')
+                  nota = st.text_input(label='Nota',key='Nota')
+                  destino = st.text_input(label='Destino',key='Destino')
+                  try:
+                        manual_billing(code=produto,transp=transp,client=cliente,user=st.session_state.selected_option,qtd=qtd,number=nota,destino=destino)
+                  except:
+                        st.warning("Ainda restam campos a serem preenchidos")
             if uploaded_files:
                           resultado = process_notes(notes_list=uploaded_files,data=str(date.today()),usuario=st.session_state.selected_option,status=False,peso_recebido=float(1))
                           if resultado:
