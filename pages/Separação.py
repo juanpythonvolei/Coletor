@@ -57,10 +57,10 @@ try:
             with col3:
                   quantidade = 0
                   try:
-                     quantidade = session.query(Separacao).filter(Separacao.produto == item,Separacao.id_mercado == elemento.id,Separacao.data == str(date.today()),Separacao.nota == elemento.nota).first().qtd_coletada
+                     quantidade_coletada = st.metric(label="quantidade coletada",value=session.query(Separacao).filter(Separacao.produto == item,Separacao.id_mercado == elemento.id,Separacao.data == str(date.today()),Separacao.nota == elemento.nota).first().qtd_coletada)   
                   except:
-                     pass
-                  quantidade_coletada = st.metric(label="quantidade coletada",value=quantidade)
+                     quantidade_coletada = st.metric(label="quantidade coletada",value=quantidade)
+                  
             st.divider()
 except:
       st.error('Você deve estar logado para acessar essa página')
