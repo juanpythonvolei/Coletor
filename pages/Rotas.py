@@ -32,6 +32,7 @@ if taba:
                   result = build_google_map(route(define_destiny_list(item[0] for item in notas)))
                   save_route(data=data,transp=transp,routes=result[2])
                   st.table(result[1])
+                  st.link_button(label="Acessar Rota",url=result[0])
 with tabb:
             data = st.date_input("Selecione uma data",value=None,key='Data_selector_epecific')
             if data:
@@ -50,6 +51,7 @@ with tabb:
                                   texto += info
                               st.info(texto)
                               result = build_google_map(route(define_destiny_list([item.numero_da_nota])))
+                              st.link_button(label="Acessar Rota",url=result[0])
                               save_route(data=data,transp=transp,routes=result[2])
                   
 with tabc:
@@ -90,7 +92,7 @@ with tabd:
                               notas = st.multiselect(label="notas",placeholder="Selecione uma nota",options=list(set([item[0] for item in session.query(Entregas.nota).filter(Entregas.status == False,Faturamento.transportadora == transp).all()])),key='select_notes_deli')    
                               if notas: 
                                     st.title('Entregas')
-                                    response =load_delivery(notas,data,veiculo)
+                                    response = load_delivery(notas,data,veiculo)
                                     st.metric('Entregas não completas',response[0])
                                     st.metric('Entregas completas',response[1])
 with tabe:
