@@ -54,7 +54,7 @@ try:
                   veiculo = st.selectbox(label='Seleção',placeholder="Selecione o veículo",options=[item[0] for item in session.query(Veiculos.modelo).all()],key='deletar',index=None)
                   if veiculo:
                         senha = st.text_input(label='Insira a senha do administrador');
-                        if senha == st.secrets['key']:
+                        if senha == str(st.secrets['key']):
                               session.delete(session.query(Veiculos).filter(Veiculos.modelo==veiculo).firts())
                               session.commit()
                               st.success(f'O Veículo de modelo: {veiculo} foi deletado com sucesso')
