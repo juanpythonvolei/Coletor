@@ -35,7 +35,7 @@ def new_logged_infos(user):
     sixth = st.header('1. Vá para cadastro de produtos, e preencha os campos para que o cadastro seja finalizado')
     sleep(6)
     sixth.empty()
-    seventh = st.subheader('''2. Em Seguida, siga para Recebimento. Na caixa de seleção, 
+    seventh = st.text('''2. Em Seguida, siga para Recebimento. Na caixa de seleção, 
     escolha o item que você separou, 
     ou os que estão disponíveis, e faço o recebimento de uma quantidade de sua preferência
     ''')
@@ -119,10 +119,10 @@ def new_logged_infos(user):
     sleep(6)
     twelveth.empty()
     final = st.header('''8. Bom, já falei demais. Aproveite sua experiência!
+    Se não souber o que fazer, chame o assistente!.
     ''')
     sleep(4)
     final.empty()
-    sleep(1)
 def treat_table(df):
     table = pd.read_excel(df)
     return table.to_string()
@@ -814,7 +814,49 @@ def assistant():
             Histórico: {texto_historico}\n
             Produtos: {texto_produtos}\n
             Entregas: {texto_entregas}\n
-            Veículos: {texto_veiculos}
+            Veículos: {texto_veiculos}\n
+            Intruções de uso desse app:
+            1.Vá para cadastro de produtos, e preencha os campos para que o cadastro seja finalizado
+            2. Em Seguida, siga para Recebimento. Na caixa de seleção, 
+                escolha o item que você separou, 
+                ou os que estão disponíveis, e faço o recebimento de uma quantidade de sua preferência
+            3. Com o item já recebido, vá para a aba de Transferência. Nesse espaço, para trazer os itens,
+                selecione a opção "Recebimento" em "origem". Após isso, Insira, no campo de destino, um endereço 
+                no seguinte
+                formato: 0>0n<08-0>00n<20-0>0n<05. Na aba seguinte, escolha o item, e a quantidade.
+             4.Agora, você já pode ir para aba de faturamento, e realizar o faturamento manual. Assim, 
+                preencha todos os
+                campos e, ao fim, o faturamento terá se iniciado. obs: Caso você queira realizar o faturamento 
+                com arquivos de 
+                notas  fiscais 
+                clique no icone maior
+                a primeira ação que ele fará é, automaticamente, cadastrar os itens da nota. Depois, 
+                você deve realizar o 
+                processo de
+                recebimento e transferência.
+                Quando concluir, é só retornar no icone e reselecionar as notas. Isso fará com que o 
+                Faturamento se inicie.   
+            5. Entre na aba de Pickinglist. Para coletar os itens, observe sua localização e quantidade. 
+                A coleta se da na ação
+                de inserir o código do produto no campo. Se houver apenas 1 item, o processo se encerrará. 
+                Se não, 
+                o mostrador irá mudar 
+                até que você colete
+                a quantidade da nota. Se completar esse campo, vá para Separação. Nessa aba, 
+                é o mesmo procedimento porém, 
+                além do item
+                deve-se inserir a posição dele
+                no estoque para contabilizar uma coleta 
+            6.Pronto, seu faturamento acabou. Agora, vá para Rotas e depois em entregas. Nessa aba selecione 
+                a data de hoje, a 
+                transportadora e  um carro de tranporte.
+                Após isso, serão exibidos todos os pedidos faturados e separados. Para entregar, 
+                é só ativar a chave. 
+                Nesse caso,você assume o papel do entregador. Ops, esqueci. O carro utilizado também
+                deve ser cadastrado. Para isso, vá para a aba "Frota" e lá, preencha os dados do veículo. Eles são 
+                importantes 
+                para as informações 
+                vindas da entrega. 
             """
     cola,colb = st.columns(2)
     with cola:
