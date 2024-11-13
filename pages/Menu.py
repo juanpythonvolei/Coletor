@@ -73,7 +73,7 @@ try:
       if str(st.session_state.selected_option) == 'Juan':
                   with st.popover('Deletar tabelas'):
                         senha = st.text_input(label='Senha',placeholder='Insira a senha do administrador',key='tabs') 
-                        if senha == str(st.secrets['key']):
+                        if str(senha) == str(st.secrets['key']):
                                   session.query(Estoque).delete()  
                                   session.query(Faturamento).delete()  
                                   session.query(Picklist).delete()  
