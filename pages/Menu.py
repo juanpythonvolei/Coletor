@@ -44,7 +44,7 @@ try:
                         deletar = st.button("🗑️")
                         if deletar:
                           senha = text_input(label='Senha',placeholder='Insira a senha do administrador')      
-                          if senha == st.secrets['key']:    
+                          if senha == str(st.secrets['key']):    
                                 st.info(delete_product(item,user=st.session_state.selected_option))
                   if item and elemento and valor:
                       st.info(update_product(item,elemento,valor,user=st.session_state.selected_option))
@@ -73,7 +73,7 @@ try:
       if str(st.session_state.selected_option) == 'Juan':
                   with st.popover('Deletar tabelas'):
                         senha = st.text_input(label='Senha',placeholder='Insira a senha do administrador',key='tabs') 
-                        if senha == st.secrets['key']:
+                        if senha == str(st.secrets['key']):
                                   session.query(Estoque).delete()  
                                   session.query(Faturamento).delete()  
                                   session.query(Picklist).delete()  
