@@ -700,8 +700,8 @@ def create_itens_relations_for_item(data,lista,user):
     for i,espec in enumerate(verificar_items):
         valor = session.query(Produtos).filter(Produtos.codigo == espec.produto).first().preco
         peso = session.query(Produtos).filter(Produtos.codigo ==espec.produto).first().peso
-        total_peso += peso
-        total_valor += valor
+        total_peso += peso*item.quantidade
+        total_valor += valor*item.quantidade
         total_volumes +=espec.quantidade
         infos = pd.DataFrame({
             'volumes':total_volumes,
