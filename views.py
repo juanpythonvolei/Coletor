@@ -1261,7 +1261,7 @@ def complete_desciption(car):
                     'Valor': round(float((distancia/autonomia)*5.50))
                 }
             gasto = round(float((distancia*2/autonomia)*5.50))
-            distancia_total = distancia
+            distancia_total = distancia*2
             qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificarr.nota).first().quantidade
             if dict in lista:
                     pass
