@@ -1152,12 +1152,12 @@ def complete_delivery(data,transp):
                     'distancia km':distancia*2,
                     'Valor': round(float((distancia/kml)*5.50))
                 }
-                gasto += round(float((distancia*2/kml)*5.50))
-                distancia_per += distancia*2
-                qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
-                if dict in lista:
+            gasto += round(float((distancia*2/kml)*5.50))
+            distancia_per += distancia*2
+            qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
+            if dict in lista:
                     pass
-                else:
+            else:
                     lista.append(dict)
         return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
 
