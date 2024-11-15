@@ -1267,7 +1267,7 @@ def complete_desciption(car):
                     pass
             else:
                     lista.append(dict)
-            return gasto,distancia_per,qtd
+            return gasto,distancia_total,qtd
     
 def manual_billing(code,transp,client,user,qtd,number,destino):
                     verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
