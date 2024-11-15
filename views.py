@@ -1148,7 +1148,7 @@ def complete_delivery(data,transp):
             lista = []
             verificarr = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first()
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificarr.nota,Faturamento.data==verificarr.data).first().destino
-            verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
+            verificar_carr = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
             autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificarr_car).first().autonomia
             distancia = calculate_distance(destino,'Itupeva,sp')[1]
             st.write(destino)
