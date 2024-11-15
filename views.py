@@ -1146,25 +1146,25 @@ def complete_delivery(data,transp):
             distancia_total = 0
             qtd = 0
             lista = []
-            verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first()
-            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificar.nota,Faturamento.data==verificar.data).first().destino
+            verificarr = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first()
+            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificarr.nota,Faturamento.data==verificarr.data).first().destino
             verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
-            autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).first().autonomia
+            autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificarr_car).first().autonomia
             distancia = calculate_distance(destino,'Itupeva,sp')[1]
             st.write(destino)
             st.write(distancia)
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
             dict={
-                    'Cliente':verificar.cliente,
-                    'Nota':verificar.nota,
-                    'Produto':verificar.produto,
+                    'Cliente':verificarr.cliente,
+                    'Nota':verificarr.nota,
+                    'Produto':verificarr.produto,
                     'distancia km':distancia*2,
                     'Valor': round(float((distancia/autonomia)*5.50))
                 }
             gasto = round(float((distancia*2/autonomia)*5.50))
             distancia_total = distancia
-            qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar.nota).first().quantidade
+            qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificarr.nota).first().quantidade
             if dict in lista:
                     pass
             else:
