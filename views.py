@@ -676,8 +676,8 @@ def create_itens_relations(data,transp,user):
     for i,item in enumerate(verificar_transps):
         valor = session.query(Produtos).filter(Produtos.codigo == item.produto).first().preco
         peso = session.query(Produtos).filter(Produtos.codigo == item.produto).first().peso
-        total_peso += peso
-        total_valor += valor
+        total_peso += peso*item.quantidade
+        total_valor += valor*item.quantidade
         total_volumes += item.quantidade
         infos = pd.DataFrame({
             'volumes':item.quantidade,
