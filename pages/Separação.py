@@ -49,7 +49,7 @@ try:
             nota = st.subheader(f"Nota: {elemento.nota} Quantidade: {elemento.quantidade}")
             col1,col2,col3 = st.columns(3)
             with col1:
-               posicao = st.text_input(label=f"Posicao: {elemento.endereco}",key=i+2,placeholder="Insira a posição")
+               posicao = st.text_input(label=f"Posicao: {elemento.endereco}",key=i+2,placeholder="Insira a posição",help='Exemplo = 01-001-01')
             with col2:
                item = st.text_input(label=f"Produto: {elemento.produto}",key=i+100,placeholder="Insira o produto")
             if item == str(elemento.produto) and posicao == str(elemento.endereco):
