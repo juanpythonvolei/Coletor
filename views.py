@@ -1161,7 +1161,7 @@ def complete_delivery(data,transp):
                     'distancia km':distancia*2,
                     'Valor': round(float((distancia/autonomia)*5.50))
                 }
-            gasto +]= round(float((distancia*2/autonomia)*5.50))
+            gasto = round(float((distancia*2/autonomia)*5.50))
             distancia_total = distancia
             qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar.nota).first().quantidade
             if dict in lista:
