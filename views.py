@@ -1152,7 +1152,7 @@ def complete_delivery(data,transp):
                     'Nota':verificar.nota,
                     'Produto':verificar.produto,
                     'distancia km':distancia*2,
-                    'Valor': round(float((distancia/klm)*5.50))
+                    'Valor': round(float((distancia/autonomia)*5.50))
                 }
             gasto += round(float((distancia*2/autonomia)*5.50))
             distancia_per += distancia*2
