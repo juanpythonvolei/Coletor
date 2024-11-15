@@ -1142,6 +1142,8 @@ def complete_delivery(data,transp):
         else:
             verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificar[0].nota,Faturamento.data==verificar[0].data).first().destino
+            verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
+            autonomia_itupeva = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).first().autonomia
             distancia = calculate_distance(destino,'Itupeva,sp')[1]
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
@@ -1150,9 +1152,9 @@ def complete_delivery(data,transp):
                     'Nota':verificar[0].nota,
                     'Produto':verificar[0].produto,
                     'distancia km':distancia*2,
-                    'Valor': round(float((distancia/kml)*5.50))
+                    'Valor': round(float((distancia/autonomia)*5.50))
                 }
-            gasto += round(float((distancia*2/kml)*5.50))
+            gasto += round(float((distancia*2/autonomia)*5.50))
             distancia_per += distancia*2
             qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
             if dict in lista:
