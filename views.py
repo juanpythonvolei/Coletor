@@ -1156,7 +1156,7 @@ def complete_delivery(data,transp):
                 }
             gasto += round(float((distancia*2/autonomia)*5.50))
             distancia_per += distancia*2
-            qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
+            qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar.nota).first().quantidade
             if dict in lista:
                     pass
             else:
