@@ -1148,8 +1148,7 @@ def deliver(car,product,qtd,data,transp,note,client,user):
     except:
         session.add(Entregas(veiculo=car,produto=product,quantidade=qtd,data=data,transportadora=transp,cliente=client,status=True,nota=note))
         session.commit()
-        session.add(add_history(action=f"Entrega realizada para o cliente: {client}",data=str(date.today()),qtd=qtd,item=product,user=user))
-        session.commit()
+        add_history(action=f"Entrega realizada para o cliente: {client}",data=str(date.today()),qtd=qtd,item=product,user=user)
         return st.success(f'Entrega do cliente {client} realizada com sucesso')   
 
 def load_delivery(notes,data,veiculo,user):
