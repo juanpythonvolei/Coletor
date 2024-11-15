@@ -1140,8 +1140,7 @@ def complete_delivery(data,transp):
                     lista.append(dict)
                 origem = destino
         else:
-            verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first()
-            st.write(verificar)
+            verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().produto
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificar.nota,Faturamento.data==verificar.data).first().destino
             verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
             autonomia_itupeva = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).first().autonomia
