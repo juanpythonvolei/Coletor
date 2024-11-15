@@ -1248,7 +1248,7 @@ def complete_desciption(car):
             lista = []
             verificarr = session.query(Entregas).filter(Entregas.veiculo == car,Entregas.status==True).first()
             destinor = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificarr.nota,Faturamento.data==verificarr.data).first().destino
-            verificarr_car = session.query(Entregas).filter(Entregas.data==verificarr.data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
+            verificarr_car = session.query(Entregas).filter(Entregas.data==verificarr.data,Entregas.status==True).first().veiculo
             autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificarr_car).first().autonomia
             distancia = calculate_distance(destinor,'Itupeva,sp')[1]
             if ' k' in distancia:
