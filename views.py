@@ -1147,11 +1147,11 @@ def complete_delivery(data,transp):
             qtd = 0
             lista = []
             verificarr = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first()
-            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificarr.nota,Faturamento.data==verificarr.data).first().destino
-            verificar_carr = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
+            destinor = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificarr.nota,Faturamento.data==verificarr.data).first().destino
+            verificarr_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
             autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificarr_car).first().autonomia
-            distancia = calculate_distance(destino,'Itupeva,sp')[1]
-            st.write(destino)
+            distancia = calculate_distance(destinor,'Itupeva,sp')[1]
+            st.write(destinor)
             st.write(distancia)
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
