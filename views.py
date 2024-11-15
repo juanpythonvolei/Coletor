@@ -1117,27 +1117,48 @@ def complete_delivery(data,transp):
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
         distancia_per += distancia_a*2   
         gasto += round(float((distancia_per/autonomia_itupeva)*5.50))
-        for i,item in enumerate(list(set(verificar))):
-            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino
-            distancia = calculate_distance(destino,origem)[1]
+        if len(list(set(verificar)) > 1:
+            for i,item in enumerate(list(set(verificar))):
+                destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino
+                distancia = calculate_distance(destino,origem)[1]
+                if ' k' in distancia:
+                    distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
+                kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
+                dict={
+                    'Cliente':item.cliente,
+                    'Nota':item.nota,
+                    'Produto':item.produto,
+                    'distancia km':distancia,
+                    'Valor': round(float((distancia/kml)*5.50))
+                }
+                gasto += round(float((distancia/kml)*5.50))
+                distancia_per += distancia
+                qtd += session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
+                if dict in lista:
+                    pass
+                else:
+                    lista.append(dict)
+                origem = destino
+        else:
+            verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
+            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificar[0].nota,Faturamento.data==verificar[0].data).first().destino
+            distancia = calculate_distance(destino,'Itupeva,sp')[1]
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
-            kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
             dict={
-                'Cliente':item.cliente,
-                'Nota':item.nota,
-                'Produto':item.produto,
-                'distancia km':distancia,
-                'Valor': round(float((distancia/kml)*5.50))
-            }
-            gasto += round(float((distancia/kml)*5.50))
-            distancia_per += distancia
-            qtd += session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
-            if dict in lista:
-                pass
-            else:
-                lista.append(dict)
-            origem = destino
+                    'Cliente':verificar[0].cliente,
+                    'Nota':verificar[0].nota,
+                    'Produto':verificar[0].produto,
+                    'distancia km':distancia*2,
+                    'Valor': round(float((distancia/kml)*5.50))
+                }
+                gasto += round(float((distancia*2/kml)*5.50))
+                distancia_per += distancia*2
+                qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==item.nota).first().quantidade
+                if dict in lista:
+                    pass
+                else:
+                    lista.append(dict)
         return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
 
 
