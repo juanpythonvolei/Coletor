@@ -1267,7 +1267,7 @@ def complete_desciption(car):
                     pass
             else:
                     lista.append(dict)
-            return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_total,qtd
+            return gasto,distancia_per,qtd
     
 def manual_billing(code,transp,client,user,qtd,number,destino):
                     verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
