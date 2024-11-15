@@ -1151,8 +1151,6 @@ def complete_delivery(data,transp):
             verificarr_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
             autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificarr_car).first().autonomia
             distancia = calculate_distance(destinor,'Itupeva,sp')[1]
-            st.write(destinor)
-            st.write(distancia)
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
             dict={
@@ -1205,41 +1203,71 @@ def load_delivery(notes,data,veiculo,user):
     return contador_nao,contador_sim
     
 def complete_desciption(car):
-        origem = 'Itupeva,sp'
-        gasto = 0
-        distancia_per = 0
-        qtd = 0
-        lista = []
+        
         verificar = session.query(Entregas).filter(Entregas.veiculo == car,Entregas.status==True).all()
         verificar_car = session.query(Veiculos).filter(Veiculos.modelo == car).first().autonomia
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
-        distancia_per += 2*distancia_a
-        gasto += round(float((distancia_per/verificar_car)*5.50))
-        for i,item in enumerate(list(set(verificar[:2]))):
-            destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
-            distancia = calculate_distance(destino,origem)[1]
+        if len(list(set(verificar))) > int(1):
+            origem = 'Itupeva,sp'
+            gasto = 0
+            distancia_per = 0
+            qtd = 0
+            lista = []
+            distancia_per += 2*distancia_a
+            gasto += round(float((distancia_per/verificar_car)*5.50))
+            for i,item in enumerate(list(set(verificar))):
+                destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota).first().destino
+                distancia = calculate_distance(destino,origem)[1]
+                if ' k' in distancia:
+                    distancia = float(distancia.replace('k', '').replace(',', '.').strip())  
+                kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
+                dict={
+                    'Cliente':item.cliente,
+                    'Nota':item.nota,
+                    'Produto':item.produto,
+                    'Quantidade':item.quantidade,
+                    'Gasto em R$': round(float((float(distancia)/float(kml))*5.50)),
+                    'Distância percorrida':distancia
+                }
+                gasto += round(float((distancia/kml)*5.50))
+                distancia_per += distancia
+                qtd += item.quantidade
+                if dict in lista:
+                    pass
+                else:
+                    lista.append(dict)
+                origem =  destino
+            return gasto,distancia_per,qtd
+        else:
+            origem = 'Itupeva,sp'
+            gasto = 0
+            distancia_total = 0
+            qtd = 0
+            lista = []
+            verificarr = session.query(Entregas).filter(Entregas.veiculo == car,Entregas.status==True).first()
+            destinor = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificarr.nota,Faturamento.data==verificarr.data).first().destino
+            verificarr_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
+            autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificarr_car).first().autonomia
+            distancia = calculate_distance(destinor,'Itupeva,sp')[1]
             if ' k' in distancia:
-                distancia = float(distancia.replace('k', '').replace(',', '.').strip())  
-            kml = session.query(Veiculos).filter(Veiculos.modelo==item.veiculo).first().autonomia
+                distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
             dict={
-                'Cliente':item.cliente,
-                'Nota':item.nota,
-                'Produto':item.produto,
-                'Quantidade':item.quantidade,
-                'Gasto em R$': round(float((float(distancia)/float(kml))*5.50)),
-                'Distância percorrida':distancia
-            }
-            gasto += round(float((distancia/kml)*5.50))
-            distancia_per += distancia
-            qtd += item.quantidade
+                    'Cliente':verificarr.cliente,
+                    'Nota':verificarr.nota,
+                    'Produto':verificarr.produto,
+                    'distancia km':distancia*2,
+                    'Valor': round(float((distancia/autonomia)*5.50))
+                }
+            gasto = round(float((distancia*2/autonomia)*5.50))
+            distancia_total = distancia
+            qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificarr.nota).first().quantidade
             if dict in lista:
-                pass
+                    pass
             else:
-                lista.append(dict)
-            origem =  destino
-        return gasto,distancia_per,qtd
+                    lista.append(dict)
+            return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_total,qtd
     
 def manual_billing(code,transp,client,user,qtd,number,destino):
                     verificar = session.query(Produtos).filter(Produtos.codigo == code).first()
