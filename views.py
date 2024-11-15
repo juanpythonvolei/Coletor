@@ -1110,12 +1110,12 @@ def complete_delivery(data,transp):
         distancia_a = calculate_distance(session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar[0].nota).first().destino,'Itupeva,sp')[1]
         if ' k' in distancia_a:
                 distancia_a = float(distancia_a.replace('k', '').replace(',', '.').strip()) 
-        distancia_per += distancia_a*2   
         gasto += round(float((distancia_per/autonomia_itupeva)*5.50))
         if len(list(set(verificar))) > int(1):
             origem = 'Itupeva,sp'
             gasto = 0
             distancia_per = 0
+            distancia_per += distancia_a*2
             qtd = 0
             lista = []
             for i,item in enumerate(list(set(verificar))):
