@@ -1139,10 +1139,11 @@ def complete_delivery(data,transp):
                 else:
                     lista.append(dict)
                 origem = destino
+            return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
         else:
             origem = 'Itupeva,sp'
             gasto = 0
-            distancia_per = 0
+            distancia_total = 0
             qtd = 0
             lista = []
             verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first()
@@ -1160,13 +1161,13 @@ def complete_delivery(data,transp):
                     'Valor': round(float((distancia/autonomia)*5.50))
                 }
             gasto += round(float((distancia*2/autonomia)*5.50))
-            distancia_per += distancia
+            distancia_total += distancia
             qtd = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota==verificar.nota).first().quantidade
             if dict in lista:
                     pass
             else:
                     lista.append(dict)
-        return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_per,qtd
+            return pd.concat([pd.DataFrame(elemento,index=[i]) for i,elemento in enumerate(lista)]),gasto,distancia_total,qtd
 
 
 def deliver(car,product,qtd,data,transp,note,client,user):
