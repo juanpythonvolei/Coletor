@@ -1104,11 +1104,6 @@ def save_route(routes,data,transp):
             session.commit()
 
 def complete_delivery(data,transp):
-        origem = 'Itupeva,sp'
-        gasto = 0
-        distancia_per = 0
-        qtd = 0
-        lista = []
         verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
         verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
         autonomia_itupeva = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).first().autonomia
@@ -1118,6 +1113,11 @@ def complete_delivery(data,transp):
         distancia_per += distancia_a*2   
         gasto += round(float((distancia_per/autonomia_itupeva)*5.50))
         if len(list(set(verificar))) > int(1):
+            origem = 'Itupeva,sp'
+            gasto = 0
+            distancia_per = 0
+            qtd = 0
+            lista = []
             for i,item in enumerate(list(set(verificar))):
                 destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == item.nota,Faturamento.data==item.data).first().destino
                 distancia = calculate_distance(destino,origem)[1]
