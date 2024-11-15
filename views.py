@@ -1151,6 +1151,7 @@ def complete_delivery(data,transp):
             verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
             autonomia = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).first().autonomia
             distancia = calculate_distance(destino,'Itupeva,sp')[1]
+            st.write(destino)
             st.write(distancia)
             if ' k' in distancia:
                 distancia = float(distancia.replace('k', '').replace(',', '.').strip()) 
