@@ -1141,6 +1141,7 @@ def complete_delivery(data,transp):
                 origem = destino
         else:
             verificar = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).all()
+            st.write(verificar)
             destino = session.query(Faturamento).filter(Faturamento.status==True,Faturamento.numero_da_nota == verificar[0].nota,Faturamento.data==verificar[0].data).first().destino
             verificar_car = session.query(Entregas).filter(Entregas.data==data,Entregas.transportadora == transp,Entregas.status==True).first().veiculo
             autonomia_itupeva = session.query(Veiculos).filter(Veiculos.modelo == verificar_car).first().autonomia
