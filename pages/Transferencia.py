@@ -32,7 +32,7 @@ try:
                               st.info(tranfer_item_from_storage(code=produto,qtd=quantidade,origin=origem,destiny=destino,user=st.session_state.selected_option))
                               deposito = ''
               elif deposito == 'Recebimento':
-                  destino = st.text_input(label="Destino",placeholder="Insira o endereço de destino")
+                  destino = st.text_input(label="Destino",placeholder="Insira o endereço de destino",help='Exemplo: 01-001-01')
                   destino_valido = treat_adress(destino)
                   if destino_valido:
                       produto = st.selectbox(label="Consulta",placeholder="Selecione um Produto",options=[item.produto for item in session.query(Recebimento).filter(Recebimento.quantidade>0).all()],index=None,key="seleção produtos")
