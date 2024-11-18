@@ -143,7 +143,7 @@ def treat_audio(texto_final,files):
             return assistente.write(analisar(
                 f"""Você é um analista de dados em larga escala e sua missão é me ajudar a solucionar problemas relacionados ao meu estoque. Estou lhe enviando uma grande quantidade de dados referentes a diferentes aspectos e processo do meu Estoque como desde o faturamento de pedidos e recebimento de mercadorias até a expedição. Essas informações estão em formato de listas.
                 Então você deve interpretar o que cada lista mostra de informação e responder a essa questão: {texto}"""
-                ,str(texto_final)))
+                ,str(files)))
         else:
             return assistente.write(analisar(
                 f"""Por favor, analise as tabelas a seguir e, baseando-se nelas, responda ao que se pede: {texto}"""
